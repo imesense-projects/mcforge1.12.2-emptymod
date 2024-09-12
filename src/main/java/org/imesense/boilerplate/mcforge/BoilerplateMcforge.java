@@ -4,10 +4,17 @@ import net.minecraft.init.Blocks;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
 
 import org.apache.logging.log4j.Logger;
+
+import org.imesense.boilerplate.mcforge.proxy.IProxy;
 
 /**
  * Main class of modification
@@ -40,14 +47,31 @@ public class BoilerplateMcforge
     private static Logger logger;
 
     /**
+     * Main class instance
+     */
+    @Mod.Instance
+    public static BoilerplateMcforge Instance;
+
+    /**
+     * Sided proxy settings
+     */
+    @SidedProxy(
+        clientSide = "org.imesense.boilerplate.mcforge.proxy.ClientProxy",
+        serverSide = "org.imesense.boilerplate.mcforge.proxy.ServerProxy"
+    )
+    public static IProxy Proxy;
+
+    /**
      * Preinitialize modification
      * 
      * @param event Preinitialization event
      */
     @EventHandler
-    public void preInit(FMLPreInitializationEvent event)
+    public synchronized void preInit(FMLPreInitializationEvent event)
     {
         logger = event.getModLog();
+
+        Proxy.preInit(event);
     }
 
     /**
@@ -56,8 +80,51 @@ public class BoilerplateMcforge
      * @param event Initialization event
      */
     @EventHandler
-    public void init(FMLInitializationEvent event)
+    public synchronized void init(FMLInitializationEvent event)
     {
+        Proxy.init(event);
+
         logger.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+    }
+
+    /**
+     * Postinitialize modification
+     * 
+     * @param event Postinitialization event
+     */
+    @EventHandler
+    public synchronized void postInit(FMLPostInitializationEvent event)
+    {
+        Proxy.postInit(event);
+    }
+
+    /**
+     * Load complete action
+     * 
+     * @param event Load complete event
+     */
+    @EventHandler
+    public synchronized void onLoadComplete(FMLLoadCompleteEvent event)
+    {
+    }
+
+    /**
+     * Server load action
+     * 
+     * @param event Server starting event
+     */
+    @EventHandler
+    public synchronized void serverLoad(FMLServerStartingEvent event)
+    {
+    }
+
+    /**
+     * Server stopped action
+     * 
+     * @param event Server stopped action
+     */
+    @EventHandler
+    public synchronized void serverStopped(FMLServerStoppedEvent event)
+    {
     }
 }
