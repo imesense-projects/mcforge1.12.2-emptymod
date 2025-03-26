@@ -1,0 +1,61 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: "Build template"
+
+on:
+    push:
+        branches:
+            - "**"
+        paths:
+            - ".github/workflows/**"
+            - "gradle/**"
+            - "src/**"
+            - "*.gradle"
+            - "gradle*"
+
+    pull_request:
+        branches:
+            - "**"
+        paths:
+            - ".github/workflows/**"
+            - "gradle/**"
+            - "src/**"
+            - "*.gradle"
+            - "gradle*"
+
+defaults:
+    run:
+        shell: bash
+
+jobs:
+    build-template:
+        name: "Build template"
+
+        strategy:
+            matrix:
+                system:
+                    - ubuntu-latest
+
+        runs-on: ${{ matrix.system }}
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Setup JDK
+              uses: actions/setup-java@v4
+              with:
+                  java-version: "8"
+                  distribution: "temurin"
+
+            - name: Build modification
+              run: |
+                  ./gradlew build
+
+            - name: Upload modification
+              uses: actions/upload-artifact@v4
+              with:
+                  name: boilerplatemcforge-${{ github.sha }}
+                  path: build/libs/
