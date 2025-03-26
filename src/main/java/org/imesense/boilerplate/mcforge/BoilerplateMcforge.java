@@ -4,7 +4,6 @@ import net.minecraft.init.Blocks;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -13,8 +12,6 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
 
 import org.apache.logging.log4j.Logger;
-
-import org.imesense.boilerplate.mcforge.proxy.IProxy;
 
 /**
  * Main class of modification
@@ -53,15 +50,6 @@ public class BoilerplateMcforge
     public static BoilerplateMcforge Instance;
 
     /**
-     * Sided proxy settings
-     */
-    @SidedProxy(
-        clientSide = "org.imesense.boilerplate.mcforge.proxy.ClientProxy",
-        serverSide = "org.imesense.boilerplate.mcforge.proxy.ServerProxy"
-    )
-    public static IProxy Proxy;
-
-    /**
      * Preinitialize modification
      * 
      * @param event Preinitialization event
@@ -70,8 +58,6 @@ public class BoilerplateMcforge
     public synchronized void preInit(FMLPreInitializationEvent event)
     {
         logger = event.getModLog();
-
-        Proxy.preInit(event);
     }
 
     /**
@@ -82,8 +68,6 @@ public class BoilerplateMcforge
     @EventHandler
     public synchronized void init(FMLInitializationEvent event)
     {
-        Proxy.init(event);
-
         logger.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
     }
 
@@ -95,7 +79,6 @@ public class BoilerplateMcforge
     @EventHandler
     public synchronized void postInit(FMLPostInitializationEvent event)
     {
-        Proxy.postInit(event);
     }
 
     /**
