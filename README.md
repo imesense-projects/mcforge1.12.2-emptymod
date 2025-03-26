@@ -1,4 +1,4 @@
-# Minecraft 1.12.2 Forge Template
+# Minecraft Forge MDK Template
 
 <div>
   <p>
