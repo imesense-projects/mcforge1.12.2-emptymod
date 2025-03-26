@@ -99,9 +99,33 @@ jar
 // Preferred method to reobfuscate JAR file
 jar.finalizedBy('reobfJar')
 
+// Build sources task
+tasks.register('sourcesJar', Jar)
+{
+    from sourceSets.main.allJava
+    from sourceSets.main.resources
+    classifier = 'sources'
+}
+
+// Build documentation task
+tasks.register('javadocJar', Jar)
+{
+    dependsOn javadoc
+    from "$buildDir/docs/javadoc"
+    classifier = 'javadoc'
+}
+
+// Build additional artifacts
+artifacts
+{
+    archives sourcesJar
+    archives javadocJar
+}
+
 // Delay the obfuscation
 //publish.dependsOn('reobfJar')
 
+// Set publish settings
 publishing
 {
     publications
@@ -109,6 +133,8 @@ publishing
         mavenJava(MavenPublication)
         {
             artifact jar
+            artifact sourcesJar
+            artifact javadocJar
         }
     }
 
