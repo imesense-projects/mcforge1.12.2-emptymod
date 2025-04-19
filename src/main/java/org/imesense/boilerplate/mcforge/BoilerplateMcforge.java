@@ -1,7 +1,5 @@
 package org.imesense.boilerplate.mcforge;
 
-import net.minecraft.init.Blocks;
-
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -44,6 +42,20 @@ public final class BoilerplateMcforge
     private static Logger logger;
 
     /**
+     * Writes method call to log
+     *
+     * @param methodName Name of method
+     */
+    private void logMethodCall(String methodName)
+    {
+        logger.info(
+            "Called {}.{} method",
+            this.getClass().getName(),
+            methodName
+        );
+    }
+
+    /**
      * Preinitialize modification
      * 
      * @param event Preinitialization event
@@ -52,11 +64,7 @@ public final class BoilerplateMcforge
     public void preInit(FMLPreInitializationEvent event)
     {
         logger = event.getModLog();
-        logger.info(
-            "Called {}.{} method",
-            new Object(){}.getClass().getName(),
-            new Object(){}.getClass().getEnclosingMethod().getName()
-        );
+        logMethodCall(new Object(){}.getClass().getEnclosingMethod().getName());
     }
 
     /**
@@ -67,11 +75,7 @@ public final class BoilerplateMcforge
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-        logger.info(
-            "Called {}.{} method",
-            new Object(){}.getClass().getName(),
-            new Object(){}.getClass().getEnclosingMethod().getName()
-        );
+        logMethodCall(new Object(){}.getClass().getEnclosingMethod().getName());
     }
 
     /**
@@ -82,11 +86,7 @@ public final class BoilerplateMcforge
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-        logger.info(
-            "Called {}.{} method",
-            new Object(){}.getClass().getName(),
-            new Object(){}.getClass().getEnclosingMethod().getName()
-        );
+        logMethodCall(new Object(){}.getClass().getEnclosingMethod().getName());
     }
 
     /**
@@ -97,11 +97,7 @@ public final class BoilerplateMcforge
     @EventHandler
     public void onLoadComplete(FMLLoadCompleteEvent event)
     {
-        logger.info(
-            "Called {}.{} method",
-            new Object(){}.getClass().getName(),
-            new Object(){}.getClass().getEnclosingMethod().getName()
-        );
+        logMethodCall(new Object(){}.getClass().getEnclosingMethod().getName());
     }
 
     /**
@@ -112,11 +108,7 @@ public final class BoilerplateMcforge
     @EventHandler
     public void serverLoad(FMLServerStartingEvent event)
     {
-        logger.info(
-            "Called {}.{} method",
-            new Object(){}.getClass().getName(),
-            new Object(){}.getClass().getEnclosingMethod().getName()
-        );
+        logMethodCall(new Object(){}.getClass().getEnclosingMethod().getName());
     }
 
     /**
@@ -127,10 +119,6 @@ public final class BoilerplateMcforge
     @EventHandler
     public void serverStopped(FMLServerStoppedEvent event)
     {
-        logger.info(
-            "Called {}.{} method",
-            new Object(){}.getClass().getName(),
-            new Object(){}.getClass().getEnclosingMethod().getName()
-        );
+        logMethodCall(new Object(){}.getClass().getEnclosingMethod().getName());
     }
 }
