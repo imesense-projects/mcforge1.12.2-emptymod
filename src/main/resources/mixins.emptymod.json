@@ -1,0 +1,13 @@
+{
+    "compatibilityLevel": "JAVA_8",
+    "minVersion": "0.8.5",
+    "package": "org.imesense.emptymod.mixin",
+    "mixins": [
+        "MixinMinecraft"
+    ],
+    "client": [],
+    "server": [],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}
