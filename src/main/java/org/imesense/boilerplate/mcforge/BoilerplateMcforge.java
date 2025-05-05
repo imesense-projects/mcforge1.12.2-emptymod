@@ -1,5 +1,12 @@
 package org.imesense.boilerplate.mcforge;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.IOException;
+
+import org.apache.logging.log4j.Logger;
+
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -8,8 +15,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
-
-import org.apache.logging.log4j.Logger;
 
 /**
  * Main class of modification
@@ -39,7 +44,7 @@ public final class BoilerplateMcforge
     /**
      * Logger object
      */
-    private static Logger logger;
+    public static Logger Logger;
 
     /**
      * Writes method call to log
@@ -48,23 +53,71 @@ public final class BoilerplateMcforge
      */
     private void logMethodCall(String methodName)
     {
-        logger.info(
+        Logger.info(
             "Called {}.{} method",
             this.getClass().getName(),
             methodName
         );
     }
 
+    private static String getBufferedReader(InputStream stream) throws IOException
+    {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+        StringBuilder fileContent = new StringBuilder();
+
+        String line;
+        boolean isFirstLine = true;
+        while ((line = reader.readLine()) != null)
+        {
+            if (!isFirstLine)
+            {
+                fileContent.append("\n");
+            }
+            else
+            {
+                isFirstLine = false;
+            }
+            fileContent.append(line);
+        }
+
+        reader.close();
+
+        return fileContent.toString();
+    }
+
     /**
      * Preinitialize modification
-     * 
+     *
      * @param event Preinitialization event
      */
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        logger = event.getModLog();
+        Logger = event.getModLog();
         logMethodCall(new Object(){}.getClass().getEnclosingMethod().getName());
+
+        try
+        {
+            String filename = "mixins.boilerplatemcforge.json";
+            InputStream stream = getClass().getClassLoader().getResourceAsStream(filename);
+            if (stream != null)
+            {
+                Logger.info("Mixins config {} loaded", filename);
+
+                String content = getBufferedReader(stream);
+                Logger.info("File content: {}", content);
+                Logger.info("Mixins loaded successfully");
+            }
+            else
+            {
+                Logger.error("File {} not found", filename);
+            }
+        }
+        catch (Exception exception)
+        {
+            Logger.error("Mixin loading error: {}", exception.getMessage());
+            exception.printStackTrace();
+        }
     }
 
     /**

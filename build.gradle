@@ -1,17 +1,26 @@
-buildscript
-{
-    repositories
-    {
-        maven
-        {
+buildscript {
+    repositories {
+        maven {
             url = 'https://maven.minecraftforge.net/'
+        }
+        maven {
+            url = 'https://repo.spongepowered.org/maven'
         }
         mavenCentral()
     }
 
-    dependencies
-    {
+    dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
+        classpath 'org.spongepowered:mixingradle:0.7.+'
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    maven {
+        url "https://cursemaven.com"
     }
 }
 
@@ -19,6 +28,8 @@ apply plugin: 'net.minecraftforge.gradle'
 
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+
+apply plugin: 'org.spongepowered.mixin'
 
 // File metadata
 version = '0.1'
@@ -32,8 +43,7 @@ compileJava.sourceCompatibility =
 compileJava.targetCompatibility =
     '1.8'
 
-minecraft
-{
+minecraft {
     // Mappings settings of Minecraft
     mappings channel: 'snapshot', version: '20171003-1.12'
 
@@ -43,10 +53,8 @@ minecraft
     //accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     // Default run configurations
-    runs
-    {
-        client
-        {
+    runs {
+        client {
             workingDirectory project.file('run')
 
             // Recommended logging data for a userdev environment
@@ -54,21 +62,35 @@ minecraft
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
+
+            // Load LoadingPlugin class
+            property 'fml.coreMods.load', 'org.imesense.boilerplate.mcforge.plugin.LoadingPlugin'
+
+            // Enable mixins
+            arg '-torg.spongepowered.asm.launch.MixinTweaker'
         }
 
-        server
-        {
+        server {
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
+
+            // Load LoadingPlugin class
+            property 'fml.coreMods.load', 'org.imesense.boilerplate.mcforge.plugin.LoadingPlugin'
+
+            // Enable mixins
+            arg '-torg.spongepowered.asm.launch.MixinTweaker'
         }
     }
 }
 
-dependencies
-{
+mixin {
+    add sourceSets.main, 'mixins.boilerplatemcforge.refmap.json'
+}
+
+dependencies {
     // Specify the version of Minecraft to use
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
 
@@ -77,13 +99,32 @@ dependencies
 
     // Dependencies to get remapped to current MCP mappings
     //deobf 'com.mod-buildcraft:buildcraft:6.0.8:dev'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    // SLF4J
+    implementation 'org.slf4j:slf4j-simple:1.7.36'
+
+    // Mixins
+    implementation fg.deobf("curse.maven:mixin-0-7-0-8-compatibility-405327:3045381")
+    implementation 'org.spongepowered:mixin:0.8.5'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    // GSON
+    implementation 'com.google.code.gson:gson:2.8.9'
+
+    // Byte Buddy
+    implementation 'net.bytebuddy:byte-buddy:1.12.9'
+
+    // DivineRPG
+    //implementation fg.deobf("curse.maven:official-divinerpg-363543:2937175")
 }
 
 // Get properties into the manifest for reading by the runtime
-jar
-{
-    manifest
-    {
+jar {
+    manifest {
         attributes([
             "Specification-Title": "boilerplatemcforge",
             "Specification-Vendor": "imesense",
@@ -91,7 +132,12 @@ jar
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
             "Implementation-Vendor" :"imesense",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+            "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
+            "MixinConfigs": "mixins.boilerplatemcforge.json",
+            "FMLCorePlugin": "org.imesense.boilerplate.mcforge.plugin.LoadingPlugin",
+            "FMLCorePluginContainsFMLMod": "true",
+            "ForceLoadAsMod": "true"
         ])
     }
 }
@@ -100,24 +146,21 @@ jar
 jar.finalizedBy('reobfJar')
 
 // Build sources task
-tasks.register('sourcesJar', Jar)
-{
+tasks.register('sourcesJar', Jar) {
     from sourceSets.main.allJava
     from sourceSets.main.resources
     classifier = 'sources'
 }
 
 // Build documentation task
-tasks.register('javadocJar', Jar)
-{
+tasks.register('javadocJar', Jar) {
     dependsOn javadoc
     from "$buildDir/docs/javadoc"
     classifier = 'javadoc'
 }
 
 // Build additional artifacts
-artifacts
-{
+artifacts {
     archives sourcesJar
     archives javadocJar
 }
@@ -126,32 +169,43 @@ artifacts
 //publish.dependsOn('reobfJar')
 
 // Set publish settings
-publishing
-{
-    publications
-    {
-        mavenJava(MavenPublication)
-        {
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
             artifact jar
             artifact sourcesJar
             artifact javadocJar
         }
     }
 
-    repositories
-    {
-        maven
-        {
+    repositories {
+        maven {
             url "file:///${project.projectDir}/mcmodsrepo"
         }
     }
 }
 
 // Enable packaging of metadata and resources
-sourceSets
-{
-    main
-    {
+sourceSets {
+    main {
         output.resourcesDir = output.classesDir
     }
 }
+
+// Enable annotations for mixins
+compileJava {
+    options.annotationProcessorPath = configurations.annotationProcessor
+    options.compilerArgs += [
+        "-AdefaultObfuscationEnv=searge",
+        "-AoutRefMap=mixins.boilerplatemcforge.refmap.json"
+    ]
+}
+
+task copyDependencies(type: Copy) {
+    from configurations.runtimeClasspath.filter {
+        it.name.contains("mixin-0-7-0-8-compatibility")
+    }
+    into 'build/libs'
+}
+
+build.dependsOn copyDependencies
