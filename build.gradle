@@ -33,7 +33,7 @@ apply plugin: 'org.spongepowered.mixin'
 
 // File metadata
 version = '0.1'
-group = 'org.imesense.emptymod.modid'
+group = 'org.imesense.emptymod'
 archivesBaseName = 'emptymod'
 
 // Java version
@@ -201,7 +201,7 @@ compileJava {
     ]
 }
 
-task copyDependencies(type: Copy) {
+tasks.register('copyDependencies', Copy) {
     from configurations.runtimeClasspath.filter {
         it.name.contains("mixin-0-7-0-8-compatibility")
     }
