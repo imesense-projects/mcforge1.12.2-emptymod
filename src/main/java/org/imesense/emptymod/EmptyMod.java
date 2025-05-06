@@ -7,8 +7,11 @@ import java.io.IOException;
 
 import org.apache.logging.log4j.Logger;
 
+import net.minecraft.client.resources.I18n;
+
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.ModMetadata;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -95,6 +98,10 @@ public final class EmptyMod
     {
         Logger = event.getModLog();
         logMethodCall(new Object(){}.getClass().getEnclosingMethod().getName());
+
+        ModMetadata metadata = event.getModMetadata();
+        metadata.name = I18n.format("mod." + MODID + ".name");
+        metadata.description = I18n.format("mod." + MODID + ".description");
 
         try
         {
