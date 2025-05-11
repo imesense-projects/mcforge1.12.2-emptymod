@@ -1,7 +1,8 @@
 {
-    "compatibilityLevel": "JAVA_8",
-    "minVersion": "0.8.5",
+    "required": true,
+    "minVersion": "0.7.11",
     "package": "org.imesense.boilerplate.mcforge.mixin",
+    "compatibilityLevel": "JAVA_8",
     "mixins": [
         "MixinMinecraft"
     ],
@@ -9,5 +10,7 @@
     "server": [],
     "injectors": {
         "defaultRequire": 1
-    }
+    },
+    "verbose": true,
+    "debug": true
 }
