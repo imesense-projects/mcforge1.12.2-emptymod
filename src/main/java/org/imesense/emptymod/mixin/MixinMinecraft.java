@@ -18,7 +18,7 @@ public abstract class MixinMinecraft
             this.getClass().getName() +
             "." +
             new Object(){}.getClass().getEnclosingMethod().getName() +
-            "method"
+            " method"
         );
     }
 }
