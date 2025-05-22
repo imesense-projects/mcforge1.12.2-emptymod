@@ -25,7 +25,7 @@ on:
 
 defaults:
     run:
-        shell: bash
+        shell: pwsh
 
 jobs:
     build-modification:
@@ -62,10 +62,16 @@ jobs:
                       Modification-${{ hashFiles('**/build.gradle') }}
                       Modification-
                   path: |
-                      ${{ github.workspace }}/.gradle/cache
+                      .gradle/cache
                   enableCrossOsArchive: true
 
-            - name: Build modification
+            - name: Build modification (Windows)
+              if: ${{ runner.os == 'Windows' }}
+              run: |
+                  ${{ github.workspace }}\gradlew.bat build
+
+            - name: Build modification (Linux)
+              if: ${{ runner.os == 'Linux' }}
               run: |
                   ${{ github.workspace }}/gradlew build
 
@@ -73,4 +79,6 @@ jobs:
               uses: actions/upload-artifact@v4
               with:
                   name: ${{ github.event.repository.name }}-${{ github.sha }}
-                  path: ${{ github.workspace }}/build/libs/
+                  path: |
+                      ${{ github.workspace }}/build/libs/
+                  overwrite: true
