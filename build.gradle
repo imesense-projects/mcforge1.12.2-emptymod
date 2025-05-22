@@ -104,22 +104,20 @@ dependencies {
     //deobf 'com.mod-buildcraft:buildcraft:6.0.8:dev'
 
     // Mixins
-    implementation fg.deobf("curse.maven:mixin-0-7-0-8-compatibility-405327:3045381")
-    implementation 'org.spongepowered:mixin:0.8.5'
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    implementation fg.deobf("curse.maven:mixin-0-7-0-8-compatibility-405327:4641243")
+    implementation fg.deobf("curse.maven:mixin-booter-419286:4459218")
+    //implementation 'org.spongepowered:mixin:0.8.5'
+    //annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     // Lombok
-    compileOnly 'org.projectlombok:lombok:1.18.30'
-    annotationProcessor 'org.projectlombok:lombok:1.18.30'
-
-    // SLF4J
-    implementation 'org.slf4j:slf4j-simple:1.7.36'
+    //compileOnly 'org.projectlombok:lombok:1.18.30'
+    //annotationProcessor 'org.projectlombok:lombok:1.18.30'
 
     // GSON
-    implementation 'com.google.code.gson:gson:2.8.9'
+    //implementation 'com.google.code.gson:gson:2.8.9'
 
     // Byte Buddy
-    implementation 'net.bytebuddy:byte-buddy:1.12.9'
+    //implementation 'net.bytebuddy:byte-buddy:1.12.9'
 
     // DivineRPG
     //implementation fg.deobf("curse.maven:official-divinerpg-363543:2937175")
@@ -204,11 +202,19 @@ compileJava {
     ]
 }
 
-tasks.register('copyDependencies', Copy) {
+tasks.register('copyMixinCompatibility', Copy) {
     from configurations.runtimeClasspath.filter {
-        it.name.contains("mixin-0-7-0-8-compatibility")
+        it.name.contains('mixin-0-7-0-8-compatibility')
     }
     into 'build/libs'
 }
 
-build.dependsOn copyDependencies
+tasks.register('copyMixinBooter', Copy) {
+    from configurations.runtimeClasspath.filter {
+        it.name.contains('mixin-booter-419286')
+    }
+    into 'build/libs'
+}
+
+build.dependsOn copyMixinCompatibility
+build.dependsOn copyMixinBooter

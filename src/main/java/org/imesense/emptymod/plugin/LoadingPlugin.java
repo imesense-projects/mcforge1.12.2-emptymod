@@ -3,7 +3,8 @@ package org.imesense.emptymod.plugin;
 import java.io.File;
 import java.util.Map;
 
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
@@ -19,7 +20,7 @@ import org.imesense.emptymod.transformer.ClassTransformer;
 @IFMLLoadingPlugin.SortingIndex(LoadingPlugin.AFTER_DEOBFUSCATION)
 public final class LoadingPlugin implements IFMLLoadingPlugin
 {
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(LoadingPlugin.class);
+    private static final Logger LOGGER = LogManager.getLogger(LoadingPlugin.class);
 
     public static File FileLocation;
     public static Boolean RuntimeDeobfuscation;
