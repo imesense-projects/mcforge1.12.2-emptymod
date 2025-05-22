@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: "Build template"
+name: "Build modification"
 
 on:
     push:
@@ -28,8 +28,8 @@ defaults:
         shell: bash
 
 jobs:
-    build-template:
-        name: "Build template"
+    build-modification:
+        name: "Build modification"
 
         strategy:
             matrix:
@@ -37,6 +37,9 @@ jobs:
                     - ubuntu-latest
 
         runs-on: ${{ matrix.system }}
+
+        env:
+            GRADLE_USER_HOME: ${{ github.workspace }}/.gradle/cache
 
         steps:
             - name: Checkout
@@ -50,12 +53,23 @@ jobs:
                   java-version: "8"
                   distribution: "temurin"
 
+            - name: Cache dependencies
+              uses: actions/cache@v4
+              with:
+                  key: Modification-${{ hashFiles('**/build.gradle') }}
+                  restore-keys: |
+                      Modification-${{ hashFiles('**/build.gradle') }}
+                      Modification-
+                  path: |
+                      ${{ github.workspace }}/.gradle/cache
+                  enableCrossOsArchive: true
+
             - name: Build modification
               run: |
-                  ./gradlew build
+                  ${{ github.workspace }}/gradlew build
 
             - name: Upload modification
               uses: actions/upload-artifact@v4
               with:
-                  name: boilerplatemcforge-${{ github.sha }}
-                  path: build/libs/
+                  name: ${{ github.event.repository.name }}-${{ github.sha }}
+                  path: ${{ github.workspace }}/build/libs/
