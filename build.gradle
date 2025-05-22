@@ -94,9 +94,6 @@ dependencies {
     // Specify the version of Minecraft to use
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
 
-    // Mergetool
-    implementation fg.deobf("libs:mergetool-0.2.3.3-forge")
-
     // Optional dependencies that exist at compile-time but might not at runtime
     //provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
 
@@ -141,6 +138,8 @@ jar {
             "ForceLoadAsMod": "true"
         ])
     }
+
+    exclude 'net/**'
 }
 
 // Preferred method to reobfuscate JAR file
@@ -202,19 +201,12 @@ compileJava {
     ]
 }
 
-tasks.register('copyMixinCompatibility', Copy) {
-    from configurations.runtimeClasspath.filter {
-        it.name.contains('mixin-0-7-0-8-compatibility')
+tasks.register('copyDependencies', Copy) {
+    from configurations.runtimeClasspath.filter { file ->
+        file.name.contains('mixin-0-7-0-8-compatibility') ||
+        file.name.contains('mixin-booter-419286')
     }
     into 'build/libs'
 }
 
-tasks.register('copyMixinBooter', Copy) {
-    from configurations.runtimeClasspath.filter {
-        it.name.contains('mixin-booter-419286')
-    }
-    into 'build/libs'
-}
-
-build.dependsOn copyMixinCompatibility
-build.dependsOn copyMixinBooter
+build.dependsOn copyDependencies
