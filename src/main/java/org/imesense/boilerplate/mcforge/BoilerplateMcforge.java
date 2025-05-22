@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import net.minecraft.client.resources.I18n;
 
@@ -47,7 +48,7 @@ public final class BoilerplateMcforge
     /**
      * Logger object
      */
-    public static Logger Logger;
+    private static final Logger LOGGER = LogManager.getLogger(BoilerplateMcforge.class);
 
     /**
      * Writes method call to log
@@ -56,7 +57,7 @@ public final class BoilerplateMcforge
      */
     private void logMethodCall(String methodName)
     {
-        Logger.info(
+        LOGGER.info(
             "Called {}.{} method",
             this.getClass().getName(),
             methodName
@@ -96,7 +97,6 @@ public final class BoilerplateMcforge
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        Logger = event.getModLog();
         logMethodCall(new Object(){}.getClass().getEnclosingMethod().getName());
 
         ModMetadata metadata = event.getModMetadata();
@@ -109,20 +109,20 @@ public final class BoilerplateMcforge
             InputStream stream = getClass().getClassLoader().getResourceAsStream(filename);
             if (stream != null)
             {
-                Logger.info("Mixins config {} loaded", filename);
+                LOGGER.info("Mixins config {} loaded", filename);
 
                 String content = getBufferedReader(stream);
-                Logger.info("File content: {}", content);
-                Logger.info("Mixins loaded successfully");
+                LOGGER.info("File content: {}", content);
+                LOGGER.info("Mixins loaded successfully");
             }
             else
             {
-                Logger.error("File {} not found", filename);
+                LOGGER.error("File {} not found", filename);
             }
         }
         catch (Exception exception)
         {
-            Logger.error("Mixin loading error: {}", exception.getMessage());
+            LOGGER.error("Mixin loading error: {}", exception.getMessage());
             exception.printStackTrace();
         }
     }
