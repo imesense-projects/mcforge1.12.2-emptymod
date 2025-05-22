@@ -138,6 +138,8 @@ jar {
             "ForceLoadAsMod": "true"
         ])
     }
+
+    exclude 'net/**'
 }
 
 // Preferred method to reobfuscate JAR file
@@ -199,19 +201,12 @@ compileJava {
     ]
 }
 
-tasks.register('copyMixinCompatibility', Copy) {
-    from configurations.runtimeClasspath.filter {
-        it.name.contains('mixin-0-7-0-8-compatibility')
+tasks.register('copyDependencies', Copy) {
+    from configurations.runtimeClasspath.filter { file ->
+        file.name.contains('mixin-0-7-0-8-compatibility') ||
+        file.name.contains('mixin-booter-419286')
     }
     into 'build/libs'
 }
 
-tasks.register('copyMixinBooter', Copy) {
-    from configurations.runtimeClasspath.filter {
-        it.name.contains('mixin-booter-419286')
-    }
-    into 'build/libs'
-}
-
-build.dependsOn copyMixinCompatibility
-build.dependsOn copyMixinBooter
+build.dependsOn copyDependencies
