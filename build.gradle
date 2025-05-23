@@ -101,10 +101,10 @@ dependencies {
     //deobf 'com.mod-buildcraft:buildcraft:6.0.8:dev'
 
     // Mixins
+    implementation 'org.spongepowered:mixin:0.8.5'
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     implementation fg.deobf("curse.maven:mixin-0-7-0-8-compatibility-405327:4641243")
     implementation fg.deobf("curse.maven:mixin-booter-419286:4459218")
-    //implementation 'org.spongepowered:mixin:0.8.5'
-    //annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     // Lombok
     //compileOnly 'org.projectlombok:lombok:1.18.30'
