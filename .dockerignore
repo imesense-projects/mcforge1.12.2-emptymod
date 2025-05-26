@@ -1,0 +1,23 @@
+# Global ignoring of different binaries and another temporary files
+
+# Git files and folders
+.git/
+*.gitattributes
+*.gitignore
+
+# Docker files
+*.dockerignore
+
+# Gradle cache
+.gradle/
+
+# Build results
+build/
+run/
+
+# Generated files
+.vscode/launch.json
+
+# System cache
+.DS_Store
+Thumbs.db
