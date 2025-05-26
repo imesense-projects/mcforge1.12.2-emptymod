@@ -26,6 +26,9 @@ run/
 # Minecraft Forge MDK files
 forge*changelog.txt
 
-# System Cache
+# Generated files
+.vscode/launch.json
+
+# System cache
 .DS_Store
 Thumbs.db
