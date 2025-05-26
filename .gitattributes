@@ -13,6 +13,10 @@
 # TOML configs
 *.toml text eol=lf encoding=utf-8
 
+# Visual Studio Code files
+*.code-workspace eol=crlf encoding=utf-8
+.vscode/*.json   eol=crlf encoding=utf-8
+
 # Gradle scripts
 build.gradle text eol=crlf encoding=utf-8
 gradlew text eol=lf encoding=utf-8

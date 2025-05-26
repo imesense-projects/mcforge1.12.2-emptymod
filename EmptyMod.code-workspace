@@ -1,0 +1,42 @@
+{
+    // Folders properties
+    "folders": [
+        // Main folder
+        {
+            "name": "Empty Mod",
+            "path": "."
+        }
+    ],
+
+    // Workspace settings
+    "settings": {
+        // Files associations
+        "files.associations": {
+            // Visual Studio Code files
+            "*.code-workspace": "jsonc",
+            ".vscode/*.json": "jsonc",
+
+            // Gradle scripts
+            "gradlew": "shellscript",
+
+            // Minecraft resources
+            "*.info": "json",
+            "*.mcmeta": "json",
+            "*.lang": "properties"
+        },
+
+        // Extensions settings
+        "redhat.telemetry.enabled": false,
+
+        // Formats settings
+        "[yaml]": {
+            "editor.defaultFormatter": "redhat.vscode-yaml"
+        },
+        "[json]": {
+            "editor.defaultFormatter": "vscode.json-language-features"
+        },
+        "[markdown]": {
+            "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+        }
+    }
+}

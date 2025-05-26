@@ -1,0 +1,17 @@
+{
+    // Recommended extensions
+    "recommendations": [
+        // Markdown
+        "DavidAnson.vscode-markdownlint",
+
+        // YAML
+        "redhat.vscode-yaml",
+
+        // Docker
+        "ms-azuretools.vscode-docker",
+        "docker.docker",
+
+        // DevContainers
+        "ms-vscode-remote.remote-containers"
+    ]
+}
