@@ -1,8 +1,14 @@
 {
-    "minVersion": "0.7.11",
+    "required": true,
     "package": "org.imesense.boilerplate.mcforge.mixin",
+    "refmap": "mixins.boilerplatemcforge.refmap.json",
     "compatibilityLevel": "JAVA_8",
+    "target": "@env(DEFAULT)",
+    "minVersion": "0.8",
     "mixins": [
-        "MixinMinecraft"
-    ]
+        "MixinEntityPlayer"
+    ],
+    "injectors": {
+        "maxShiftBy": 10
+    }
 }
