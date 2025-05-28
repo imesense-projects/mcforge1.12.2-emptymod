@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -26,7 +28,8 @@ import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
 @Mod(
     modid = EmptyMod.MODID,
     name = EmptyMod.NAME,
-    version = EmptyMod.VERSION
+    version = EmptyMod.VERSION,
+    dependencies = "required-after:fermiumbooter"
 )
 public final class EmptyMod
 {
@@ -105,24 +108,64 @@ public final class EmptyMod
 
         try
         {
-            String filename = "mixins.emptymod.json";
-            InputStream stream = getClass().getClassLoader().getResourceAsStream(filename);
-            if (stream != null)
-            {
-                LOGGER.info("Mixins config {} loaded", filename);
+            String resourcePath = "";
+            List<String> configFiles = new ArrayList<>();
 
-                String content = getBufferedReader(stream);
-                LOGGER.info("File content: {}", content);
-                LOGGER.info("Mixins loaded successfully");
-            }
-            else
+            try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(resourcePath))
             {
-                LOGGER.error("File {} not found", filename);
+                assert inputStream != null;
+
+                try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream)))
+                {
+                    String resource;
+                    while ((resource = bufferedReader.readLine()) != null)
+                    {
+                        if (resource.startsWith("mixin.") && resource.endsWith(".json"))
+                        {
+                            configFiles.add(resource);
+                        }
+                    }
+                }
+            }
+
+            if (configFiles.isEmpty())
+            {
+                LOGGER.error("No mixin config files found!");
+                return;
+            }
+
+            LOGGER.info("Found {} mixin config files:", configFiles.size());
+
+            for (String configFile : configFiles)
+            {
+                try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(configFile))
+                {
+                    assert inputStream != null;
+
+                    try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream)))
+                    {
+                        LOGGER.info("Loading mixin: {}", configFile);
+
+                        String line;
+                        StringBuilder stringBuilder = new StringBuilder();
+                        while ((line = bufferedReader.readLine()) != null)
+                        {
+                            stringBuilder.append(line).append("\n");
+                        }
+
+                        LOGGER.info("Contents of {}:\n{}", configFile, stringBuilder);
+                        LOGGER.info("Successfully loaded: {}", configFile);
+                    }
+                }
+                catch (Exception exception)
+                {
+                    LOGGER.error("Error loading {}: {}", configFile, exception.getMessage());
+                }
             }
         }
         catch (Exception exception)
         {
-            LOGGER.error("Mixin loading error: {}", exception.getMessage());
+            LOGGER.error("Common error: {}", exception.getMessage());
             exception.printStackTrace();
         }
     }
