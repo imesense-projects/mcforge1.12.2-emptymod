@@ -23,6 +23,12 @@ build/
 eclipse/
 run/
 
+# Minecraft cache
+mods/
+config/
+world/
+crash-reports/
+
 # Minecraft Forge MDK files
 forge*changelog.txt
 

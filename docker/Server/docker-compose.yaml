@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+
+services:
+    emptymod-server:
+        container_name: emptymod-server
+        platform: linux/amd64
+        build:
+            context: ../..
+            dockerfile: docker/Server/Dockerfile
+            target: final
+        profiles:
+            - server
+        environment:
+            - EULA=true
+        ports:
+            - "25565:25565"
+        volumes:
+            - ../../world:/app/world
+            - ../../config:/app/config
+            - ../../crash-reports:/app/crash-reports
+        networks:
+            - emptymod-network
+        restart: unless-stopped
+
+networks:
+    emptymod-network:
+        name: emptymod-network
+        driver: bridge
