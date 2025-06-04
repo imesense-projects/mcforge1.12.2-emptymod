@@ -7,6 +7,7 @@
 
 # Docker files
 docker/
+!docker/**/*.sh
 *.dockerignore
 
 # Gradle cache
