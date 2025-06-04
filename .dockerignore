@@ -6,6 +6,7 @@
 *.gitignore
 
 # Docker files
+docker/
 *.dockerignore
 
 # Gradle cache
@@ -15,8 +16,8 @@
 build/
 run/
 
-# Generated files
-.vscode/launch.json
+# Visual Studio Code files
+.vscode/
 
 # System cache
 .DS_Store

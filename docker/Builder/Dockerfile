@@ -1,0 +1,35 @@
+#syntax=docker/dockerfile:1
+
+# Build stage
+FROM openjdk:8-jdk-alpine AS build
+
+# Set working directory
+WORKDIR /app
+
+# Copy project
+COPY . .
+
+# Set cache
+ENV GRADLE_USER_HOME=/gradle
+RUN \
+    mkdir -p $GRADLE_USER_HOME
+
+# Build project
+RUN \
+    ./gradlew --no-daemon build
+
+# Cache stage
+FROM scratch AS cache
+
+# Copy cache
+COPY --from=build \
+    /gradle \
+    /.gradle/cache
+
+# Export stage
+FROM scratch AS export
+
+# Copy output
+COPY --from=build \
+    /app/build/libs/*.jar \
+    /build/libs/
