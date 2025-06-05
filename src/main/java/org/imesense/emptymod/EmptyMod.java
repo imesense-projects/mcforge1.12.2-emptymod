@@ -21,6 +21,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppedEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Main class of modification
@@ -92,6 +94,14 @@ public final class EmptyMod
         return fileContent.toString();
     }
 
+    @SideOnly(Side.CLIENT)
+    private static void setLocaleMetadata(FMLPreInitializationEvent event)
+    {
+        ModMetadata metadata = event.getModMetadata();
+        metadata.name = I18n.format("mod." + MODID + ".name");
+        metadata.description = I18n.format("mod." + MODID + ".description");
+    }
+
     /**
      * Preinitialize modification
      *
@@ -102,9 +112,12 @@ public final class EmptyMod
     {
         logMethodCall(new Object(){}.getClass().getEnclosingMethod().getName());
 
-        ModMetadata metadata = event.getModMetadata();
-        metadata.name = I18n.format("mod." + MODID + ".name");
-        metadata.description = I18n.format("mod." + MODID + ".description");
+        if (!event.getSide().isClient())
+        {
+            return;
+        }
+
+        setLocaleMetadata(event);
 
         try
         {

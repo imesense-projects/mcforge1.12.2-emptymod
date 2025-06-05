@@ -18,6 +18,7 @@ services:
             - ../../world:/app/world
             - ../../config:/app/config
             - ../../crash-reports:/app/crash-reports
+            - ../../server.properties:/app/server.properties
         networks:
             - emptymod-network
         restart: unless-stopped
