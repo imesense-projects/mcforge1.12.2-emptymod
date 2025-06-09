@@ -39,9 +39,15 @@ archivesBaseName = 'emptymod'
 // Java version
 sourceCompatibility =
 targetCompatibility =
-compileJava.sourceCompatibility =
-compileJava.targetCompatibility =
     '1.8'
+
+// Compile options
+compileJava {
+    sourceCompatibility =
+    targetCompatibility =
+        '1.8'
+    options.encoding = 'UTF-8'
+}
 
 minecraft {
     // Mappings settings of Minecraft
@@ -193,8 +199,7 @@ sourceSets {
 compileJava {
     options.annotationProcessorPath = configurations.annotationProcessor
     options.compilerArgs += [
-        "-AdefaultObfuscationEnv=searge",
-        "-AoutRefMap=mixins.emptymod.refmap.json"
+        "-AdefaultObfuscationEnv=searge"
     ]
 }
 
