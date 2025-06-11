@@ -199,8 +199,9 @@ compileJava {
 }
 
 tasks.register('copyDependencies', Copy) {
-    from configurations.runtimeClasspath.filter { file ->
-        file.name.contains('fermiumbooter')
+    from configurations.runtimeClasspath.filter {
+        file ->
+            file.name.contains('fermiumbooter')
     }
     into 'build/libs'
 }
