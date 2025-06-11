@@ -6,7 +6,7 @@
       <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License" />
     </a>
     <a href="https://github.com/imesense/mcforge1.12.2-modification-boilerplate/actions/workflows/build-modification.yml">
-      <img src="https://github.com/imesense/mcforge1.12.2-modification-boilerplate/actions/workflows/build-modification.yml/badge.svg" alt="Pack addon" />
+      <img src="https://github.com/imesense/mcforge1.12.2-modification-boilerplate/actions/workflows/build-modification.yml/badge.svg" alt="Build modification" />
     </a>
   </p>
 </div>
