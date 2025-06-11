@@ -6,6 +6,7 @@
 *.gitignore
 
 # Docker files
+.docker/
 docker/
 !docker/**/*.sh
 *.dockerignore
@@ -14,11 +15,18 @@ docker/
 .gradle/
 
 # Build results
+bin/
 build/
 run/
 
 # Visual Studio Code files
 .vscode/
+
+# Minecraft files
+mods/
+config/
+world/
+crash-reports/
 
 # System cache
 .DS_Store

@@ -1,7 +1,8 @@
 # Global ignoring of different binaries and another temporary files
 
 # Eclipse cache and settings
-bin
+bin/
+eclipse/
 *.launch
 .settings
 .metadata
@@ -18,9 +19,6 @@ out/
 # Gradle cache and settings
 .gradle/
 build/
-
-# Other cache
-eclipse/
 run/
 
 # Minecraft cache and settings

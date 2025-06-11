@@ -12,11 +12,20 @@ COPY . .
 # Set cache
 ENV GRADLE_USER_HOME=/gradle
 RUN \
-    mkdir -p $GRADLE_USER_HOME
+    mkdir -p ${GRADLE_USER_HOME} && \
+    mkdir -p ${GRADLE_USER_HOME}/{wrapper,caches}
 
 # Build project
 RUN \
-    ./gradlew --no-daemon build
+    ./gradlew \
+        --no-daemon \
+        build
+
+# Set mount
+RUN \
+    --mount=type=cache,target=${GRADLE_USER_HOME}/wrapper \
+    --mount=type=cache,target=${GRADLE_USER_HOME}/caches \
+    ls ${GRADLE_USER_HOME}
 
 # Cache stage
 FROM scratch AS cache
@@ -24,7 +33,7 @@ FROM scratch AS cache
 # Copy cache
 COPY --from=build \
     /gradle \
-    /.gradle/cache
+    ./.gradle
 
 # Export stage
 FROM scratch AS export
@@ -32,4 +41,4 @@ FROM scratch AS export
 # Copy output
 COPY --from=build \
     /app/build/libs/*.jar \
-    /build/libs/
+    ./build/libs/
