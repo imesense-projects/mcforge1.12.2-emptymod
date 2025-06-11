@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: "Build mod"
+name: "Build modification"
 
 on:
     push:
@@ -28,8 +28,8 @@ defaults:
         shell: pwsh
 
 jobs:
-    build-mod:
-        name: "Build mod"
+    build-modification:
+        name: "Build modification"
 
         strategy:
             matrix:
@@ -65,17 +65,17 @@ jobs:
                       .gradle/cache
                   enableCrossOsArchive: true
 
-            - name: Build mod (Windows)
+            - name: Build modification (Windows)
               if: ${{ runner.os == 'Windows' }}
               run: |
                   ${{ github.workspace }}\gradlew.bat build
 
-            - name: Build mod (Linux)
+            - name: Build modification (Linux)
               if: ${{ runner.os == 'Linux' }}
               run: |
                   ${{ github.workspace }}/gradlew build
 
-            - name: Upload mod
+            - name: Upload modification
               uses: actions/upload-artifact@v4
               with:
                   name: ${{ github.event.repository.name }}-${{ github.sha }}
