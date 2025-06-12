@@ -1,6 +1,6 @@
 @echo off
 
-:: Build mod
+:: Build modification
 docker build ^
     --file docker\Builder\Dockerfile ^
     --progress=plain ^
