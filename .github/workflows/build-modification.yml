@@ -40,7 +40,7 @@ jobs:
         runs-on: ${{ matrix.system }}
 
         env:
-            GRADLE_USER_HOME: ${{ github.workspace }}/.gradle/cache
+            GRADLE_USER_HOME: ${{ github.workspace }}/.gradle
 
         steps:
             - name: Checkout
@@ -62,7 +62,9 @@ jobs:
                       Modification-${{ hashFiles('**/build.gradle') }}
                       Modification-
                   path: |
-                      .gradle/cache
+                      .gradle/caches/
+                      .gradle/wrapper/
+                      libs/
                   enableCrossOsArchive: true
 
             - name: Build modification (Windows)
