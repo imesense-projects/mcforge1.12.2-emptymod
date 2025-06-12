@@ -15,17 +15,11 @@ RUN \
     mkdir -p ${GRADLE_USER_HOME} && \
     mkdir -p ${GRADLE_USER_HOME}/{wrapper,caches}
 
-# Build project
+# Build modification
 RUN \
     ./gradlew \
         --no-daemon \
         build
-
-# Set mount
-RUN \
-    --mount=type=cache,target=${GRADLE_USER_HOME}/wrapper \
-    --mount=type=cache,target=${GRADLE_USER_HOME}/caches \
-    ls ${GRADLE_USER_HOME}
 
 # Cache stage
 FROM scratch AS cache
