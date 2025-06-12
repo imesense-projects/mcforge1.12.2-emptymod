@@ -1,0 +1,76 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: "Build containers"
+
+on:
+    push:
+        branches:
+            - "**"
+        paths:
+            - ".github/workflows/**"
+            - "gradle/**"
+            - "src/**"
+            - "*.gradle"
+            - "gradle*"
+
+    pull_request:
+        branches:
+            - "**"
+        paths:
+            - ".github/workflows/**"
+            - "gradle/**"
+            - "src/**"
+            - "*.gradle"
+            - "gradle*"
+
+defaults:
+    run:
+        shell: pwsh
+
+jobs:
+    build-modification:
+        name: "Build modification"
+
+        strategy:
+            matrix:
+                system:
+                    - ubuntu-24.04
+
+        runs-on: ${{ matrix.system }}
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Setup Docker
+              uses: crazy-max/ghaction-setup-docker@v2
+              with:
+                  daemon-config: |
+                      {
+                          "features": {
+                              "containerd-snapshotter": true
+                          }
+                      }
+
+            - name: Setup QEMU
+              uses: docker/setup-qemu-action@v3
+              with:
+                  platforms: linux/amd64
+
+            - name: Setup Docker Buildx
+              uses: docker/setup-buildx-action@v3
+
+            - name: Build modification
+              run: |
+                  chmod +x docker/Builder/build-modification.sh
+                  ./docker/Builder/build-modification.sh
+
+            - name: Upload modification
+              uses: actions/upload-artifact@v4
+              with:
+                  name: ${{ github.event.repository.name }}-${{ github.sha }}
+                  path: |
+                      ${{ github.workspace }}/build/libs/
+                  overwrite: true
