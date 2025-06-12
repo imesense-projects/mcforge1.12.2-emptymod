@@ -69,31 +69,6 @@ public final class BoilerplateMcforge
         );
     }
 
-    private static String getBufferedReader(InputStream stream) throws IOException
-    {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-        StringBuilder fileContent = new StringBuilder();
-
-        String line;
-        boolean isFirstLine = true;
-        while ((line = reader.readLine()) != null)
-        {
-            if (!isFirstLine)
-            {
-                fileContent.append("\n");
-            }
-            else
-            {
-                isFirstLine = false;
-            }
-            fileContent.append(line);
-        }
-
-        reader.close();
-
-        return fileContent.toString();
-    }
-
     @SideOnly(Side.CLIENT)
     private static void setLocaleMetadata(FMLPreInitializationEvent event)
     {
