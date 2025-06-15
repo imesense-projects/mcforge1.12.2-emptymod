@@ -11,18 +11,30 @@ docker/
 !docker/**/*.sh
 *.dockerignore
 
-# Gradle cache
-.gradle/
+# GitHub files and folders
+.github/
 
-# Build results
-bin/
-build/
-run/
+# Java cache
+libs/
+
+# IntelliJ Idea cache and settings
+.idea/
+out/
+*.ipr
+*.iws
+*.iml
 
 # Visual Studio Code files
 .vscode/
+*.code-workspace
+
+# Gradle cache and settings
+.gradle/
+build/
+run/
 
 # Minecraft files
+mcmodsrepo/
 mods/
 config/
 world/

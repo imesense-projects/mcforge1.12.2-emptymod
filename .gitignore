@@ -10,6 +10,9 @@ out/
 *.iws
 *.iml
 
+# Visual Studio Code files
+.vscode/launch.json
+
 # Gradle cache and settings
 .gradle/
 build/
@@ -22,12 +25,6 @@ config/
 world/
 crash-reports/
 server.properties
-
-# Minecraft Forge files
-forge*changelog.txt
-
-# Visual Studio Code files
-.vscode/launch.json
 
 # System cache
 .DS_Store
