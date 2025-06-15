@@ -3,15 +3,6 @@
 # Java cache
 libs/
 
-# Eclipse cache and settings
-bin/
-eclipse/
-*.launch
-.settings
-.metadata
-.classpath
-.project
-
 # IntelliJ Idea cache and settings
 .idea/
 out/
@@ -25,16 +16,17 @@ build/
 run/
 
 # Minecraft cache and settings
+mcmodsrepo/
 mods/
 config/
 world/
 crash-reports/
 server.properties
 
-# Minecraft Forge MDK files
+# Minecraft Forge files
 forge*changelog.txt
 
-# Generated files
+# Visual Studio Code files
 .vscode/launch.json
 
 # System cache
