@@ -88,14 +88,18 @@ jobs:
             - name: Upload cache
               uses: actions/upload-artifact@v4
               with:
-                  name: ${{ github.event.repository.name }}-cache-${{ runner.os }}-${{ github.sha }}
+                  name: ${{ github.event.repository.name }}-cache-${{ github.sha }}
                   path: |
                       ${{ github.workspace }}/.gradle/caches/
                       ${{ github.workspace }}/.gradle/wrapper/
                       ${{ github.workspace }}/libs/
+                  overwrite: true
 
-    build-docker:
-        name: "Build modification"
+    publish-modification:
+        name: "Publish modification"
+
+        needs:
+            - build-modification
 
         strategy:
             matrix:
@@ -104,31 +108,49 @@ jobs:
 
         runs-on: ${{ matrix.system }}
 
+        env:
+            GRADLE_USER_HOME: ${{ github.workspace }}/.gradle
+
         steps:
             - name: Checkout
               uses: actions/checkout@v4
               with:
                   fetch-depth: 0
 
-            - name: Setup Docker
-              uses: crazy-max/ghaction-setup-docker@v2
+            - name: Setup JDK
+              uses: actions/setup-java@v4
               with:
-                  daemon-config: |
-                      {
-                          "features": {
-                              "containerd-snapshotter": true
-                          }
-                      }
+                  java-version: "8"
+                  distribution: "temurin"
 
-            - name: Setup QEMU
-              uses: docker/setup-qemu-action@v3
+            - name: Cache dependencies
+              uses: actions/cache@v4
               with:
-                  platforms: linux/amd64
+                  key: Modification-${{ hashFiles('**/build.gradle') }}
+                  restore-keys: |
+                      Modification-${{ hashFiles('**/build.gradle') }}
+                      Modification-
+                  path: |
+                      .gradle/caches/
+                      .gradle/wrapper/
+                      libs/
+                  enableCrossOsArchive: true
 
-            - name: Setup Docker Buildx
-              uses: docker/setup-buildx-action@v3
-
-            - name: Build modification
+            - name: Publish modification
               run: |
-                  chmod +x docker/Builder/build-modification.sh
-                  ./docker/Builder/build-modification.sh
+                  ${{ github.workspace }}/gradlew publish
+
+            - name: Upload modification
+              uses: actions/upload-artifact@v4
+              with:
+                  name: ${{ github.event.repository.name }}-publish-${{ github.sha }}
+                  path: |
+                      ${{ github.workspace }}/build/libs/
+                  overwrite: true
+
+            - name: Upload repository
+              uses: actions/upload-artifact@v4
+              with:
+                  name: ${{ github.event.repository.name }}-repository-${{ github.sha }}
+                  path: |
+                      ${{ github.workspace }}/mcmodsrepo/
