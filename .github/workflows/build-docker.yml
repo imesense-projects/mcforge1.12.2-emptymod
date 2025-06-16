@@ -45,7 +45,7 @@ jobs:
                   fetch-depth: 0
 
             - name: Setup Docker
-              uses: crazy-max/ghaction-setup-docker@v2
+              uses: crazy-max/ghaction-setup-docker@v4
               with:
                   daemon-config: |
                       {
