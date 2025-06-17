@@ -1,29 +1,24 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
 
 services:
-    boilerplatemcforge-server:
-        container_name: boilerplatemcforge-server
+    boilerplatemcforge:
+        container_name: boilerplatemcforge
+        image: ${REGISTRY:-ghcr.io/imesense}/mcforge1.12.2-modification-boilerplate:${IMAGE_TAG:-latest}
         platform: linux/amd64
-        build:
-            context: ../..
-            dockerfile: docker/Server/Dockerfile
-            target: final
-        profiles:
-            - server
         environment:
-            - EULA=true
+            - EULA=${EULA:-false}
         ports:
-            - "25565:25565"
+            - "${SERVER_PORT:-25565}:25565"
         volumes:
-            - ../../world:/app/world
-            - ../../config:/app/config
-            - ../../crash-reports:/app/crash-reports
-            - ../../server.properties:/app/server.properties
+            - ${VOLUME_WORLD:-../../world}:/app/world
+            - ${VOLUME_CONFIG:-../../config}:/app/config
+            - ${VOLUME_REPORTS:-../../crash-reports}:/app/crash-reports
+            - ${VOLUME_PROPERTIES:-../../server.properties}:/app/server.properties
         networks:
-            - boilerplatemcforge-network
+            - boilerplatemcforge
         restart: unless-stopped
 
 networks:
-    boilerplatemcforge-network:
-        name: boilerplatemcforge-network
+    boilerplatemcforge:
+        name: boilerplatemcforge
         driver: bridge

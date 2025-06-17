@@ -1,5 +1,8 @@
 # Global ignoring of different binaries and another temporary files
 
+# Docker files
+*.env
+
 # Java cache
 libs/
 

@@ -6,10 +6,10 @@
 *.gitignore
 
 # Docker files
-.docker/
 docker/
 !docker/**/*.sh
 *.dockerignore
+*.env
 
 # GitHub files and folders
 .github/
