@@ -56,7 +56,7 @@ compileJava {
 
 minecraft {
     // Mappings settings of Minecraft
-    mappings channel: 'snapshot', version: '20171003-1.12'
+    mappings channel: 'stable', version: '39-1.12'
 
     // Uncomment this to disable `Srg` named sources JAR by default
     //makeObfSourceJar = false
@@ -168,8 +168,6 @@ jar {
             "ForceLoadAsMod": "true"
         ])
     }
-
-    exclude 'net/**'
 }
 
 // Preferred method to reobfuscate JAR file
