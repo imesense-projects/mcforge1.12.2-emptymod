@@ -56,18 +56,22 @@ jobs:
 
             - name: Build image
               run: |
-                  chmod +x docker/Server/build-server.sh
-                  ./docker/Server/build-server.sh
-                  docker tag `
-                      ${{ github.event.repository.name }}:latest `
-                      ${{ github.event.repository.name }}:${{ env.tag }}
+                  docker build `
+                      --file docker/Server/Dockerfile `
+                      --progress=plain `
+                      --target final `
+                      --tag ghcr.io/imesense/${{ github.event.repository.name }}:${{ env.tag }} `
+                      .
+
+            - name: Save image
+              run: |
                   docker save `
                       -o ${{ github.event.repository.name }}-${{ env.tag }}.tar `
-                      ${{ github.event.repository.name }}:${{ env.tag }}
+                      ghcr.io/imesense/${{ github.event.repository.name }}:${{ env.tag }}
 
             - name: Upload image
               uses: actions/upload-artifact@v4
               with:
                   name: ${{ github.event.repository.name }}-${{ github.sha }}
                   path: |
-                      ${{ github.workspace }}/build/libs/
+                      ${{ github.workspace }}/${{ github.event.repository.name }}-${{ env.tag }}.tar
