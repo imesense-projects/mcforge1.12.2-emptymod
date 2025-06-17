@@ -3,7 +3,6 @@ package org.imesense.emptymod;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,19 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
- * Main class of modification
+ * Main class for EmptyMod modification
+ * <p>
+ * This class serves as the primary entry point for the mod and handles all major
+ * lifecycle events in the Forge mod loading process. It includes functionality for:
+ * <ul>
+ *     <li>Mixin configuration loading</li>
+ *     <li>Localization support</li>
+ *     <li>Standard Forge mod lifecycle management</li>
+ * </ul>
+ *
+ * {@code @Mod} annotation configures the basic mod metadata and dependencies.
+ *
+ * @see Mod
  */
 @Mod(
     modid = EmptyMod.MODID,
@@ -36,7 +47,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public final class EmptyMod
 {
     /**
-     * Modification ID
+     * Modification unique identifier
      */
     public static final String MODID = "emptymod";
 
@@ -51,14 +62,17 @@ public final class EmptyMod
     public static final String VERSION = "1.12.2-14.23.5.2860";
 
     /**
-     * Logger object
+     * Logger instance for {@link EmptyMod}
+     *
+     * @see Logger
+     * @see LogManager
      */
     private static final Logger LOGGER = LogManager.getLogger(EmptyMod.class);
 
     /**
-     * Writes method call to log
+     * Logs a method call to the logger.
      *
-     * @param methodName Name of method
+     * @param methodName the name of the method being called
      */
     private void logMethodCall(String methodName)
     {
@@ -69,6 +83,15 @@ public final class EmptyMod
         );
     }
 
+    /**
+     * Sets the localized metadata for the mod (client-side only).
+     *
+     * @param event pre-initialization event containing mod metadata
+     *
+     * @see FMLPreInitializationEvent
+     * @see ModMetadata
+     * @see I18n
+     */
     @SideOnly(Side.CLIENT)
     private static void setLocaleMetadata(FMLPreInitializationEvent event)
     {
@@ -78,9 +101,18 @@ public final class EmptyMod
     }
 
     /**
-     * Preinitialize modification
+     * Handles the mod pre-initialization phase.
+     * <p>
+     * This method:
+     * <ul>
+     *   <li>Sets up localization (client-side only)</li>
+     *   <li>Loads and validates Mixin configuration files</li>
+     *   <li>Logs all Mixin configurations found</li>
+     * </ul>
      *
-     * @param event Preinitialization event
+     * @param event the pre-initialization event
+     *
+     * @see FMLPreInitializationEvent
      */
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -159,57 +191,92 @@ public final class EmptyMod
     }
 
     /**
-     * Initialize modification
-     * 
-     * @param event Initialization event
+     * Handles the mod initialization phase.
+     *
+     * @param event the initialization event
+     *
+     * @see FMLInitializationEvent
      */
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-        logMethodCall(new Object(){}.getClass().getEnclosingMethod().getName());
+        logMethodCall(
+            new Object(){}
+                .getClass()
+                .getEnclosingMethod()
+                .getName()
+        );
     }
 
     /**
-     * Postinitialize modification
-     * 
-     * @param event Postinitialization event
+     * Handles the mod post-initialization phase.
+     *
+     * @param event the post-initialization event
+     *
+     * @see FMLPostInitializationEvent
      */
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-        logMethodCall(new Object(){}.getClass().getEnclosingMethod().getName());
+        logMethodCall(
+            new Object(){}
+                .getClass()
+                .getEnclosingMethod()
+                .getName()
+        );
     }
 
     /**
-     * Load complete action
-     * 
-     * @param event Load complete event
+     * Handles the load complete event.
+     *
+     * @param event the load complete event
+     *
+     * @see FMLLoadCompleteEvent
      */
     @EventHandler
     public void onLoadComplete(FMLLoadCompleteEvent event)
     {
-        logMethodCall(new Object(){}.getClass().getEnclosingMethod().getName());
+        logMethodCall(
+            new Object(){}
+                .getClass()
+                .getEnclosingMethod()
+                .getName()
+        );
     }
 
     /**
-     * Server load action
-     * 
-     * @param event Server starting event
+     * Handles server starting event.
+     *
+     * @param event the server starting event
+     *
+     * @see FMLServerStartingEvent
      */
     @EventHandler
     public void serverLoad(FMLServerStartingEvent event)
     {
-        logMethodCall(new Object(){}.getClass().getEnclosingMethod().getName());
+        logMethodCall(
+            new Object(){}
+                .getClass()
+                .getEnclosingMethod()
+                .getName()
+        );
     }
 
     /**
-     * Server stopped action
-     * 
-     * @param event Server stopped action
+     * Handles server stopped event.
+     *
+     * @param event the server stopped event
+     *
+     * @see FMLServerStoppedEvent
      */
     @EventHandler
     public void serverStopped(FMLServerStoppedEvent event)
     {
-        logMethodCall(new Object(){}.getClass().getEnclosingMethod().getName());
+        logMethodCall(
+            new Object(){}
+                .getClass()
+                .getEnclosingMethod()
+                .getName()
+        );
     }
 }
