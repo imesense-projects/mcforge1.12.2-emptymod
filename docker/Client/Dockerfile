@@ -21,14 +21,6 @@ RUN \
         --no-daemon \
         build
 
-# Cache stage
-FROM scratch AS cache
-
-# Copy cache
-COPY --from=build \
-    /gradle \
-    ./.gradle
-
 # Export stage
 FROM scratch AS export
 

@@ -21,12 +21,6 @@ RUN \
         --no-daemon \
         build
 
-# Set mount
-RUN \
-    --mount=type=cache,target=${GRADLE_USER_HOME}/wrapper \
-    --mount=type=cache,target=${GRADLE_USER_HOME}/caches \
-    ls ${GRADLE_USER_HOME}
-
 # Final stage
 FROM openjdk:8-jre-alpine AS final
 
