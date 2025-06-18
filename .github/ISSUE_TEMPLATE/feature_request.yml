@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-issue-forms.json
+
+name: Feature request
+description: Suggest feature for integration
+title: "Feature: "
+labels:
+    - "enhancement"
+
+body:
+    # Feature information
+    - type: textarea
+      id: formulation
+      attributes:
+          label: Formulation
+          description: >
+              Description of why a feature is need to integrate
+      validations:
+          required: true
+    - type: textarea
+      id: solution
+      attributes:
+          label: Solution
+          description: >
+              Description of what want to happen
+    - type: textarea
+      id: alternatives
+      attributes:
+          label: Alternatives
+          description: >
+              Description of any alternative solutions or features
+
+    # Options
+    - type: textarea
+      id: additional
+      attributes:
+          label: Additional context
+          description: >
+              Add any other context or screenshots about the feature request here
+
+    # Terms
+    - type: checkboxes
+      id: terms
+      attributes:
+          label: Terms
+          description: >
+              By submitting this issue, you agree to follow our
+              [__Code of Conduct__](../CODE_OF_CONDUCT.md) and
+              [__Contributing Guidelines__](../CONTRIBUTING.md)
+          options:
+              - label: I agree to follow this project's __Code of Conduct__
+                required: true
+              - label: I agree to follow this project's __Contributing Guidelines__
+                required: true

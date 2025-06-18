@@ -1,0 +1,77 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-issue-forms.json
+
+name: Bug report
+description: Create bug report
+title: "Bug: "
+labels:
+    - "bug"
+
+body:
+    # Bug information
+    - type: textarea
+      id: version
+      attributes:
+          label: Version
+          description: >
+              Fields to create a complete report
+          placeholder: |
+              - Operating system
+              - Project version
+      validations:
+          required: true
+    - type: textarea
+      id: description
+      attributes:
+          label: Description
+          description: >
+              Description of what the bug is
+      validations:
+          required: true
+    - type: textarea
+      id: reproduction
+      attributes:
+          label: Reproduction
+          description: >
+              Steps to reproduce the behavior
+          placeholder: |
+              - Go to '...'
+              - Click on '...'
+              - Scroll down to '...'
+              - See error
+      validations:
+          required: true
+
+    # Options
+    - type: textarea
+      id: expected-behavior
+      attributes:
+          label: Expected behavior
+          description: >
+              Description of what expected to happen
+    - type: textarea
+      id: screenshots
+      attributes:
+          label: Screenshots
+          description: >
+              Add screenshots to help explain the bug
+    - type: textarea
+      id: additional
+      attributes:
+          label: Additional context
+          description: >
+              Add any other context about the bug if it is necessary
+
+    # Terms
+    - type: checkboxes
+      id: terms
+      attributes:
+          label: Terms
+          description: >
+              By submitting this issue, you agree to follow our
+              [__Code of Conduct__](../CODE_OF_CONDUCT.md) and
+              [__Contributing Guidelines__](../CONTRIBUTING.md)
+          options:
+              - label: I agree to follow this project's __Code of Conduct__
+                required: true
+              - label: I agree to follow this project's __Contributing Guidelines__
+                required: true
