@@ -5,9 +5,8 @@
 Releases provided with security updates:
 
 - The latest release
-- All subsequent minor and patch versions of that release
 
-Example: If `v2.3.1` is the latest release, `v2.3.1` is supported version, but not `v2.3.0` or earlier.
+If `v2.3.1` is the latest release, `v2.3.1` is supported version, but not `v2.3.0` or earlier.
 
 ## Reporting a Vulnerability
 
