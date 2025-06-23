@@ -10,8 +10,14 @@ Empty mod for Minecraft 1.12.2 with mixins support
 
 ## Requirements
 
-- JDK 1.8
-- IntelliJ IDEA/Visual Studio Code
+For building:
+
+- __JDK 1.8__
+- __Docker__ and __Docker Compose__
+
+For development:
+
+- __IntelliJ IDEA__ or __Visual Studio Code__
 
 ## Building
 
@@ -43,7 +49,8 @@ Empty mod for Minecraft 1.12.2 with mixins support
 
 - Configure `.env` and `server.properties` files
 
-  See [.env](./docker/Server/.env.example) and [server.properties](./docker/Server/server.properties.example) examples in `docker/Server/` folder
+  See [`.env`](./docker/Server/.env.example) and [`server.properties`](./docker/Server/server.properties.example)
+  examples in `docker/Server/` folder
 
 - Run command to run server in container:
 
