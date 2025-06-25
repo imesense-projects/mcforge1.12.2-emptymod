@@ -12,7 +12,10 @@ on:
             - "gradle/**"
             - "src/**"
             - "*.gradle"
+            - "*.yml"
+            - "*.yaml"
             - "gradle*"
+            - "Dockerfile*"
 
     pull_request:
         branches:
@@ -23,15 +26,24 @@ on:
             - "gradle/**"
             - "src/**"
             - "*.gradle"
+            - "*.yml"
+            - "*.yaml"
             - "gradle*"
+            - "Dockerfile*"
 
 defaults:
     run:
         shell: pwsh
 
+env:
+    DOCKER_REGISTRY: ghcr.io
+
 jobs:
     build-image:
         name: "Build image"
+
+        outputs:
+            image-tag: ${{ steps.set-tag.outputs.tag }}
 
         strategy:
             matrix:
@@ -50,8 +62,10 @@ jobs:
               uses: docker/setup-buildx-action@v3
 
             - name: Set tag
+              id: set-tag
               run: |
                   $tag = [math]::Round((New-TimeSpan -Start (Get-Date "1970-01-01") -End (Get-Date)).TotalSeconds)
+                  Add-Content -Path $env:GITHUB_OUTPUT -Value "tag=$tag"
                   Add-Content -Path $env:GITHUB_ENV -Value "tag=$tag"
 
             - name: Build image
@@ -60,14 +74,16 @@ jobs:
                       --file docker/Server/Dockerfile `
                       --progress=plain `
                       --target final `
-                      --tag ghcr.io/imesense/${{ github.event.repository.name }}:${{ env.tag }} `
+                      --tag ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}:${{ env.tag }} `
+                      --tag ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}:latest `
                       .
 
             - name: Save image
               run: |
                   docker save `
-                      -o ${{ github.event.repository.name }}-${{ env.tag }}.tar `
-                      ghcr.io/imesense/${{ github.event.repository.name }}:${{ env.tag }}
+                      --output ${{ github.event.repository.name }}-${{ env.tag }}.tar `
+                      ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}:${{ env.tag }} `
+                      ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}:latest
 
             - name: Upload image
               uses: actions/upload-artifact@v4
@@ -75,3 +91,44 @@ jobs:
                   name: ${{ github.event.repository.name }}-${{ github.sha }}
                   path: |
                       ${{ github.workspace }}/${{ github.event.repository.name }}-${{ env.tag }}.tar
+
+    publish-image:
+        name: "Publish image"
+
+        needs:
+            - build-image
+
+        strategy:
+            matrix:
+                system:
+                    - ubuntu-24.04
+
+        runs-on: ${{ matrix.system }}
+
+        env:
+            IMAGE_TAG: ${{ needs.build-image.outputs.image-tag }}
+
+        steps:
+            - name: Download image
+              uses: actions/download-artifact@v4
+              with:
+                  name: ${{ github.event.repository.name }}-${{ github.sha }}
+
+            - name: Load image
+              run: |
+                  docker load `
+                      --input ${{ github.workspace }}/${{ github.event.repository.name }}-${{ env.IMAGE_TAG }}.tar
+
+            - name: Login to registry
+              uses: docker/login-action@v3
+              with:
+                  registry: ${{ env.DOCKER_REGISTRY }}
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Push image
+              run: |
+                  docker push `
+                      ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}:${{ env.IMAGE_TAG }}
+                  docker push `
+                      ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}:latest
