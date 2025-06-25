@@ -6,7 +6,7 @@
 [![Build client](https://github.com/imesense-projects/mcforge1.12.2-emptymod/actions/workflows/build-client.yml/badge.svg)](https://github.com/imesense-projects/mcforge1.12.2-emptymod/actions/workflows/build-client.yml)
 [![Build server](https://github.com/imesense-projects/mcforge1.12.2-emptymod/actions/workflows/build-server.yml/badge.svg)](https://github.com/imesense-projects/mcforge1.12.2-emptymod/actions/workflows/build-server.yml)
 
-Empty mod for Minecraft 1.12.2 with mixins support
+Temp
 
 ## Requirements
 
