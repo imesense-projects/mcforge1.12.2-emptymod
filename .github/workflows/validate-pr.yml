@@ -27,6 +27,9 @@ jobs:
 
         runs-on: ${{ matrix.system }}
 
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
         steps:
             - name: Check pull request
               id: check-pr
