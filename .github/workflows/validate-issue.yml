@@ -1,0 +1,92 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: "Validate issue"
+
+on:
+    issues:
+        types:
+            - opened
+            - edited
+            - reopened
+
+jobs:
+    validate-agreements:
+        name: "Validate agreements"
+
+        permissions:
+            issues: write
+            pull-requests: read
+
+        strategy:
+            matrix:
+                system:
+                    - ubuntu-24.04
+
+        runs-on: ${{ matrix.system }}
+
+        steps:
+            - name: Check issue
+              id: check-issue
+              env:
+                  ISSUE_BODY: ${{ github.event.issue.body }}
+              run: |
+                  if \
+                  [[ "$ISSUE_BODY" == *"- [x] I agree to follow this project's __Code of Conduct__"* ]] && \
+                  [[ "$ISSUE_BODY" == *"- [x] I agree to follow this project's __Contributing Guidelines__"* ]]
+                  then
+                      echo "::notice::Agreements confirmed"
+                      echo "is_valid=true" >> $GITHUB_OUTPUT
+                  else
+                      echo "::error::Missing agreements"
+                      echo "is_valid=false" >> $GITHUB_OUTPUT
+                  fi
+
+            - name: Accept issue
+              if: ${{ steps.check-issue.outputs.is_valid == 'true' }}
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const issue = await github.rest.issues.get({
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                          issue_number: context.issue.number
+                      });
+                      if (issue.data.state === 'closed' && issue.data.state_reason !== 'completed')
+                      {
+                          await github.rest.issues.update({
+                              owner: context.repo.owner,
+                              repo: context.repo.repo,
+                              issue_number: context.issue.number,
+                              state: 'open'
+                          });
+                      }
+                      await github.rest.issues.createComment({
+                          issue_number: context.issue.number,
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                          body: "✅ Issue is valid and has been accepted"
+                      });
+
+            - name: Reject issue
+              if: ${{ steps.check-issue.outputs.is_valid != 'true' }}
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      await github.rest.issues.createComment({
+                          issue_number: context.issue.number,
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                          body: "❌ Issue is not valid and has not been accepted\n\nPlease edit the issue to accept agreements"
+                      })
+                      await github.rest.issues.update({
+                          issue_number: context.issue.number,
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                          state: 'closed',
+                          state_reason: 'not_planned'
+                      })
+
+            - name: Throw error
+              if: ${{ steps.check-issue.outputs.is_valid != 'true' }}
+              run: |
+                  exit 1
