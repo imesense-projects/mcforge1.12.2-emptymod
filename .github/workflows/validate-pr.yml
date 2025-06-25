@@ -1,0 +1,101 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: "Validate pull request"
+
+on:
+    pull_request:
+        types:
+            - opened
+            - edited
+            - reopened
+            - ready_for_review
+            - synchronize
+
+jobs:
+    validate-agreements:
+        name: "Validate agreements"
+
+        permissions:
+            pull-requests: write
+            contents: read
+
+        strategy:
+            matrix:
+                system:
+                    - ubuntu-24.04
+
+        runs-on: ${{ matrix.system }}
+
+        steps:
+            - name: Check pull request
+              id: check-pr
+              env:
+                  PR_BODY: ${{ github.event.pull_request.body }}
+              run: |
+                   if \
+                   [[ "$PR_BODY" == *"- [x] I agree to follow this project's __Code of Conduct__"* ]] && \
+                   [[ "$PR_BODY" == *"- [x] I agree to follow this project's __Contributing Guidelines__"* ]]
+                   then
+                       echo "::notice::Agreements confirmed"
+                       echo "is_valid=true" >> $GITHUB_OUTPUT
+                   else
+                       echo "::error::Missing agreements"
+                       echo "is_valid=false" >> $GITHUB_OUTPUT
+                   fi
+
+            - name: Accept pull request
+              if: ${{ steps.check-pr.outputs.is_valid == 'true' }}
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const pr = await github.rest.pulls.get({
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                          pull_number: context.payload.pull_request?.number
+                      });
+                      if (pr.data.state === 'closed')
+                      {
+                          await github.rest.pulls.update({
+                              owner: context.repo.owner,
+                              repo: context.repo.repo,
+                              pull_number: context.payload.pull_request?.number,
+                              state: 'open'
+                          });
+                      }
+                      await github.rest.pulls.createReviewComment({
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                          pull_number: context.payload.pull_request?.number,
+                          event: "COMMENT",
+                          body: "✅ Pull request is valid and has been accepted"
+                      })
+
+            - name: Reject pull request
+              if: ${{ steps.check-pr.outputs.is_valid != 'true' }}
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      await github.rest.pulls.createReviewComment({
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                          pull_number: context.payload.pull_request?.number,
+                          event: "COMMENT",
+                          body: "❌ Pull request is not valid and has not been accepted\n\nPlease edit the pull request description to accept agreements"
+                      })
+                      await github.rest.pulls.update({
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                          pull_number: context.payload.pull_request?.number,
+                          state: 'closed'
+                      });
+                      await github.rest.pulls.requestReviewers({
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                          pull_number: context.payload.pull_request?.number,
+                          reviewers: ['maintainers']
+                      })
+
+            - name: Throw error
+              if: ${{ steps.check-pr.outputs.is_valid != 'true' }}
+              run: |
+                  exit 1
