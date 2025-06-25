@@ -28,11 +28,7 @@ jobs:
         runs-on: ${{ matrix.system }}
 
         env:
-<<<<<<< default
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-=======
             GITHUB_TOKEN: ${{ secrets.PAT }}
->>>>>>> default
 
         steps:
             - name: Check pull request
