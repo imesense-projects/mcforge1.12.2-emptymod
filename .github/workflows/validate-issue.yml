@@ -77,14 +77,22 @@ jobs:
                           owner: context.repo.owner,
                           repo: context.repo.repo,
                           body: "❌ Issue is not valid and has not been accepted\n\nPlease edit the issue to accept agreements"
+<<<<<<< default
                       })
+=======
+                      });
+>>>>>>> default
                       await github.rest.issues.update({
                           issue_number: context.issue.number,
                           owner: context.repo.owner,
                           repo: context.repo.repo,
                           state: 'closed',
                           state_reason: 'not_planned'
+<<<<<<< default
                       })
+=======
+                      });
+>>>>>>> default
 
             - name: Throw error
               if: ${{ steps.check-issue.outputs.is_valid != 'true' }}

@@ -16,6 +16,7 @@ jobs:
         name: "Validate agreements"
 
         permissions:
+            issues: write
             pull-requests: write
             contents: read
 
@@ -68,7 +69,7 @@ jobs:
                           pull_number: context.payload.pull_request?.number,
                           event: "COMMENT",
                           body: "✅ Pull request is valid and has been accepted"
-                      })
+                      });
 
             - name: Reject pull request
               if: ${{ steps.check-pr.outputs.is_valid != 'true' }}
@@ -81,19 +82,13 @@ jobs:
                           pull_number: context.payload.pull_request?.number,
                           event: "COMMENT",
                           body: "❌ Pull request is not valid and has not been accepted\n\nPlease edit the pull request description to accept agreements"
-                      })
+                      });
                       await github.rest.pulls.update({
                           owner: context.repo.owner,
                           repo: context.repo.repo,
                           pull_number: context.payload.pull_request?.number,
                           state: 'closed'
                       });
-                      await github.rest.pulls.requestReviewers({
-                          owner: context.repo.owner,
-                          repo: context.repo.repo,
-                          pull_number: context.payload.pull_request?.number,
-                          reviewers: ['maintainers']
-                      })
 
             - name: Throw error
               if: ${{ steps.check-pr.outputs.is_valid != 'true' }}
