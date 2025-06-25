@@ -1,0 +1,74 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: "Validate pull request"
+
+on:
+    pull_request:
+        types:
+            - opened
+            - edited
+            - reopened
+            - ready_for_review
+            - synchronize
+
+jobs:
+    validate-agreements:
+        name: "Validate agreements"
+
+        permissions:
+            issues: write
+            pull-requests: write
+            contents: read
+
+        strategy:
+            matrix:
+                system:
+                    - ubuntu-24.04
+
+        runs-on: ${{ matrix.system }}
+
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        steps:
+            - name: Check pull request
+              id: check-pr
+              env:
+                  PR_BODY: ${{ github.event.pull_request.body }}
+              run: |
+                   if \
+                   [[ "$PR_BODY" == *"- [x] I agree to follow this project's __Code of Conduct__"* ]] && \
+                   [[ "$PR_BODY" == *"- [x] I agree to follow this project's __Contributing Guidelines__"* ]]
+                   then
+                       echo "::notice::Agreements confirmed"
+                       echo "is_valid=true" >> $GITHUB_OUTPUT
+                   else
+                       echo "::error::Missing agreements"
+                       echo "is_valid=false" >> $GITHUB_OUTPUT
+                   fi
+
+            - name: Add comments
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      try {
+                        if (${{ steps.check-pr.outputs.is_valid }} === 'true') {
+                            await github.rest.issues.createComment({
+                            owner: context.repo.owner,
+                            repo: context.repo.repo,
+                            issue_number: context.issue.number,
+                            body: "✅ Pull request is valid and has been accepted"
+                            });
+                        } else {
+                            await github.rest.issues.createComment({
+                            owner: context.repo.owner,
+                            repo: context.repo.repo,
+                            issue_number: context.issue.number,
+                            body: "❌ Pull request is not valid\n\nPlease edit the description to accept agreements"
+                            });
+                            core.setFailed('Pull request validation failed');
+                        }
+                      } catch (error) {
+                        core.error('Failed to add comment: ' + error.message);
+                        core.setFailed('Pull request comment failed');
+                      }
