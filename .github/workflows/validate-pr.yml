@@ -48,15 +48,10 @@ jobs:
               uses: actions/github-script@v7
               with:
                   script: |
-                      const pr = await github.rest.pulls.get({
+                      await github.rest.issues.createComment({
                           owner: context.repo.owner,
                           repo: context.repo.repo,
-                          pull_number: context.payload.pull_request?.number
-                      });
-                      await github.rest.pulls.createComment({
-                          owner: context.repo.owner,
-                          repo: context.repo.repo,
-                          pull_number: context.payload.pull_request?.number,
+                          issue_number: context.issue.number,
                           body: "✅ Pull request is valid and has been accepted"
                       });
 
@@ -65,10 +60,10 @@ jobs:
               uses: actions/github-script@v7
               with:
                   script: |
-                      await github.rest.pulls.createComment({
+                      await github.rest.issues.createComment({
                           owner: context.repo.owner,
                           repo: context.repo.repo,
-                          pull_number: context.payload.pull_request?.number,
+                          issue_number: context.issue.number,
                           body: "❌ Pull request is not valid and has not been accepted\n\nPlease edit the pull request description to accept agreements"
                       });
 
