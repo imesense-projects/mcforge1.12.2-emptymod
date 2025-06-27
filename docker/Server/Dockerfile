@@ -24,6 +24,14 @@ RUN \
 # Final stage
 FROM openjdk:8-jre-alpine AS final
 
+# Set metadata
+LABEL \
+    org.opencontainers.image.vendor="ImeSense" \
+    org.opencontainers.image.authors="ImeSense, acidicMercury8, OldSerpskiStalker" \
+    org.opencontainers.image.licenses="MIT" \
+    org.opencontainers.image.version="0.1" \
+    org.opencontainers.image.description="Empty Mod (Minecraft Forge 1.12.2)"
+
 # Set working directory
 WORKDIR /app
 
