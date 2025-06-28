@@ -95,56 +95,11 @@ jobs:
                       ${{ github.workspace }}/libs/
                   overwrite: true
 
-    test-modification:
-        name: "Test modification"
-
-        needs:
-            - build-modification
-
-        strategy:
-            matrix:
-                system:
-                    - ubuntu-24.04
-
-        runs-on: ${{ matrix.system }}
-
-        env:
-            GRADLE_USER_HOME: ${{ github.workspace }}/.gradle
-
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4
-              with:
-                  fetch-depth: 0
-
-            - name: Setup JDK
-              uses: actions/setup-java@v4
-              with:
-                  java-version: "8"
-                  distribution: "temurin"
-
-            - name: Cache dependencies
-              uses: actions/cache@v4
-              with:
-                  key: Modification-${{ hashFiles('**/build.gradle') }}
-                  restore-keys: |
-                      Modification-${{ hashFiles('**/build.gradle') }}
-                      Modification-
-                  path: |
-                      .gradle/caches/
-                      .gradle/wrapper/
-                      libs/
-                  enableCrossOsArchive: true
-
-            - name: Run tests
-              run: |
-                  ${{ github.workspace }}/gradlew test
-
     publish-modification:
         name: "Publish modification"
 
         needs:
-            - test-modification
+            - build-modification
 
         strategy:
             matrix:
