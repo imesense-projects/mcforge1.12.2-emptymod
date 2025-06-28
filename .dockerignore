@@ -33,6 +33,9 @@ out/
 build/
 run/
 
+# Common logs
+logs/
+
 # Minecraft files
 mcmodsrepo/
 mods/
