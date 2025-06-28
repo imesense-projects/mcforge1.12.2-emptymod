@@ -149,6 +149,30 @@ dependencies {
 
     // DivineRPG
     //implementation fg.deobf("curse.maven:official-divinerpg-363543:2937175")
+
+    // Asm
+    testImplementation 'org.ow2.asm:asm:9.4'
+    testImplementation 'org.ow2.asm:asm-tree:9.4'
+
+    // JUnit
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+
+    // Mockito
+    testImplementation 'org.mockito:mockito-core:4.11.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.11.0'
+    testImplementation 'org.mockito:mockito-inline:4.11.0'
+
+    // Mixins
+    testImplementation 'org.spongepowered:mixin:0.8.5'
+}
+
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
 
 // Get properties into the manifest for reading by the runtime

@@ -28,7 +28,14 @@ public final class LoadingPlugin implements IFMLLoadingPlugin
      * @see Logger
      * @see LogManager
      */
-    private static final Logger LOGGER = LogManager.getLogger(LoadingPlugin.class);
+    static Logger LOGGER = LogManager.getLogger(LoadingPlugin.class);
+
+    static boolean TEST_MODE = false;
+
+    public static void enableTestMode()
+    {
+        TEST_MODE = true;
+    }
 
     /**
      * Constructs the loading plugin and initializes Mixin framework.
@@ -47,6 +54,11 @@ public final class LoadingPlugin implements IFMLLoadingPlugin
     public LoadingPlugin()
     {
         LOGGER.info("Initializing LoadingPlugin");
+
+        if (TEST_MODE)
+        {
+            return;
+        }
 
         try
         {
