@@ -21,6 +21,9 @@ out/
 build/
 run/
 
+# Common logs
+logs/
+
 # Minecraft cache and settings
 mcmodsrepo/
 mods/

@@ -67,7 +67,7 @@ public final class EmptyMod
      * @see Logger
      * @see LogManager
      */
-    private static final Logger LOGGER = LogManager.getLogger(EmptyMod.class);
+    static Logger LOGGER = LogManager.getLogger(EmptyMod.class);
 
     /**
      * Logs a method call to the logger.
@@ -93,7 +93,7 @@ public final class EmptyMod
      * @see I18n
      */
     @SideOnly(Side.CLIENT)
-    private static void setLocaleMetadata(FMLPreInitializationEvent event)
+    static void setLocaleMetadata(FMLPreInitializationEvent event)
     {
         ModMetadata metadata = event.getModMetadata();
         metadata.name = I18n.format("mod." + MODID + ".name");

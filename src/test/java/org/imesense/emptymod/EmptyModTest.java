@@ -1,0 +1,178 @@
+package org.imesense.emptymod;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
+import org.apache.logging.log4j.Logger;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
+
+import net.minecraft.client.resources.I18n;
+import net.minecraftforge.fml.common.ModMetadata;
+import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.relauncher.Side;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
+public class EmptyModTest
+{
+    private static final String CLASS_NAME = "org.imesense.emptymod.EmptyMod";
+    private static final String LOG_MESSAGE = "Called {}.{} method";
+
+    @Mock
+    private Logger mockLogger;
+
+    @Mock
+    private FMLPreInitializationEvent mockPreInitEvent;
+
+    @Mock
+    private FMLInitializationEvent mockInitEvent;
+
+    @Mock
+    private FMLPostInitializationEvent mockPostInitEvent;
+
+    @Mock
+    private FMLLoadCompleteEvent mockLoadCompleteEvent;
+
+    @Mock
+    private FMLServerStartingEvent mockServerStartingEvent;
+
+    @Mock
+    private FMLServerStoppedEvent mockServerStoppedEvent;
+
+    @Mock
+    private ModMetadata mockModMetadata;
+
+    private EmptyMod emptyMod;
+
+    @BeforeEach
+    public void setUp()
+    {
+        emptyMod = new EmptyMod();
+
+        try
+        {
+            Field field = EmptyMod.class.getDeclaredField("LOGGER");
+            field.setAccessible(true);
+            field.set(null, mockLogger);
+        }
+        catch (Exception e)
+        {
+            throw new RuntimeException(e);
+        }
+
+        when(mockPreInitEvent.getModMetadata()).thenReturn(mockModMetadata);
+    }
+
+    @Test
+    public void testClassConstants_SetsCorrect()
+    {
+        assertEquals("emptymod", EmptyMod.MODID);
+        assertEquals("Empty Mod", EmptyMod.NAME);
+        assertEquals("1.12.2-14.23.5.2860", EmptyMod.VERSION);
+    }
+
+    @Test
+    public void testPreInit_ClientSideLogsError()
+    {
+        when(mockPreInitEvent.getSide()).thenReturn(Side.CLIENT);
+
+        try (MockedStatic<I18n> mockedI18n = mockStatic(I18n.class))
+        {
+            mockedI18n.when(() -> I18n.format(anyString())).thenReturn("test");
+
+            emptyMod.preInit(mockPreInitEvent);
+
+            verify(mockLogger).error("No mixin config files found!");
+        }
+    }
+
+    @Test
+    public void testPreInit_ServerSideLogsCorrect()
+    {
+        when(mockPreInitEvent.getSide()).thenReturn(Side.SERVER);
+
+        emptyMod.preInit(mockPreInitEvent);
+
+        verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "preInit");
+        verifyNoMoreInteractions(mockLogger);
+    }
+
+    @Test
+    public void testSetLocaleMetadata_SetsCorrect()
+    {
+        try (MockedStatic<I18n> mockedI18n = mockStatic(I18n.class))
+        {
+            String expectedName = "Localized Mod Name";
+            String expectedDesc = "Localized Mod Description";
+
+            mockedI18n.when(() -> I18n.format("mod.emptymod.name")).thenReturn(expectedName);
+            mockedI18n.when(() -> I18n.format("mod.emptymod.description")).thenReturn(expectedDesc);
+
+            EmptyMod.setLocaleMetadata(mockPreInitEvent);
+
+            assertEquals(expectedName, mockModMetadata.name);
+            assertEquals(expectedDesc, mockModMetadata.description);
+        }
+    }
+
+    @Test
+    public void testInit_CallsCorrect()
+    {
+        emptyMod.init(mockInitEvent);
+        verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "init");
+    }
+
+    @Test
+    public void testPostInit_CallsCorrect()
+    {
+        emptyMod.postInit(mockPostInitEvent);
+        verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "postInit");
+    }
+
+    @Test
+    public void testOnLoadComplete_CallsCorrect()
+    {
+        emptyMod.onLoadComplete(mockLoadCompleteEvent);
+        verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "onLoadComplete");
+    }
+
+    @Test
+    public void testServerLoad_CallsCorrect()
+    {
+        emptyMod.serverLoad(mockServerStartingEvent);
+        verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "serverLoad");
+    }
+
+    @Test
+    public void testServerStopped_CallsCorrect()
+    {
+        emptyMod.serverStopped(mockServerStoppedEvent);
+        verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "serverStopped");
+    }
+
+    @Test
+    public void testLogMethodCall_LogsCorrect() throws Exception
+    {
+        Method method = EmptyMod.class.getDeclaredMethod("logMethodCall", String.class);
+        method.setAccessible(true);
+        method.invoke(emptyMod, "testMethod");
+        verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "testMethod");
+    }
+}
