@@ -1,5 +1,5 @@
 # Maintainers
 
 - `*`
-  - @acidicMercury8
-  - @OldSerpskiStalker
+  - `acidicMercury8`
+  - `OldSerpskiStalker`
