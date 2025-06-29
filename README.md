@@ -39,6 +39,14 @@ For development:
 
   Or run build script from `docker/Server/` folder in root of the repository
 
+## Testing
+
+- Run command to launch all tests:
+
+  ```sh
+  ./gradlew test
+  ```
+
 ## Installation
 
 ### Client
