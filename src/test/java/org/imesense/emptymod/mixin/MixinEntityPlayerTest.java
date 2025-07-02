@@ -18,13 +18,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MixinEntityPlayerTest
 {
-    private static final String MIXIN_CLASS = "org.imesense.boilerplate.mcforge.mixin.MixinEntityPlayer";
-    private static final String METHOD_NAME = "onPlayerUpdate";
-    private static final String METHOD_DESCRIPTOR = "(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V";
-    private static final String METHOD_ANNOTATION = "Lorg/spongepowered/asm/mixin/injection/Inject;";
+    private static final String MIXIN_CLASS =
+        "org.imesense.boilerplate.mcforge.mixin.MixinEntityPlayer";
+    private static final String METHOD_NAME =
+        "onPlayerUpdate";
+    private static final String METHOD_DESCRIPTOR =
+        "(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V";
+    private static final String METHOD_ANNOTATION =
+        "Lorg/spongepowered/asm/mixin/injection/Inject;";
 
     @Test
-    public void testMixin_ChecksSignatureIsCorrect() throws IOException
+    public void mixinEntityPlayer_Class_ChecksSignatureIsCorrect() throws IOException
     {
         ClassReader reader = new ClassReader(MIXIN_CLASS);
         ClassWriter writer = new ClassWriter(0);
@@ -70,7 +74,7 @@ public class MixinEntityPlayerTest
     }
 
     @Test
-    public void testMixin_ChecksLogicMethodCall() throws IOException
+    public void mixinEntityPlayer_onPlayerUpdate_ChecksLogicMethodCall() throws IOException
     {
         List<String> operations = new ArrayList<>();
         List<String> methodCalls = new ArrayList<>();
