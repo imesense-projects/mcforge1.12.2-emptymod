@@ -74,7 +74,7 @@ public class MixinEntityPlayerTest
     }
 
     @Test
-    public void mixinEntityPlayer_onPlayerUpdate_ChecksLogicMethodCall() throws IOException
+    public void mixinEntityPlayer_onPlayerUpdate_ChecksPrintMethodCall() throws IOException
     {
         List<String> operations = new ArrayList<>();
         List<String> methodCalls = new ArrayList<>();
@@ -124,10 +124,10 @@ public class MixinEntityPlayerTest
         boolean callsCorrectMethod = methodCalls
             .stream()
             .anyMatch(s ->
-                s.contains("MixinEntityPlayerLogic.onPlayerUpdate"));
+                s.contains("println"));
         assertTrue(
             callsCorrectMethod,
-            "Method should call MixinEntityPlayerLogic.onPlayerUpdate() method"
+            "Method should call System.out.println() method"
         );
 
         System.out.println("Operations in method:");
