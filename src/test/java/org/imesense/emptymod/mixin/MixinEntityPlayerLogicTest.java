@@ -16,7 +16,7 @@ import static org.mockito.Mockito.when;
 public class MixinEntityPlayerLogicTest
 {
     @Test
-    public void testOnPlayerUpdate_PrintsCorrectMessage()
+    public void mixinEntityPlayerLogic_onPlayerUpdate_PrintsCorrectMessage()
     {
         EntityPlayer mockPlayer = Mockito.mock(EntityPlayer.class);
         when(mockPlayer.getName()).thenReturn("TestPlayer");

@@ -40,18 +40,34 @@ public class LoadingPluginTest
     {
         LoadingPlugin.enableTestMode();
 
-        originalLogger = LoadingPlugin.LOGGER;
-        LoadingPlugin.LOGGER = mockLogger;
+        originalLogger = LoadingPlugin.logger;
+        LoadingPlugin.logger = mockLogger;
     }
 
     @AfterEach
     public void tearDown()
     {
-        LoadingPlugin.LOGGER = originalLogger;
+        LoadingPlugin.logger = originalLogger;
     }
 
     @Test
-    public void testConstructor_LogsInitialization()
+    public void loadingPlugin_Class_MCVersionAnnotationIsCorrect()
+    {
+        IFMLLoadingPlugin.MCVersion annotation = LoadingPlugin.class
+            .getAnnotation(IFMLLoadingPlugin.MCVersion.class);
+        assertNotNull(
+            annotation,
+            "@MCVersion annotation should be set"
+        );
+        assertEquals(
+            "1.12.2",
+            annotation.value(),
+            "Minecraft version should be 1.12.2"
+        );
+    }
+
+    @Test
+    public void loadingPlugin_Constructor_LogsInitialization()
     {
         new LoadingPlugin();
         verify(mockLogger).info("Initializing LoadingPlugin");
@@ -59,8 +75,9 @@ public class LoadingPluginTest
     }
 
     @Test
-    public void testConstructor_ThrowsExceptionWhenMixinFails() {
-        LoadingPlugin.TEST_MODE = false;
+    public void loadingPlugin_Constructor_ThrowsExceptionWhenMixinFails()
+    {
+        LoadingPlugin.testMode = false;
 
         doThrow(new RuntimeException("Mixin error"))
             .when(mockLogger)
@@ -77,12 +94,12 @@ public class LoadingPluginTest
         }
         finally
         {
-            LoadingPlugin.TEST_MODE = true;
+            LoadingPlugin.testMode = true;
         }
     }
 
     @Test
-    public void testIFMLLoadingPlugin_MethodsCallsAreCorrect()
+    public void loadingPlugin_IFMLLoadingPlugin_MethodsCallsAreCorrect()
     {
         LoadingPlugin plugin = new LoadingPlugin();
 
@@ -93,21 +110,5 @@ public class LoadingPluginTest
 
         assertDoesNotThrow(() -> plugin.injectData(Collections.emptyMap()));
         assertDoesNotThrow(() -> plugin.injectData(null));
-    }
-
-    @Test
-    public void testMCVersion_AnnotationIsCorrect()
-    {
-        IFMLLoadingPlugin.MCVersion annotation = LoadingPlugin.class
-            .getAnnotation(IFMLLoadingPlugin.MCVersion.class);
-        assertNotNull(
-            annotation,
-            "@MCVersion annotation should be set"
-        );
-        assertEquals(
-            "1.12.2",
-            annotation.value(),
-            "Minecraft version should be 1.12.2"
-        );
     }
 }

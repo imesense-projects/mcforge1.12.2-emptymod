@@ -30,6 +30,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
+@SuppressWarnings("LoggingSimilarMessage")
 public class EmptyModTest
 {
     private static final String CLASS_NAME = "org.imesense.emptymod.EmptyMod";
@@ -68,7 +69,7 @@ public class EmptyModTest
 
         try
         {
-            Field field = EmptyMod.class.getDeclaredField("LOGGER");
+            Field field = EmptyMod.class.getDeclaredField("logger");
             field.setAccessible(true);
             field.set(null, mockLogger);
         }
@@ -81,41 +82,24 @@ public class EmptyModTest
     }
 
     @Test
-    public void testClassConstants_SetsCorrect()
+    public void emptyMod_Constants_SetsCorrect()
     {
-        assertEquals("emptymod", EmptyMod.MODID);
+        assertEquals("emptymod", EmptyMod.MOD_ID);
         assertEquals("Empty Mod", EmptyMod.NAME);
         assertEquals("1.12.2-14.23.5.2860", EmptyMod.VERSION);
     }
 
     @Test
-    public void testPreInit_ClientSideLogsError()
+    public void emptyMod_logMethodCall_LogsCorrect() throws Exception
     {
-        when(mockPreInitEvent.getSide()).thenReturn(Side.CLIENT);
-
-        try (MockedStatic<I18n> mockedI18n = mockStatic(I18n.class))
-        {
-            mockedI18n.when(() -> I18n.format(anyString())).thenReturn("test");
-
-            emptyMod.preInit(mockPreInitEvent);
-
-            verify(mockLogger).error("No mixin config files found!");
-        }
+        Method method = EmptyMod.class.getDeclaredMethod("logMethodCall", String.class);
+        method.setAccessible(true);
+        method.invoke(emptyMod, "testMethod");
+        verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "testMethod");
     }
 
     @Test
-    public void testPreInit_ServerSideLogsCorrect()
-    {
-        when(mockPreInitEvent.getSide()).thenReturn(Side.SERVER);
-
-        emptyMod.preInit(mockPreInitEvent);
-
-        verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "preInit");
-        verifyNoMoreInteractions(mockLogger);
-    }
-
-    @Test
-    public void testSetLocaleMetadata_SetsCorrect()
+    public void emptyMod_setLocaleMetadata_SetsCorrect()
     {
         try (MockedStatic<I18n> mockedI18n = mockStatic(I18n.class))
         {
@@ -133,46 +117,63 @@ public class EmptyModTest
     }
 
     @Test
-    public void testInit_CallsCorrect()
+    public void emptyMod_preInit_ClientSideLogsError()
+    {
+        when(mockPreInitEvent.getSide()).thenReturn(Side.CLIENT);
+
+        try (MockedStatic<I18n> mockedI18n = mockStatic(I18n.class))
+        {
+            mockedI18n.when(() -> I18n.format(anyString())).thenReturn("test");
+
+            emptyMod.preInit(mockPreInitEvent);
+
+            verify(mockLogger).error("No mixin config files found!");
+        }
+    }
+
+    @Test
+    public void emptyMod_preInit_ServerSideLogsCorrect()
+    {
+        when(mockPreInitEvent.getSide()).thenReturn(Side.SERVER);
+
+        emptyMod.preInit(mockPreInitEvent);
+
+        verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "preInit");
+        verifyNoMoreInteractions(mockLogger);
+    }
+
+    @Test
+    public void emptyMod_init_CallsCorrect()
     {
         emptyMod.init(mockInitEvent);
         verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "init");
     }
 
     @Test
-    public void testPostInit_CallsCorrect()
+    public void emptyMod_postInit_CallsCorrect()
     {
         emptyMod.postInit(mockPostInitEvent);
         verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "postInit");
     }
 
     @Test
-    public void testOnLoadComplete_CallsCorrect()
+    public void emptyMod_onLoadComplete_CallsCorrect()
     {
         emptyMod.onLoadComplete(mockLoadCompleteEvent);
         verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "onLoadComplete");
     }
 
     @Test
-    public void testServerLoad_CallsCorrect()
+    public void emptyMod_serverLoad_CallsCorrect()
     {
         emptyMod.serverLoad(mockServerStartingEvent);
         verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "serverLoad");
     }
 
     @Test
-    public void testServerStopped_CallsCorrect()
+    public void emptyMod_serverStopped_CallsCorrect()
     {
         emptyMod.serverStopped(mockServerStoppedEvent);
         verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "serverStopped");
-    }
-
-    @Test
-    public void testLogMethodCall_LogsCorrect() throws Exception
-    {
-        Method method = EmptyMod.class.getDeclaredMethod("logMethodCall", String.class);
-        method.setAccessible(true);
-        method.invoke(emptyMod, "testMethod");
-        verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "testMethod");
     }
 }
