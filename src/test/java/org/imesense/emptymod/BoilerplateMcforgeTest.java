@@ -28,40 +28,107 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+/**
+ * Test class for {@link BoilerplateMcforge} functionality.
+ *
+ * @see BoilerplateMcforge
+ */
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
 @SuppressWarnings("LoggingSimilarMessage")
 public class BoilerplateMcforgeTest
 {
-    private static final String CLASS_NAME = "org.imesense.boilerplate.mcforge.BoilerplateMcforge";
-    private static final String LOG_MESSAGE = "Called {}.{} method";
+    /**
+     * The fully qualified class name of {@link BoilerplateMcforge} being tested.
+     *
+     * @see BoilerplateMcforge
+     */
+    private static final String CLASS_NAME =
+        "org.imesense.boilerplate.mcforge.BoilerplateMcforge";
 
+    /**
+     * The log message template used for method call logging.
+     */
+    private static final String LOG_MESSAGE =
+        "Called {}.{} method";
+
+    /**
+     * Mocked logger instance for verifying log messages.
+     *
+     * @see Logger
+     */
     @Mock
     private Logger mockLogger;
 
+    /**
+     * Mocked pre-initialization event for testing.
+     *
+     * @see FMLPreInitializationEvent
+     */
     @Mock
     private FMLPreInitializationEvent mockPreInitEvent;
 
+    /**
+     * Mocked initialization event for testing.
+     *
+     * @see FMLInitializationEvent
+     */
     @Mock
     private FMLInitializationEvent mockInitEvent;
 
+    /**
+     * Mocked post-initialization event for testing.
+     *
+     * @see FMLPostInitializationEvent
+     */
     @Mock
     private FMLPostInitializationEvent mockPostInitEvent;
 
+    /**
+     * Mocked load complete event for testing.
+     *
+     * @see FMLLoadCompleteEvent
+     */
     @Mock
     private FMLLoadCompleteEvent mockLoadCompleteEvent;
 
+    /**
+     * Mocked server starting event for testing.
+     *
+     * @see FMLServerStartingEvent
+     */
     @Mock
     private FMLServerStartingEvent mockServerStartingEvent;
 
+    /**
+     * Mocked server stopped event for testing.
+     *
+     * @see FMLServerStoppedEvent
+     */
     @Mock
     private FMLServerStoppedEvent mockServerStoppedEvent;
 
+    /**
+     * Mocked mod metadata for testing.
+     *
+     * @see ModMetadata
+     */
     @Mock
     private ModMetadata mockModMetadata;
 
+    /**
+     * Instance of {@link BoilerplateMcforge} being tested.
+     *
+     * @see BoilerplateMcforge
+     */
     private BoilerplateMcforge boilerplateMcforge;
 
+    /**
+     * Sets up the test environment before each test method execution.
+     * Initializes the {@link BoilerplateMcforge} instance and injects the mock logger.
+     *
+     * @see BoilerplateMcforge
+     */
     @BeforeEach
     public void setUp()
     {
@@ -81,6 +148,11 @@ public class BoilerplateMcforgeTest
         when(mockPreInitEvent.getModMetadata()).thenReturn(mockModMetadata);
     }
 
+    /**
+     * Tests that the {@link BoilerplateMcforge} constants are set correctly.
+     *
+     * @see BoilerplateMcforge
+     */
     @Test
     public void boilerplateMcforge_Constants_SetsCorrect()
     {
@@ -89,6 +161,11 @@ public class BoilerplateMcforgeTest
         assertEquals("1.12.2-14.23.5.2860", BoilerplateMcforge.VERSION);
     }
 
+    /**
+     * Tests that the {@code logMethodCall} method logs the correct message.
+     *
+     * @throws Exception if reflection access fails
+     */
     @Test
     public void boilerplateMcforge_logMethodCall_LogsCorrect() throws Exception
     {
@@ -98,6 +175,9 @@ public class BoilerplateMcforgeTest
         verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "testMethod");
     }
 
+    /**
+     * Tests that {@link BoilerplateMcforge#setLocaleMetadata} correctly sets localized metadata.
+     */
     @Test
     public void boilerplateMcforge_setLocaleMetadata_SetsCorrect()
     {
@@ -116,6 +196,9 @@ public class BoilerplateMcforgeTest
         }
     }
 
+    /**
+     * Tests that {@link BoilerplateMcforge#preInit} logs an error when called from client side.
+     */
     @Test
     public void boilerplateMcforge_preInit_ClientSideLogsError()
     {
@@ -131,6 +214,9 @@ public class BoilerplateMcforgeTest
         }
     }
 
+    /**
+     * Tests that {@link BoilerplateMcforge#preInit} logs correctly when called from server side.
+     */
     @Test
     public void boilerplateMcforge_preInit_ServerSideLogsCorrect()
     {
@@ -142,6 +228,9 @@ public class BoilerplateMcforgeTest
         verifyNoMoreInteractions(mockLogger);
     }
 
+    /**
+     * Tests that {@link BoilerplateMcforge#init} logs the correct method call.
+     */
     @Test
     public void boilerplateMcforge_init_CallsCorrect()
     {
@@ -149,6 +238,9 @@ public class BoilerplateMcforgeTest
         verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "init");
     }
 
+    /**
+     * Tests that {@link BoilerplateMcforge#postInit} logs the correct method call.
+     */
     @Test
     public void boilerplateMcforge_postInit_CallsCorrect()
     {
@@ -156,6 +248,9 @@ public class BoilerplateMcforgeTest
         verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "postInit");
     }
 
+    /**
+     * Tests that {@link BoilerplateMcforge#onLoadComplete} logs the correct method call.
+     */
     @Test
     public void boilerplateMcforge_onLoadComplete_CallsCorrect()
     {
@@ -163,6 +258,9 @@ public class BoilerplateMcforgeTest
         verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "onLoadComplete");
     }
 
+    /**
+     * Tests that {@link BoilerplateMcforge#serverLoad} logs the correct method call.
+     */
     @Test
     public void boilerplateMcforge_serverLoad_CallsCorrect()
     {
@@ -170,6 +268,9 @@ public class BoilerplateMcforgeTest
         verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "serverLoad");
     }
 
+    /**
+     * Tests that {@link BoilerplateMcforge#serverStopped} logs the correct method call.
+     */
     @Test
     public void boilerplateMcforge_serverStopped_CallsCorrect()
     {
