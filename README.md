@@ -35,7 +35,7 @@ For development:
 - Run command to build server image:
 
   ```sh
-  docker build --file docker/Server/Dockerfile --progress=plain --target final --tag mcforge1.12-emptymod:latest .
+  docker build --file docker/Server/Dockerfile --progress=plain --target final --tag mcforge1.12.2-emptymod:latest .
   ```
 
   Or run build script from `docker/Server/` folder in root of the repository
