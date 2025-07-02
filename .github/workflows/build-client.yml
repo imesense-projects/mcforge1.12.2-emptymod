@@ -64,7 +64,6 @@ jobs:
                   path: |
                       .gradle/caches/
                       .gradle/wrapper/
-                      libs/
                   enableCrossOsArchive: true
 
             - name: Build modification (Windows)
