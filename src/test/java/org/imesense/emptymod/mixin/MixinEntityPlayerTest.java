@@ -1,5 +1,9 @@
 package org.imesense.emptymod.mixin;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import org.objectweb.asm.AnnotationVisitor;
@@ -9,24 +13,58 @@ import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Test class for verifying the correctness of the {@link MixinEntityPlayer} class and its methods.
+ * <p>
+ * This class uses ASM (Java bytecode manipulation and analysis framework) to inspect
+ * the mixin class's structure and behavior at the bytecode level.
+ *
+ * @see MixinEntityPlayer
+ */
 public class MixinEntityPlayerTest
 {
+    /**
+     * Fully qualified name of the mixin class being tested.
+     *
+     * @see MixinEntityPlayer
+     */
     private static final String MIXIN_CLASS =
         "org.imesense.emptymod.mixin.MixinEntityPlayer";
+
+    /**
+     * Name of the method being tested in the mixin class.
+     */
     private static final String METHOD_NAME =
         "onPlayerUpdate";
+
+    /**
+     * Method descriptor (parameter and return types in JVM internal format).
+     *
+     * @see CallbackInfo
+     */
     private static final String METHOD_DESCRIPTOR =
         "(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V";
+
+    /**
+     * Annotation descriptor for the {@link Inject} annotation in JVM internal format.
+     *
+     * @see Inject
+     */
     private static final String METHOD_ANNOTATION =
         "Lorg/spongepowered/asm/mixin/injection/Inject;";
 
+    /**
+     * Tests that the mixin class has the correct signature for the target method.
+     * Specifically verifies that the method is private and has the correct annotation.
+     *
+     * @throws IOException if there's an error reading the class file
+     */
     @Test
     public void mixinEntityPlayer_Class_ChecksSignatureIsCorrect() throws IOException
     {
@@ -73,6 +111,13 @@ public class MixinEntityPlayerTest
         );
     }
 
+    /**
+     * Tests that {@code onPlayerUpdate} method contains the expected bytecode instructions,
+     * particularly verifying that it makes a call to {@code System.out.println}.
+     * Also prints all operations found in the method for debugging purposes.
+     *
+     * @throws IOException if there's an error reading the class file
+     */
     @Test
     public void mixinEntityPlayer_onPlayerUpdate_ChecksPrintMethodCall() throws IOException
     {

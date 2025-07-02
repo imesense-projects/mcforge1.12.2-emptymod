@@ -28,40 +28,107 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+/**
+ * Test class for {@link EmptyMod} functionality.
+ *
+ * @see EmptyMod
+ */
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
 @SuppressWarnings("LoggingSimilarMessage")
 public class EmptyModTest
 {
-    private static final String CLASS_NAME = "org.imesense.emptymod.EmptyMod";
-    private static final String LOG_MESSAGE = "Called {}.{} method";
+    /**
+     * The fully qualified class name of {@link EmptyMod} being tested.
+     *
+     * @see EmptyMod
+     */
+    private static final String CLASS_NAME =
+        "org.imesense.emptymod.EmptyMod";
 
+    /**
+     * The log message template used for method call logging.
+     */
+    private static final String LOG_MESSAGE =
+        "Called {}.{} method";
+
+    /**
+     * Mocked logger instance for verifying log messages.
+     *
+     * @see Logger
+     */
     @Mock
     private Logger mockLogger;
 
+    /**
+     * Mocked pre-initialization event for testing.
+     *
+     * @see FMLPreInitializationEvent
+     */
     @Mock
     private FMLPreInitializationEvent mockPreInitEvent;
 
+    /**
+     * Mocked initialization event for testing.
+     *
+     * @see FMLInitializationEvent
+     */
     @Mock
     private FMLInitializationEvent mockInitEvent;
 
+    /**
+     * Mocked post-initialization event for testing.
+     *
+     * @see FMLPostInitializationEvent
+     */
     @Mock
     private FMLPostInitializationEvent mockPostInitEvent;
 
+    /**
+     * Mocked load complete event for testing.
+     *
+     * @see FMLLoadCompleteEvent
+     */
     @Mock
     private FMLLoadCompleteEvent mockLoadCompleteEvent;
 
+    /**
+     * Mocked server starting event for testing.
+     *
+     * @see FMLServerStartingEvent
+     */
     @Mock
     private FMLServerStartingEvent mockServerStartingEvent;
 
+    /**
+     * Mocked server stopped event for testing.
+     *
+     * @see FMLServerStoppedEvent
+     */
     @Mock
     private FMLServerStoppedEvent mockServerStoppedEvent;
 
+    /**
+     * Mocked mod metadata for testing.
+     *
+     * @see ModMetadata
+     */
     @Mock
     private ModMetadata mockModMetadata;
 
+    /**
+     * Instance of {@link EmptyMod} being tested.
+     *
+     * @see EmptyMod
+     */
     private EmptyMod emptyMod;
 
+    /**
+     * Sets up the test environment before each test method execution.
+     * Initializes the {@link EmptyMod} instance and injects the mock logger.
+     *
+     * @see EmptyMod
+     */
     @BeforeEach
     public void setUp()
     {
@@ -81,6 +148,11 @@ public class EmptyModTest
         when(mockPreInitEvent.getModMetadata()).thenReturn(mockModMetadata);
     }
 
+    /**
+     * Tests that the {@link EmptyMod} constants are set correctly.
+     *
+     * @see EmptyMod
+     */
     @Test
     public void emptyMod_Constants_SetsCorrect()
     {
@@ -89,6 +161,11 @@ public class EmptyModTest
         assertEquals("1.12.2-14.23.5.2860", EmptyMod.VERSION);
     }
 
+    /**
+     * Tests that the {@code logMethodCall} method logs the correct message.
+     *
+     * @throws Exception if reflection access fails
+     */
     @Test
     public void emptyMod_logMethodCall_LogsCorrect() throws Exception
     {
@@ -98,6 +175,9 @@ public class EmptyModTest
         verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "testMethod");
     }
 
+    /**
+     * Tests that {@link EmptyMod#setLocaleMetadata} correctly sets localized metadata.
+     */
     @Test
     public void emptyMod_setLocaleMetadata_SetsCorrect()
     {
@@ -116,6 +196,9 @@ public class EmptyModTest
         }
     }
 
+    /**
+     * Tests that {@link EmptyMod#preInit} logs an error when called from client side.
+     */
     @Test
     public void emptyMod_preInit_ClientSideLogsError()
     {
@@ -131,6 +214,9 @@ public class EmptyModTest
         }
     }
 
+    /**
+     * Tests that {@link EmptyMod#preInit} logs correctly when called from server side.
+     */
     @Test
     public void emptyMod_preInit_ServerSideLogsCorrect()
     {
@@ -142,6 +228,9 @@ public class EmptyModTest
         verifyNoMoreInteractions(mockLogger);
     }
 
+    /**
+     * Tests that {@link EmptyMod#init} logs the correct method call.
+     */
     @Test
     public void emptyMod_init_CallsCorrect()
     {
@@ -149,6 +238,9 @@ public class EmptyModTest
         verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "init");
     }
 
+    /**
+     * Tests that {@link EmptyMod#postInit} logs the correct method call.
+     */
     @Test
     public void emptyMod_postInit_CallsCorrect()
     {
@@ -156,6 +248,9 @@ public class EmptyModTest
         verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "postInit");
     }
 
+    /**
+     * Tests that {@link EmptyMod#onLoadComplete} logs the correct method call.
+     */
     @Test
     public void emptyMod_onLoadComplete_CallsCorrect()
     {
@@ -163,6 +258,9 @@ public class EmptyModTest
         verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "onLoadComplete");
     }
 
+    /**
+     * Tests that {@link EmptyMod#serverLoad} logs the correct method call.
+     */
     @Test
     public void emptyMod_serverLoad_CallsCorrect()
     {
@@ -170,6 +268,9 @@ public class EmptyModTest
         verify(mockLogger).info(LOG_MESSAGE, CLASS_NAME, "serverLoad");
     }
 
+    /**
+     * Tests that {@link EmptyMod#serverStopped} logs the correct method call.
+     */
     @Test
     public void emptyMod_serverStopped_CallsCorrect()
     {
