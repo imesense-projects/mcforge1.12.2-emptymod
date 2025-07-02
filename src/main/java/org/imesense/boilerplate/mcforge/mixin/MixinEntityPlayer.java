@@ -31,6 +31,7 @@ public abstract class MixinEntityPlayer
     @Inject(method = "onUpdate", at = @At("HEAD"))
     private void onPlayerUpdate(CallbackInfo callbackInfo)
     {
-        MixinEntityPlayerLogic.onPlayerUpdate((EntityPlayer) (Object) this);
+        EntityPlayer player = (EntityPlayer) (Object) this;
+        System.out.println("Player " + player.getName() + " is updating!");
     }
 }
