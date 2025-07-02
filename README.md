@@ -1,5 +1,6 @@
 # Minecraft Forge Modification Boilerplate
 
+[![Language](https://img.shields.io/badge/Language-Java-orange.svg)](https://www.java.com/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE.txt)
 [![Release](https://img.shields.io/github/v/release/imesense/mcforge1.12.2-modification-boilerplate?include_prereleases&label=Release)](https://github.com/imesense/mcforge1.12.2-modification-boilerplate/releases/latest)
 [![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/imesense/mcforge1.12.2-modification-boilerplate)
