@@ -28,13 +28,25 @@ public final class LoadingPlugin implements IFMLLoadingPlugin
      * @see Logger
      * @see LogManager
      */
-    static Logger LOGGER = LogManager.getLogger(LoadingPlugin.class);
+    static Logger logger = LogManager.getLogger(LoadingPlugin.class);
 
-    static boolean TEST_MODE = false;
+    /**
+     * Indicating whether the plugin is running in test mode.
+     * <p>
+     * When enabled, skips mixin initialization during construction.
+     *
+     * @see #enableTestMode()
+     */
+    static boolean testMode = false;
 
+    /**
+     * Enables test mode for the loading plugin.
+     *
+     * @see #testMode
+     */
     public static void enableTestMode()
     {
-        TEST_MODE = true;
+        testMode = true;
     }
 
     /**
@@ -53,25 +65,25 @@ public final class LoadingPlugin implements IFMLLoadingPlugin
      */
     public LoadingPlugin()
     {
-        LOGGER.info("Initializing LoadingPlugin");
+        logger.info("Initializing LoadingPlugin");
 
-        if (TEST_MODE)
+        if (testMode)
         {
             return;
         }
 
         try
         {
-            LOGGER.debug("Initializing Mixin");
+            logger.debug("Initializing Mixin");
 
             MixinBootstrap.init();
             FermiumRegistryAPI.enqueueMixin(false, "mixins.emptymod.json");
 
-            LOGGER.info("Mixin initialization complete");
+            logger.info("Mixin initialization complete");
         }
         catch (Exception exception)
         {
-            LOGGER.error("Failed to initialize Mixin", exception);
+            logger.error("Failed to initialize Mixin", exception);
             throw exception;
         }
     }

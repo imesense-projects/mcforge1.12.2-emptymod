@@ -39,7 +39,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * @see Mod
  */
 @Mod(
-    modid = EmptyMod.MODID,
+    modid = EmptyMod.MOD_ID,
     name = EmptyMod.NAME,
     version = EmptyMod.VERSION,
     dependencies = "required-after:fermiumbooter"
@@ -49,7 +49,7 @@ public final class EmptyMod
     /**
      * Modification unique identifier
      */
-    public static final String MODID = "emptymod";
+    public static final String MOD_ID = "emptymod";
 
     /**
      * Modification name
@@ -67,7 +67,7 @@ public final class EmptyMod
      * @see Logger
      * @see LogManager
      */
-    static Logger LOGGER = LogManager.getLogger(EmptyMod.class);
+    static Logger logger = LogManager.getLogger(EmptyMod.class);
 
     /**
      * Logs a method call to the logger.
@@ -76,7 +76,7 @@ public final class EmptyMod
      */
     private void logMethodCall(String methodName)
     {
-        LOGGER.info(
+        logger.info(
             "Called {}.{} method",
             this.getClass().getName(),
             methodName
@@ -96,8 +96,8 @@ public final class EmptyMod
     static void setLocaleMetadata(FMLPreInitializationEvent event)
     {
         ModMetadata metadata = event.getModMetadata();
-        metadata.name = I18n.format("mod." + MODID + ".name");
-        metadata.description = I18n.format("mod." + MODID + ".description");
+        metadata.name = I18n.format("mod." + MOD_ID + ".name");
+        metadata.description = I18n.format("mod." + MOD_ID + ".description");
     }
 
     /**
@@ -150,11 +150,11 @@ public final class EmptyMod
 
             if (configFiles.isEmpty())
             {
-                LOGGER.error("No mixin config files found!");
+                logger.error("No mixin config files found!");
                 return;
             }
 
-            LOGGER.info("Found {} mixin config files:", configFiles.size());
+            logger.info("Found {} mixin config files:", configFiles.size());
 
             for (String configFile : configFiles)
             {
@@ -164,7 +164,7 @@ public final class EmptyMod
 
                     try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream)))
                     {
-                        LOGGER.info("Loading mixin: {}", configFile);
+                        logger.info("Loading mixin: {}", configFile);
 
                         String line;
                         StringBuilder stringBuilder = new StringBuilder();
@@ -173,19 +173,19 @@ public final class EmptyMod
                             stringBuilder.append(line).append("\n");
                         }
 
-                        LOGGER.info("Contents of {}:\n{}", configFile, stringBuilder);
-                        LOGGER.info("Successfully loaded: {}", configFile);
+                        logger.info("Contents of {}:\n{}", configFile, stringBuilder);
+                        logger.info("Successfully loaded: {}", configFile);
                     }
                 }
                 catch (Exception exception)
                 {
-                    LOGGER.error("Error loading {}: {}", configFile, exception.getMessage());
+                    logger.error("Error loading {}: {}", configFile, exception.getMessage());
                 }
             }
         }
         catch (Exception exception)
         {
-            LOGGER.error("Common error: {}", exception.getMessage());
+            logger.error("Common error: {}", exception.getMessage());
             exception.printStackTrace();
         }
     }
