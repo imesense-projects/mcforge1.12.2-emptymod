@@ -1,7 +1,6 @@
 {
     "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
 
-    // Container properties
     "name": "Empty Mod",
     "build": {
         "dockerfile": "Dockerfile",
@@ -13,52 +12,38 @@
     "postCreateCommand": "./gradlew genVSCodeRuns",
     "remoteUser": "minecraft",
 
-    // Enabled features
     "features": {
         "ghcr.io/devcontainers/features/github-cli:1": {}
     },
 
-    // Customization options
     "customizations": {
-        // Codespace options
         "codespaces": {
             "openFiles": [
                 "README.md"
             ]
         },
 
-        // Visual Studio Code options
         "vscode": {
-            // Enabled extensions
             "extensions": [
-                // Markdown
                 "DavidAnson.vscode-markdownlint",
 
-                // YAML
                 "redhat.vscode-yaml"
             ],
 
-            // Editor settings
             "settings": {
-                // Files associations
                 "files.associations": {
-                    // Visual Studio Code files
                     "*.code-workspace": "jsonc",
                     ".vscode/*.json": "jsonc",
 
-                    // Gradle scripts
                     "gradlew": "shellscript",
 
-                    // Minecraft resources
                     "*.info": "json",
                     "*.mcmeta": "json",
                     "*.lang": "properties"
                 },
 
-                // Extensions settings
                 "redhat.telemetry.enabled": false,
 
-                // Formats settings
                 "[yaml]": {
                     "editor.defaultFormatter": "redhat.vscode-yaml"
                 },

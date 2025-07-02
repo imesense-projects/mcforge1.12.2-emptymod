@@ -1,22 +1,16 @@
 {
-    // Files associations
     "files.associations": {
-        // Visual Studio Code files
         "*.code-workspace": "jsonc",
 
-        // Gradle scripts
         "gradlew": "shellscript",
 
-        // Minecraft resources
         "*.info": "json",
         "*.mcmeta": "json",
         "*.lang": "properties"
     },
 
-    // Extensions settings
     "redhat.telemetry.enabled": false,
 
-    // Formats settings
     "[yaml]": {
         "editor.defaultFormatter": "redhat.vscode-yaml"
     },
