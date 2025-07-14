@@ -1,6 +1,7 @@
 # Commit style
 
-This document defines the standards for writing commit messages to maintain a clear, consistent and meaningful project history.
+This document defines the standards for writing commit messages to maintain a
+clear, consistent and meaningful project history.
 
 ## Purpose
 

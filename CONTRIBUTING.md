@@ -1,8 +1,11 @@
 # Contributing Guide
 
-Thank you for your interest in contributing to the project. We appreciate any help, whether it's code, documentation, feedback or promotion.
+Thank you for your interest in contributing to the project. We appreciate any
+help, whether it's code, documentation, feedback or promotion.
 
-This document describes the contribution process in detail and is intended for those who really want to help the team. Any type of contribution should not violate our [Code of Conduct](./CODE_OF_CONDUCT.md).
+This document describes the contribution process in detail and is intended for
+those who really want to help the team. Any type of contribution should not
+violate our [Code of Conduct](./CODE_OF_CONDUCT.md).
 
 ## Types of Contributions
 
@@ -13,7 +16,8 @@ There are several ways to contribute to the project:
 - opening reports and issues
 - sending pull requests
 
-Any type of contribution is important to maintain the project. Let's look at them in more detail.
+Any type of contribution is important to maintain the project. Let's look at
+them in more detail.
 
 ### 1. Promotion
 
@@ -39,7 +43,8 @@ If you encounter bugs or problems, please let us know by opening an issue.
 
 - Check the existing issues to avoid duplicates.
 - Use a clear and descriptive title.
-- Provide steps to reproduce the issue, including code snippets or screenshots if applicable.
+- Provide steps to reproduce the issue, including code snippets or screenshots
+if applicable.
 - Share environment details (e.g., OS, version of the project, dependencies).
 
 ### 4. Sending Pull Requests
@@ -62,7 +67,9 @@ If you'd like to contribute code or documentation, follow these steps:
 - Add or update tests (if applicable and possible).
 - Update documentation (if introduce new features or modify existing behavior).
 
-See the project's [branching model](./doc/branching-model.md), [coding style](./doc/coding-style.md) and [commit style](./doc/commit-style.md) conventions for details.
+See the project's [branching model](./doc/branching-model.md),
+[coding style](./doc/coding-style.md) and [commit style](./doc/commit-style.md)
+conventions for details.
 
 #### Submitting a pull request
 
@@ -85,7 +92,8 @@ See the project's [branching model](./doc/branching-model.md), [coding style](./
 
 > Q: What if my PR is rejected?
 >
-> A: Don’t take it personally! The maintainers will provide feedback, and you can always discuss alternatives.
+> A: Don’t take it personally! The maintainers will provide feedback, and you
+can always discuss alternatives.
 
 > Q: Can I contribute if I'm not a developer?
 >
@@ -93,4 +101,5 @@ See the project's [branching model](./doc/branching-model.md), [coding style](./
 
 ## Acknowledgments
 
-We appreciate every contributor, no matter how small the contribution. Your efforts help make this project better for everyone!
+We appreciate every contributor, no matter how small the contribution. Your
+efforts help make this project better for everyone!
