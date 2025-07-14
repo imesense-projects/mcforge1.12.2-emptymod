@@ -1,6 +1,7 @@
 # Branching Model
 
-This document describes the principles for maintaining the project repository history and branch management strategy.
+This document describes the principles for maintaining the project repository
+history and branch management strategy.
 
 ## History Style
 

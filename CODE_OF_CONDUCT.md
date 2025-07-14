@@ -4,7 +4,8 @@ This document describes the code of conduct adopted by the team in the project c
 
 ## Purpose
 
-This project and its community are aimed at creating a healthy and comfortable environment, free from harassment, for everyone, regardless of origin or identity.
+This project and its community are aimed at creating a healthy and comfortable
+environment, free from harassment, for everyone, regardless of origin or identity.
 
 ## Expected Behavior
 
