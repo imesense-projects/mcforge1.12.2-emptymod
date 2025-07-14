@@ -29,7 +29,7 @@ Please write 'x' letter in '[]' to agree. For example:
 - [x] Manual testing
 -->
 
-- [ ] Manual testing 
+- [ ] Manual testing
 
 ### Terms
 
