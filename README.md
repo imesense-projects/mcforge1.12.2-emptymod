@@ -34,9 +34,11 @@ For development:
 
 - Run command to build server image:
 
+  <!-- markdownlint-disable MD013 -->
   ```sh
   docker build --file docker/Server/Dockerfile --progress=plain --target final --tag mcforge1.12.2-emptymod:latest .
   ```
+  <!-- markdownlint-enable MD013 -->
 
   Or run build script from `docker/Server/` folder in root of the repository
 
@@ -84,4 +86,5 @@ List of environment variables used by server container
 
 ## License
 
-Contents of this repository licensed under terms of the __MIT license__ unless otherwise specified. See [this](./LICENSE.txt) file for details
+Contents of this repository licensed under terms of the __MIT license__ unless
+otherwise specified. See [this](./LICENSE.txt) file for details
