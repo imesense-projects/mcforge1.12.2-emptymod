@@ -11,6 +11,54 @@ indent_size = 2
 indent_style = space
 insert_final_newline = true
 
+# Git configs
+[*.{gitattributes,gitignore,mailmap}]
+
+# Common settings
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = tab
+insert_final_newline = true
+
+# Docker files
+[{*.dockerignore,Dockerfile*}]
+
+# Common settings
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+
+# Environment configs
+[*.env*]
+
+# Common settings
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+
+# Shell scripts
+[{*.sh,gradlew}]
+
+# Common settings
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+
+# Batch scripts
+[*.{bat,cmd}]
+
+# Common settings
+charset = utf-8
+end_of_line = crlf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+
 # YAML configs
 [*.{yml,yaml}]
 
@@ -52,7 +100,7 @@ indent_style = space
 insert_final_newline = true
 
 # Java files
-[*.{java,properties}]
+[*.{java,properties*}]
 
 # Common settings
 charset = utf-8
