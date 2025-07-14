@@ -9,7 +9,9 @@
 docker/
 !docker/**/*.sh
 *.dockerignore
-*.env
+
+# Environment configs
+*.env*
 
 # GitHub files and folders
 .github/

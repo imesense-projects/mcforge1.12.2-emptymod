@@ -2,9 +2,28 @@
 
 * text=auto
 
+# Markdown documents
+*.md text eol=crlf encoding=utf-8
+
 # Git configs
 .gitattributes text eol=lf encoding=utf-8
 .gitignore text eol=lf encoding=utf-8
+.mailmap text eol=lf encoding=utf-8
+
+# Docker files
+*.dockerignore text eol=lf encoding=utf-8
+Dockerfile* text eol=lf encoding=utf-8
+
+# Environment configs
+*.env* text eol=lf encoding=utf-8
+
+# Shell scripts
+*.sh text eol=lf encoding=utf-8
+gradlew text eol=lf encoding=utf-8
+
+# Batch scripts
+*.bat text eol=crlf encoding=utf-8
+*.cmd text eol=crlf encoding=utf-8
 
 # YAML configs
 *.yml text eol=lf encoding=utf-8
@@ -15,15 +34,13 @@
 
 # Visual Studio Code files
 *.code-workspace eol=crlf encoding=utf-8
-.vscode/*.json   eol=crlf encoding=utf-8
+.vscode/*.json eol=crlf encoding=utf-8
 
 # Gradle scripts
 build.gradle text eol=crlf encoding=utf-8
-gradlew text eol=lf encoding=utf-8
-gradlew.bat text eol=crlf encoding=utf-8
 
 # Java files
-*.properties text eol=lf encoding=utf-8
+*.properties* text eol=lf encoding=utf-8
 *.java text eol=lf encoding=utf-8
 
 # Minecraft resources

@@ -1,12 +1,17 @@
 {
     "files.associations": {
         "*.code-workspace": "jsonc",
+        ".vscode/*.json": "jsonc",
 
         "gradlew": "shellscript",
 
+        "*.properties*": "properties",
+
         "*.info": "json",
         "*.mcmeta": "json",
-        "*.lang": "properties"
+        "*.lang": "properties",
+
+        "*.env*": "properties"
     },
 
     "redhat.telemetry.enabled": false,
