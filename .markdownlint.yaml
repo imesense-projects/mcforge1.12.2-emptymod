@@ -1,0 +1,257 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/DavidAnson/markdownlint/v0.38.0/schema/markdownlint-config-schema.json
+
+# Heading levels should only increment by one level at a time
+MD001: true
+
+# Heading style
+MD003:
+    # Heading style
+    style: "consistent"
+
+# Unordered list style
+MD004:
+    # List style
+    style: "consistent"
+
+# Inconsistent indentation for list items at the same level
+MD005: true
+
+# Unordered list indentation
+MD007:
+    # Spaces for indent
+    indent: 2
+    # Whether to indent the first level of the list
+    start_indented: false
+    # Spaces for first level indent (when start_indented is set)
+    start_indent: 2
+
+# Trailing spaces
+MD009:
+    # Spaces for line break
+    br_spaces: 2
+    # Allow spaces for empty lines in list items
+    list_item_empty_lines: false
+    # Include unnecessary breaks
+    strict: false
+
+# Hard tabs
+MD010: false
+
+# Reversed link syntax
+MD011: true
+
+# Multiple consecutive blank lines
+MD012:
+    # Consecutive blank lines
+    maximum: 1
+
+# Line length
+MD013:
+    # Number of characters
+    line_length: 80
+    # Number of characters for headings
+    heading_line_length: 80
+    # Number of characters for code blocks
+    code_block_line_length: 80
+    # Include code blocks
+    code_blocks: true
+    # Include tables
+    tables: true
+    # Include headings
+    headings: true
+    # Strict length checking
+    strict: false
+    # Stern length checking
+    stern: false
+
+# Dollar signs used before commands without showing output
+MD014: true
+
+# No space after hash on atx style heading
+MD018: true
+
+# Multiple spaces after hash on atx style heading
+MD019: true
+
+# No space inside hashes on closed atx style heading
+MD020: true
+
+# Multiple spaces inside hashes on closed atx style heading
+MD021: true
+
+# Headings should be surrounded by blank lines
+MD022:
+    # Blank lines above heading
+    lines_above: 1
+    # Blank lines below heading
+    lines_below: 1
+
+# Headings must start at the beginning of the line
+MD023: true
+
+# Multiple headings with the same content
+MD024:
+    # Only check sibling headings
+    siblings_only: true
+
+# Multiple top-level headings in the same document
+MD025: true
+
+# Trailing punctuation in heading
+MD026: true
+
+# Multiple spaces after blockquote symbol
+MD027:
+    # Include list items
+    list_items: true
+
+# Blank line inside blockquote
+MD028: false
+
+# Ordered list item prefix
+MD029:
+    # List style
+    style: "one_or_ordered"
+
+# Spaces after list markers
+MD030:
+    # Spaces for single-line unordered list items
+    ul_single: 1
+    # Spaces for single-line ordered list items
+    ol_single: 1
+    # Spaces for multi-line unordered list items
+    ul_multi: 1
+    # Spaces for multi-line ordered list items
+    ol_multi: 1
+
+# Fenced code blocks should be surrounded by blank lines
+MD031:
+    # Include list items
+    list_items: true
+
+# Lists should be surrounded by blank lines
+MD032: true
+
+# Inline HTML
+MD033: false
+
+# Bare URL used
+MD034: true
+
+# Horizontal rule style
+MD035:
+    # Horizontal rule style
+    style: "consistent"
+
+# Emphasis used instead of a heading
+MD036: true
+
+# Spaces inside emphasis markers
+MD037: true
+
+# Spaces inside code span elements
+MD038: true
+
+# Spaces inside link text
+MD039: true
+
+# Fenced code blocks should have a language specified
+MD040:
+    # List of languages
+    allowed_languages: []
+    # Require language only
+    language_only: false
+
+# First line in a file should be a top-level heading
+MD041: true
+
+# No empty links
+MD042: true
+
+# Required heading structure
+MD043: false
+
+# Proper names should have the correct capitalization
+MD044:
+    # List of proper names
+    names: []
+    # Include code blocks
+    code_blocks: true
+    # Include HTML elements
+    html_elements: true
+
+# Images should have alternate text (alt text)
+MD045: true
+
+# Code block style
+MD046:
+    # Block style
+    style: "consistent"
+
+# Files should end with a single newline character
+MD047: true
+
+# Code fence style
+MD048:
+    # Code fence style
+    style: "consistent"
+
+# Emphasis style
+MD049:
+    # Emphasis style
+    style: "consistent"
+
+# Strong style
+MD050:
+    # Strong style
+    style: "consistent"
+
+# Link fragments should be valid
+MD051:
+    # Ignore case of fragments
+    ignore_case: false
+    # Pattern for ignoring additional fragments
+    ignored_pattern: ""
+
+# Reference links and images should use a label that is defined
+MD052:
+    # Ignored link labels
+    ignored_labels:
+        - "x"
+    # Include shortcut syntax
+    shortcut_syntax: false
+
+# Link and image reference definitions should be needed
+MD053:
+    # Ignored definitions
+    ignored_definitions:
+        - "//"
+
+# Link and image style
+MD054:
+    # Allow autolinks
+    autolink: true
+    # Allow inline links and images
+    inline: true
+    # Allow full reference links and images
+    full: true
+    # Allow collapsed reference links and images
+    collapsed: true
+    # Allow shortcut reference links and images
+    shortcut: true
+    # Allow URLs as inline links
+    url_inline: true
+
+# Table pipe style
+MD055:
+    # Table pipe style
+    style: "consistent"
+
+# Table column count
+MD056: true
+
+# Tables should be surrounded by blank lines
+MD058: true
+
+# Link text should be descriptive
+MD059: true
