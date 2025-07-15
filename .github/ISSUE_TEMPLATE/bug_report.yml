@@ -60,17 +60,3 @@ body:
           label: Additional context
           description: >
               Add any other context about the bug if it is necessary
-
-    # Terms
-    - type: checkboxes
-      id: terms
-      attributes:
-          label: Terms
-          description: >
-              By submitting this issue, you agree to follow our
-              __Code of Conduct__ and __Contributing Guidelines__
-          options:
-              - label: I agree to follow this project's __Code of Conduct__
-                required: true
-              - label: I agree to follow this project's __Contributing Guidelines__
-                required: true
