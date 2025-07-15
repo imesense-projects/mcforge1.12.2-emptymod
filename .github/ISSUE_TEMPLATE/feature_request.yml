@@ -44,8 +44,7 @@ body:
           label: Terms
           description: >
               By submitting this issue, you agree to follow our
-              [__Code of Conduct__](../CODE_OF_CONDUCT.md) and
-              [__Contributing Guidelines__](../CONTRIBUTING.md)
+              __Code of Conduct__ and __Contributing Guidelines__
           options:
               - label: I agree to follow this project's __Code of Conduct__
                 required: true
