@@ -30,15 +30,3 @@ Please write 'x' letter in '[]' to agree. For example:
 -->
 
 - [ ] Manual testing
-
-### Terms
-
-<!--
-Please write 'x' letter in '[]' to agree. For example:
-
-- [x] I agree to follow this project's __Code of Conduct__
-- [x] I agree to follow this project's __Contributing Guidelines__
--->
-
-- [] I agree to follow this project's __Code of Conduct__
-- [] I agree to follow this project's __Contributing Guidelines__
