@@ -7,7 +7,7 @@
 [![Build client](https://github.com/imesense-projects/mcforge1.12.2-empty-mod/actions/workflows/build-client.yml/badge.svg)](https://github.com/imesense-projects/mcforge1.12.2-empty-mod/actions/workflows/build-client.yml)
 [![Build server](https://github.com/imesense-projects/mcforge1.12.2-empty-mod/actions/workflows/build-server.yml/badge.svg)](https://github.com/imesense-projects/mcforge1.12.2-empty-mod/actions/workflows/build-server.yml)
 
-Empty mod for Minecraft 1.12.2 with mixins support
+Empty mod for Minecraft 1.12.2 with mixins support.
 
 ## Requirements
 
@@ -24,7 +24,7 @@ For development:
 
 ### Client
 
-- Run command in root of the repository to build modification:
+- Build modification:
 
   ```sh
   ./gradlew build
@@ -32,7 +32,7 @@ For development:
 
 ### Server
 
-- Run command to build server image:
+- Build server image:
 
   <!-- markdownlint-disable MD013 -->
   ```sh
@@ -40,11 +40,11 @@ For development:
   ```
   <!-- markdownlint-enable MD013 -->
 
-  Or run build script from `docker/Server/` folder in root of the repository
+  Or run build script from `docker/Server/` folder in root of the repository.
 
 ## Testing
 
-- Run command to launch all tests:
+- Launch all tests:
 
   ```sh
   ./gradlew test
@@ -54,14 +54,14 @@ For development:
 
 ### Client
 
-- Copy JAR files from `build/libs/` to `mods/` folder of Minecraft
+- Copy __JAR__ files from `build/libs/` to `mods/` folder of Minecraft.
 
 ### Server
 
-- Configure `.env` and `server.properties` files
+- Configure `.env` and `server.properties` files.
 
   See [`.env`](./docker/Server/.env.example) and [`server.properties`](./docker/Server/server.properties.example)
-  examples in `docker/Server/` folder
+  examples in `docker/Server/` folder.
 
 - Run command to run server in container:
 
@@ -71,7 +71,7 @@ For development:
 
 ## Environment Variables
 
-List of environment variables used by server container
+List of environment variables used by server container:
 
 | Variable          | Description
 | ----------------- | ---
@@ -87,4 +87,4 @@ List of environment variables used by server container
 ## License
 
 Contents of this repository licensed under terms of the __MIT license__ unless
-otherwise specified. See [this](./LICENSE.txt) file for details
+otherwise specified. See [this](./LICENSE.txt) file for details.
