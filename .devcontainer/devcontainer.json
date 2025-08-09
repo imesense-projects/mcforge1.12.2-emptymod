@@ -25,9 +25,14 @@
 
         "vscode": {
             "extensions": [
+                "redhat.vscode-yaml",
+
                 "DavidAnson.vscode-markdownlint",
 
-                "redhat.vscode-yaml"
+                "ms-azuretools.vscode-docker",
+                "docker.docker",
+                "ms-vscode-remote.remote-containers",
+                "GitHub.vscode-github-actions"
             ],
 
             "settings": {
