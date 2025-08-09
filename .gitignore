@@ -1,7 +1,13 @@
 # Global ignoring of different binaries and another temporary files
 
-# Docker files
-*.env
+# System cache
+.DS_Store
+Thumbs.db
+
+# Gradle cache and settings
+.gradle/
+build/
+run/
 
 # Java cache
 libs/
@@ -16,14 +22,6 @@ out/
 # Visual Studio Code files
 .vscode/launch.json
 
-# Gradle cache and settings
-.gradle/
-build/
-run/
-
-# Common logs
-logs/
-
 # Minecraft cache and settings
 mcmodsrepo/
 mods/
@@ -32,6 +30,8 @@ world/
 crash-reports/
 server.properties
 
-# System cache
-.DS_Store
-Thumbs.db
+# Configs
+*.env
+
+# Logs
+logs/
