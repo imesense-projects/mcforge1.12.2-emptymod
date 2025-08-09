@@ -5,4 +5,5 @@ gitignore: true
 
 # Define glob expressions to ignore
 ignores:
-    - ".github/*.md"
+    - ".github/CODEOWNERS"
+    - ".github/**/*.md"
