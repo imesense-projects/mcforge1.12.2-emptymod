@@ -2,50 +2,68 @@
 
 * text=auto
 
+# Environment configs
+*.env* text eol=lf encoding=utf-8
+
+# Shell scripts
+*.sh text eol=lf encoding=utf-8
+
+# Batch scripts
+*.bat text eol=crlf encoding=utf-8
+*.cmd text eol=crlf encoding=utf-8
+
 # Markdown documents
 *.md text eol=crlf encoding=utf-8
+
+# Text documents
+*.txt text eol=crlf encoding=utf-8
 
 # Git configs
 .gitattributes text eol=lf encoding=utf-8
 .gitignore text eol=lf encoding=utf-8
 .mailmap text eol=lf encoding=utf-8
 
+# EditorConfig files
+.editorconfig text eol=crlf encoding=utf-8
+
+# MarkdownLint configs
+.markdownlint*.json* text eol=lf encoding=utf-8
+.markdownlint*.y*ml text eol=lf encoding=utf-8
+.markdownlint*.*js text eol=lf encoding=utf-8
+
 # Docker files
-*.dockerignore text eol=lf encoding=utf-8
+.dockerignore text eol=lf encoding=utf-8
 Dockerfile* text eol=lf encoding=utf-8
 
-# Environment configs
-*.env* text eol=lf encoding=utf-8
-
-# Shell scripts
-*.sh text eol=lf encoding=utf-8
-gradlew text eol=lf encoding=utf-8
-
-# Batch scripts
-*.bat text eol=crlf encoding=utf-8
-*.cmd text eol=crlf encoding=utf-8
-
-# YAML configs
-*.yml text eol=lf encoding=utf-8
-*.yaml text eol=lf encoding=utf-8
-
-# TOML configs
-*.toml text eol=lf encoding=utf-8
+# Docker Compose files
+docker-compose*.y*ml text eol=lf encoding=utf-8
 
 # Visual Studio Code files
-*.code-workspace eol=crlf encoding=utf-8
-.vscode/*.json eol=crlf encoding=utf-8
+*.code-workspace text eol=crlf encoding=utf-8
+.vscode/*.json text eol=crlf encoding=utf-8
+
+# DevContainers manifests
+.devcontainer/**/devcontainer.json text eol=lf encoding=utf-8
+
+# GitHub configs
+.github/CODEOWNERS text eol=lf encoding=utf-8
+.github/**/*.md text eol=lf encoding=utf-8
+.github/**/*.y*ml text eol=lf encoding=utf-8
 
 # Gradle scripts
-build.gradle text eol=crlf encoding=utf-8
+*.gradle text eol=lf encoding=utf-8
+gradlew text eol=lf encoding=utf-8
+gradlew.bat text eol=crlf encoding=utf-8
 
 # Java files
-*.properties* text eol=lf encoding=utf-8
 *.java text eol=lf encoding=utf-8
+*.properties* text eol=lf encoding=utf-8
+
+# Java libraries
+*.jar binary
 
 # Minecraft resources
+*.lang text eol=lf encoding=utf-8
 *.info text eol=lf encoding=utf-8
 *.mcmeta text eol=lf encoding=utf-8
-
-# Binaries
-*.jar binary
+mixins.*.json text eol=lf encoding=utf-8
