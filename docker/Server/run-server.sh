@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 
+# Check license
 if [ "$EULA" = "true" ]; then
     echo "eula=true" > eula.txt
 else
@@ -7,7 +8,9 @@ else
     exit 1
 fi
 
+# Run server
 java \
     -Xms${MIN_MEMORY} \
     -Xmx${MAX_MEMORY} \
-    -jar forge.jar nogui
+    -jar forge.jar \
+        nogui

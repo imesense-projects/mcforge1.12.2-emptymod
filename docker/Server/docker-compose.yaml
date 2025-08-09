@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
 
 services:
+    # Empty Mod server
     emptymod:
         container_name: emptymod
         image: ${REGISTRY:-ghcr.io/imesense-projects}/mcforge1.12.2-emptymod:${IMAGE_TAG:-latest}
