@@ -87,7 +87,7 @@ jobs:
             - name: Upload cache
               uses: actions/upload-artifact@v4
               with:
-                  name: ${{ github.event.repository.name }}-cache-${{ github.sha }}
+                  name: ${{ github.event.repository.name }}-cache-${{ matrix.system }}-${{ github.sha }}
                   path: |
                       ${{ github.workspace }}/.gradle/caches/
                       ${{ github.workspace }}/.gradle/wrapper/
