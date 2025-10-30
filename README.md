@@ -2,10 +2,10 @@
 
 [![Language](https://img.shields.io/badge/Language-Java-orange.svg)](https://www.java.com/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE.txt)
-[![Release](https://img.shields.io/github/v/release/imesense-projects/mcforge1.12.2-emptymod?include_prereleases&label=Release)](https://github.com/imesense-projects/mcforge1.12.2-emptymod/releases/latest)
-[![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/imesense-projects/mcforge1.12.2-emptymod)
-[![Build client](https://github.com/imesense-projects/mcforge1.12.2-emptymod/actions/workflows/build-client.yml/badge.svg)](https://github.com/imesense-projects/mcforge1.12.2-emptymod/actions/workflows/build-client.yml)
-[![Build server](https://github.com/imesense-projects/mcforge1.12.2-emptymod/actions/workflows/build-server.yml/badge.svg)](https://github.com/imesense-projects/mcforge1.12.2-emptymod/actions/workflows/build-server.yml)
+[![Release](https://img.shields.io/github/v/release/imesense/mcforge1.12.2-emptymod?include_prereleases&label=Release)](https://github.com/imesense/mcforge1.12.2-emptymod/releases/latest)
+[![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/imesense/mcforge1.12.2-emptymod)
+[![Build client](https://github.com/imesense/mcforge1.12.2-emptymod/actions/workflows/build-client.yml/badge.svg)](https://github.com/imesense/mcforge1.12.2-emptymod/actions/workflows/build-client.yml)
+[![Build server](https://github.com/imesense/mcforge1.12.2-emptymod/actions/workflows/build-server.yml/badge.svg)](https://github.com/imesense/mcforge1.12.2-emptymod/actions/workflows/build-server.yml)
 
 Empty mod for Minecraft 1.12.2 with mixins support.
 
