@@ -4,7 +4,7 @@ services:
     # Empty Mod server
     emptymod:
         container_name: emptymod
-        image: ${REGISTRY:-ghcr.io/imesense-projects}/mcforge1.12.2-emptymod:${IMAGE_TAG:-latest}
+        image: ${REGISTRY:-ghcr.io/imesense}/mcforge1.12.2-emptymod:${IMAGE_TAG:-latest}
         platform: linux/amd64
         environment:
             - EULA=${EULA:-false}

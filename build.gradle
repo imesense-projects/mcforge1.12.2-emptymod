@@ -107,7 +107,7 @@ ext {
 }
 
 task downloadAccesstransformers(type: Download) {
-    def repository = 'github.com/imesense-projects/packages-collection/releases/download'
+    def repository = 'github.com/imesense/packages-collection/releases/download'
     def tag = 'net.minecraftforge%2Faccesstransformers%2Fv1.0.5'
     def filename = 'net.minecraftforge.accesstransformers-v1.0.5.zip'
     src "https://${repository}/${tag}/${filename}"
