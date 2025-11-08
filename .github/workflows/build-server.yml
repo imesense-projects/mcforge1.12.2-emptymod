@@ -129,7 +129,7 @@ jobs:
               with:
                   registry: ${{ env.DOCKER_REGISTRY }}
                   username: ${{ github.actor }}
-                  password: ${{ secrets.GITHUB_TOKEN }}
+                  password: ${{ secrets.PAT_TOKEN }}
 
             - name: Push image
               run: |
