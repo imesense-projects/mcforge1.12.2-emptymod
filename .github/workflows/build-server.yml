@@ -88,7 +88,7 @@ jobs:
                       ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}-server:latest
 
             - name: Upload image
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v5
               with:
                   name: ${{ github.event.repository.name }}-image-${{ github.sha }}
                   path: |
