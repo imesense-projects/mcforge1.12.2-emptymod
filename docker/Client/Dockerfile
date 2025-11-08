@@ -1,7 +1,7 @@
 #syntax=docker/dockerfile:1
 
 # Build stage
-FROM openjdk:8-jdk-alpine AS build
+FROM openjdk:8u342-jdk-slim-bullseye AS build
 
 # Set working directory
 WORKDIR /app
