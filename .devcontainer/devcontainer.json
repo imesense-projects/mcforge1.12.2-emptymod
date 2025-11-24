@@ -1,23 +1,15 @@
 {
-    "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
+    "$schema": "https://raw.githubusercontent.com/devcontainers/spec/926880e9c768493eec415224f35146bdfcd63904/schemas/devContainer.schema.json",
 
     "name": "Empty Mod",
-    "build": {
-        "dockerfile": "Dockerfile",
-        "args": {
-            "DEBIAN_VARIANT": "bullseye",
-            "JAVA_VERSION": "1-8"
-        }
-    },
+    "dockerComposeFile": "docker-compose.yaml",
+    "service": "emptymod-devcontainer",
     "remoteUser": "minecraft",
     "workspaceFolder": "/src",
-    "workspaceMount": "source=${localWorkspaceFolder},target=/src,type=bind",
-    "mounts": [
-        "source=${localWorkspaceFolder}/.gradle,target=/gradle,type=bind,consistency=cached"
-    ],
+    "shutdownAction": "stopCompose",
 
     "features": {
-        "ghcr.io/devcontainers/features/github-cli:1": {}
+        "ghcr.io/devcontainers/features/github-cli:1.0.15": {}
     },
 
     "customizations": {
@@ -59,6 +51,10 @@
                 "terminal.integrated.cwd": "/src",
 
                 "redhat.telemetry.enabled": false,
+
+                "java.autobuild.enabled": false,
+                "java.import.gradle.enabled": false,
+                "java.import.maven.enabled": false,
 
                 "[yaml]": {
                     "editor.defaultFormatter": "redhat.vscode-yaml"
