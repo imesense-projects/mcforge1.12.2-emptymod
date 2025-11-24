@@ -27,6 +27,7 @@
             "extensions": [
                 "redhat.vscode-yaml",
 
+                "EditorConfig.EditorConfig",
                 "DavidAnson.vscode-markdownlint",
 
                 "ms-azuretools.vscode-docker",

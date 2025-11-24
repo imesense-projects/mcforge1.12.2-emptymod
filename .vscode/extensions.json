@@ -9,5 +9,9 @@
         "docker.docker",
         "ms-vscode-remote.remote-containers",
         "GitHub.vscode-github-actions"
+    ],
+
+    "unwantedRecommendations": [
+        "vscjava.vscode-java-pack"
     ]
 }
