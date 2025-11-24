@@ -18,4 +18,8 @@ RUN \
 ENV GRADLE_USER_HOME=/gradle
 RUN \
     mkdir -p ${GRADLE_USER_HOME} && \
-    chown ${USERNAME}:${USERNAME} ${GRADLE_USER_HOME}
+    chown -R ${USERNAME}:${USERNAME} ${GRADLE_USER_HOME}
+
+# Set user and working directory
+USER $USERNAME
+WORKDIR /src
