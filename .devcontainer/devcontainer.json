@@ -9,8 +9,12 @@
             "JAVA_VERSION": "1-8"
         }
     },
-    "postCreateCommand": "./gradlew genVSCodeRuns",
     "remoteUser": "minecraft",
+    "workspaceFolder": "/src",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/src,type=bind",
+    "mounts": [
+        "source=${localWorkspaceFolder}/.gradle,target=/gradle,type=bind,consistency=cached"
+    ],
 
     "features": {
         "ghcr.io/devcontainers/features/github-cli:1": {}
@@ -51,6 +55,8 @@
 
                     "*.env*": "properties"
                 },
+
+                "terminal.integrated.cwd": "/src",
 
                 "redhat.telemetry.enabled": false,
 
