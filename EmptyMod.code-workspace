@@ -33,5 +33,23 @@
         "[markdown]": {
             "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
         }
+    },
+
+    "extensions": {
+        "recommendations": [
+            "redhat.vscode-yaml",
+
+            "EditorConfig.EditorConfig",
+            "DavidAnson.vscode-markdownlint",
+
+            "ms-azuretools.vscode-docker",
+            "docker.docker",
+            "ms-vscode-remote.remote-containers",
+            "GitHub.vscode-github-actions"
+        ],
+
+        "unwantedRecommendations": [
+            "vscjava.vscode-java-pack"
+        ]
     }
 }
