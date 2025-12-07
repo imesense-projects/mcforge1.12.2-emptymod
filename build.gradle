@@ -30,9 +30,9 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 
 // File metadata
-version = '0.1'
-group = 'org.imesense.boilerplatemcforge'
-archivesBaseName = 'boilerplatemcforge'
+version = '1.12.2-0.1'
+group = 'org.imesense'
+archivesBaseName = 'BoilerplateMcforge'
 
 // Java version
 sourceCompatibility =
@@ -189,9 +189,25 @@ tasks.register('javadocJar', Jar) {
 publishing {
     publications {
         mavenJava(MavenPublication) {
+            // Redefine output name
+            artifactId = "boilerplatemcforge"
+
             artifact jar
             artifact sourcesJar
             artifact javadocJar
+
+            // Add dependencies to manifest
+            pom.withXml {
+                def dependenciesNode = asNode().appendNode('dependencies')
+                configurations.runtimeClasspath.allDependencies.each { dep ->
+                    if (dep.group != null && dep.name != null) {
+                        def dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', dep.group)
+                        dependencyNode.appendNode('artifactId', dep.name)
+                        dependencyNode.appendNode('version', dep.version)
+                    }
+                }
+            }
         }
     }
 
