@@ -65,8 +65,8 @@ jobs:
               id: set-tag
               run: |
                   $tag = [math]::Round((New-TimeSpan -Start (Get-Date "1970-01-01") -End (Get-Date)).TotalSeconds)
-                  Add-Content -Path $env:GITHUB_OUTPUT -Value "tag=$tag"
-                  Add-Content -Path $env:GITHUB_ENV -Value "tag=$tag"
+                  Add-Content -Path $env:GITHUB_OUTPUT -Value "tag=t$tag"
+                  Add-Content -Path $env:GITHUB_ENV -Value "tag=t$tag"
 
             - name: Build image
               run: |
