@@ -6,15 +6,10 @@ buildscript {
         maven {
             url = 'https://repo.spongepowered.org/repository/maven-public/'
         }
-        maven {
-            url = 'https://plugins.gradle.org/m2/'
-        }
         mavenCentral()
     }
 
     dependencies {
-        classpath 'de.undercouch:gradle-download-task:4.1.2'
-
         classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
         classpath 'org.spongepowered:mixingradle:0.7.+'
     }
@@ -30,8 +25,6 @@ repositories {
 }
 
 apply plugin: 'maven-publish'
-
-apply plugin: 'de.undercouch.download'
 
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
@@ -100,28 +93,6 @@ minecraft {
 mixin {
     add sourceSets.main, 'mixins.emptymod.refmap.json'
 }
-
-ext {
-    downloadDir = file("$buildDir/download")
-    libsDir = file("$projectDir/libs")
-}
-
-task downloadAccesstransformers(type: Download) {
-    def repository = 'github.com/imesense-projects/packages-collection/releases/download'
-    def tag = 'net.minecraftforge%2Faccesstransformers%2Fv1.0.5'
-    def filename = 'net.minecraftforge.accesstransformers-v1.0.5.zip'
-    src "https://${repository}/${tag}/${filename}"
-    dest new File(project.downloadDir, "${filename}")
-}
-
-task downloadAndAccesstransformers(dependsOn: downloadAccesstransformers, type: Copy) {
-    from zipTree(downloadAccesstransformers.dest)
-    into project.libsDir
-}
-
-build.dependsOn downloadAndAccesstransformers
-assemble.dependsOn downloadAndAccesstransformers
-compileJava.dependsOn downloadAndAccesstransformers
 
 dependencies {
     // Specify the version of Minecraft to use
