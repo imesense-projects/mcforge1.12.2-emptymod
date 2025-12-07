@@ -1,7 +1,7 @@
 #syntax=docker/dockerfile:1
 
 # Build stage
-FROM openjdk:8-jdk-alpine AS build
+FROM openjdk:8u342-jdk-slim-bullseye AS build
 
 # Set working directory
 WORKDIR /app
@@ -22,7 +22,7 @@ RUN \
         build
 
 # Final stage
-FROM openjdk:8-jre-alpine AS final
+FROM openjdk:8u342-jre-slim-bullseye AS final
 
 # Set metadata
 LABEL \
@@ -45,15 +45,17 @@ ENV MIN_MEMORY=1G
 
 # Install server
 RUN \
-    apk add wget --no-cache && \
+    apt update && \
+    apt install -y wget && \
     wget -O forge-installer.jar \
         https://files.minecraftforge.net/maven/net/minecraftforge/forge/${MINECRAFT_VERSION}-${MCFORGE_VERSION}/forge-${MINECRAFT_VERSION}-${MCFORGE_VERSION}-installer.jar && \
     java -jar \
         forge-installer.jar --installServer && \
     rm forge-installer.jar && \
     mv forge-${MINECRAFT_VERSION}-${MCFORGE_VERSION}.jar forge.jar && \
-    apk del wget && \
-    rm -rf /var/cache/apk/*
+    apt remove -y wget && \
+    apt autoremove -y && \
+    rm -rf /var/lib/apt/lists/*
 
 # Copy mod
 RUN \
