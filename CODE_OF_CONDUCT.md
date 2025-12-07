@@ -1,6 +1,6 @@
 # Code of Conduct
 
-This document describes the code of conduct adopted by the team and project community.
+This document describes the code of conduct adopted by the team in the project community.
 
 ## Purpose
 
@@ -11,34 +11,41 @@ This project and its community are aimed at creating a healthy and comfortable e
 All participants, without exception, must:
 
 1. Be respectful and constructive.
-2. Accept differing viewpoints and critique gracefully.
-3. Show empathy toward others.
-4. Focus on collaboration and community benefit.
+2. Accept different points of view and criticize correctly, providing detailed explanations and arguing your point of view.
+3. Strive to cooperate and benefit society.
 
 ## Unacceptable Behavior
 
-Prohibited conduct includes, but __is not limited to__:
+Unacceptable behavior includes, but is __not limited to__:
 
 1. Harassment, threats, or personal attacks.
-2. Discrimination (based on race, gender, religion, age, etc.).
-3. Sexualized language/imagery or unwelcome attention.
-4. Doxing or sharing private information without consent.
-5. Spam in any of its forms.
-6. Any behavior deemed inappropriate in a professional setting.
+2. Trolling, excessive inappropriate humor, and sexualized jokes/comments.
+3. Discrimination (based on race, gender, religion, age, etc.).
+4. Posting pornographic or otherwise immoral images.
+5. Publishing or distributing others' private information without explicit consent.
+6. Spam in any form, including excessive pinging/notifying members.
+7. Mentioning/pinging roles.
+8. Any behavior considered inappropriate in a professional setting.
+9. Calling or sending direct messages to other participants without prior agreement and consent, unless it concerns complaints to moderators and administrators about violations.
+10. Mentioning, in any form, extremist or terrorist organizations.
 
 ## Enforcement
 
-- Violations will be addressed by maintainers.
-- Consequences may include warnings, editing/removing content or bans.
+- Moderators or administrators are responsible for enforcing this code of conduct and will work to address any violations.
+- Consequences may include warnings, editing or removal of content, or bans.
 
-## Reporting
+## Reporting Violations
 
-To report violations:
+To report a violation:
 
-- Contact maintainers (see [list of maintainers](./MAINTAINERS.md) for details).
-- Provide context (links, screenshots, witnesses).
-- Reports are confidential, retaliation is unacceptable.
+- Contact the moderators or administrators.
+- Provide context (links, screenshots, other evidence).
+- Reports will be treated confidentially.
 
 ## Scope
 
 Applies to all project spaces (repositories, chats, events, etc.).
+
+## Related Documents
+
+- [List of maintainers](./MAINTAINERS.md)
