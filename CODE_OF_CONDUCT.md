@@ -1,5 +1,7 @@
 # Code of Conduct
 
+English | [Русский](./CODE_OF_CONDUCT.rus.md)
+
 This document describes the code of conduct adopted by the team in the project community.
 
 ## Purpose
@@ -12,7 +14,8 @@ environment, free from harassment, for everyone, regardless of origin or identit
 All participants, without exception, must:
 
 1. Be respectful and constructive.
-2. Accept different points of view and criticize correctly, providing detailed explanations and arguing your point of view.
+2. Accept different points of view and criticize correctly, providing detailed
+explanations and arguing your point of view.
 3. Strive to cooperate and benefit society.
 
 ## Unacceptable Behavior
@@ -32,7 +35,8 @@ Unacceptable behavior includes, but is __not limited to__:
 
 ## Enforcement
 
-- Moderators or administrators are responsible for enforcing this code of conduct and will work to address any violations.
+- Moderators or administrators are responsible for enforcing this code of
+conduct and will work to address any violations.
 - Consequences may include warnings, editing or removal of content, or bans.
 
 ## Reporting Violations
