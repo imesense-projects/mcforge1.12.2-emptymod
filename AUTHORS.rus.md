@@ -1,6 +1,6 @@
-# Authors
+# Авторы
 
-English | [Русский](./AUTHORS.rus.md)
+[English](./AUTHORS.md) | Русский
 
 ## ImeSense
 

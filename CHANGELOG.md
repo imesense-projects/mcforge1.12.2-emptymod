@@ -1,5 +1,17 @@
 # Changelog
 
+English | [Русский](./CHANGELOG.rus.md)
+
+## Version 0.2 (December 2025)
+
+- Updated common documents
+- Updated Visual Studio Code configs
+- Updated DevContainers manifests
+- Updated MarkdownLint configs
+- Updated GitHub configs
+- Updated GitHub Actions workflows
+- Updated EditorConfig settings
+
 ## Version 0.1 (June 2025)
 
 - Initial release

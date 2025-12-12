@@ -1,5 +1,7 @@
 # Branching Model
 
+English | [Русский](./branching-model.rus.md)
+
 This document describes the principles for maintaining the project repository
 history and branch management strategy.
 

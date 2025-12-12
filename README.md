@@ -1,5 +1,7 @@
 # Minecraft Forge Modification Boilerplate
 
+English | [Русский](./README.rus.md)
+
 [![Language](https://img.shields.io/badge/Language-Java-orange.svg)](https://www.java.com/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE.txt)
 [![Release](https://img.shields.io/github/v/release/imesense/mcforge1.12.2-modification-boilerplate?include_prereleases&label=Release)](https://github.com/imesense/mcforge1.12.2-modification-boilerplate/releases/latest)
@@ -73,16 +75,16 @@ For development:
 
 List of environment variables used by server container:
 
-| Variable          | Description
-| ----------------- | ---
-| IMAGE_REGISTRY    | Server image registry
-| IMAGE_TAG         | Server image tag
-| EULA              | Minecraft license agreement
-| SERVER_PORT       | Server port on the host
-| VOLUME_WORLD      | Path to `world/` folder
-| VOLUME_CONFIG     | Path to `config/` folder
-| VOLUME_REPORTS    | Path to `crash-reports/` folder
-| VOLUME_PROPERTIES | Path to `server.properties` config
+| Variable            | Description
+| ------------------- | ---
+| `IMAGE_REGISTRY`    | Server image registry.
+| `IMAGE_TAG`         | Server image tag.
+| `EULA`              | Minecraft license agreement.
+| `SERVER_PORT`       | Server port on the host.
+| `VOLUME_WORLD`      | Path to `world/` folder.
+| `VOLUME_CONFIG`     | Path to `config/` folder.
+| `VOLUME_REPORTS`    | Path to `crash-reports/` folder.
+| `VOLUME_PROPERTIES` | Path to `server.properties` config.
 
 ## License
 
