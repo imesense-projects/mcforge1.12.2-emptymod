@@ -1,5 +1,7 @@
 # Contributing Guide
 
+English | [Русский](./CONTRIBUTING.rus.md)
+
 Thank you for your interest in contributing to the project. We appreciate any
 help, whether it's code, documentation, feedback or promotion.
 
@@ -11,10 +13,10 @@ violate our [Code of Conduct](./CODE_OF_CONDUCT.md).
 
 There are several ways to contribute to the project:
 
-- promotion
-- giving feedback
-- opening reports and issues
-- sending pull requests
+- promotion,
+- giving feedback,
+- opening reports and issues,
+- sending pull requests.
 
 Any type of contribution is important to maintain the project. Let's look at
 them in more detail.
@@ -82,22 +84,23 @@ conventions for details.
 #### Code Review Process
 
 - Maintainers will review pull requests and may suggest changes.
-- Once approved pull request will be merged
+- Once approved pull request will be merged.
 
 ## F.A.Q
 
-> Q: How do I know what to work on?
+> Question: How do I know what to work on?
 >
-> A: Check the `Issues` tab for `good first issue` or `help wanted` labels.
+> Answer: Check the `Issues` tab for issues with `good first issue` or
+`help wanted` labels.
 
-> Q: What if my PR is rejected?
+> Question: What if my PR is rejected?
 >
-> A: Don’t take it personally! The maintainers will provide feedback, and you
+> Answer: Don’t take it personally! The maintainers will provide feedback, and you
 can always discuss alternatives.
 
-> Q: Can I contribute if I'm not a developer?
+> Question: Can I contribute if I'm not a developer?
 >
-> A: Absolutely! Documentation, design, and community help are equally valuable.
+> Answer: Absolutely! Documentation, design, and community help are equally valuable.
 
 ## Acknowledgments
 

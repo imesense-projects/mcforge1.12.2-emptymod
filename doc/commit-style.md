@@ -1,5 +1,7 @@
 # Commit style
 
+English | [Русский](./commit-style.rus.md)
+
 This document defines the standards for writing commit messages to maintain a
 clear, consistent and meaningful project history.
 
@@ -32,7 +34,7 @@ Bad examples:
 
 ### 2. Body (Optional, for complex changes)
 
-- Explain __what changed__ and __why__ (not how—code shows that).
+- Explain __what changed__ and __why__.
 - Wrap text at __72 characters__ per line.
 - Use bullet points for multiple changes (if needed).
 

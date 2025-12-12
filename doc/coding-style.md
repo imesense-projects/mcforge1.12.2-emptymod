@@ -1,5 +1,7 @@
 # Coding Style
 
+English | [Русский](./coding-style.rus.md)
+
 This document defines the coding standards for the project. This standard is
 designed for the Java code style.
 
@@ -14,11 +16,11 @@ end with one empty line.
 
 - Package names must be in the singular and __Lower Case__.
 - Name of class or interface should be written in __Pascal Case__.
-  - Interface must have the prefix `I`.
-  - Test class must have the postfix `Test`.
+  - Interface must have `I` prefix.
+  - Test class must have `Test` postfix.
 - Names of the constants must be written in all caps __Snake Case__.
 - Names of variables and methods must be in __Camel Case__.
-  - Event methods must have the prefix `on`, then event name and priority.
+  - Event methods must have `on` prefix, then event name and priority.
 
 ## Code Formatting
 
@@ -37,8 +39,9 @@ end with one empty line.
 - Use one empty line between imports groups.
 - Specify `final` in the final implementation of classes if there are no abstract
 and overridable methods.
-- Classes with methods marked as `@SubscribeEvent` should have the annotation `@Mod.EventBusSubscriber`.
-- Use the annotation `@Unique` for multiple usage of fields instead of duplicates.
+- Classes with methods marked as `@SubscribeEvent` should have `@Mod.EventBusSubscriber`
+annotation.
+- Use `@Unique` annotation for multiple usage of fields instead of duplicates.
 
 ## Examples
 
