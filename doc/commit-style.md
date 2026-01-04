@@ -2,8 +2,7 @@
 
 English | [Русский](./commit-style.rus.md)
 
-This document defines the standards for writing commit messages to maintain a
-clear, consistent and meaningful project history.
+This document defines the standards for writing commit messages to maintain a clear, consistent and meaningful project history.
 
 ## Purpose
 

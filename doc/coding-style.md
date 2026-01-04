@@ -2,15 +2,14 @@
 
 English | [Русский](./coding-style.rus.md)
 
-This document defines the coding standards for the project. This standard is
-designed for the Java code style.
+This document defines the coding standards for the project.
+This standard is designed for the Java code style.
 
 ## File Conventions
 
 - Default file extension for Java files is `java`.
 - File name must exactly match the primary entity name.
-- Files must be saved in __UTF-8__ encoding with __LF__ line endings and must
-end with one empty line.
+- Files must be saved in __UTF-8__ encoding with __LF__ line endings and must end with one empty line.
 
 ## Naming Conventions
 
@@ -37,10 +36,8 @@ end with one empty line.
   - Dependencies (`org.springframework.*`).
   - Project-specific (`org.imesense.*`).
 - Use one empty line between imports groups.
-- Specify `final` in the final implementation of classes if there are no abstract
-and overridable methods.
-- Classes with methods marked as `@SubscribeEvent` should have `@Mod.EventBusSubscriber`
-annotation.
+- Specify `final` in the final implementation of classes if there are no abstract and overridable methods.
+- Classes with methods marked as `@SubscribeEvent` should have `@Mod.EventBusSubscriber` annotation.
 - Use `@Unique` annotation for multiple usage of fields instead of duplicates.
 
 ## Examples
