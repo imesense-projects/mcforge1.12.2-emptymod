@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
 
 services:
-    boilerplatemcforge:
-        container_name: boilerplatemcforge
-        image: ${REGISTRY:-ghcr.io/imesense}/mcforge1.12.2-modification-boilerplate:${IMAGE_TAG:-latest}
+    boilerplatemcforge-server:
+        container_name: boilerplatemcforge-server
+        image: ${REGISTRY:-ghcr.io/imesense}/mcforge1.12.2-modification-boilerplate-server:${IMAGE_TAG:-latest}
         platform: linux/amd64
         environment:
             - EULA=${EULA:-false}
@@ -15,10 +15,10 @@ services:
             - ${VOLUME_REPORTS:-../../crash-reports}:/app/crash-reports
             - ${VOLUME_PROPERTIES:-../../server.properties}:/app/server.properties
         networks:
-            - boilerplatemcforge
+            - boilerplatemcforge-server
         restart: unless-stopped
 
 networks:
-    boilerplatemcforge:
-        name: boilerplatemcforge
+    boilerplatemcforge-server:
+        name: boilerplatemcforge-server
         driver: bridge
