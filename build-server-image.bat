@@ -11,36 +11,42 @@ set ProjectVersion=%~1
 
 :: Set variables
 set ProjectName=mcforge1.12.2-modification-boilerplate
+set ProjectTag=%ProjectName%-server
 set ProjectOutputImage=%ProjectName%-%ProjectVersion%-server-image.tar
 
 :: Get timestamp
-for /f %%a in (
-    'powershell -Command "[math]::Round((New-TimeSpan -Start (Get-Date \"1970-01-01\") -End (Get-Date)).TotalSeconds)"'
-) do set ProjectTimestamp=t%%a
+for /f "delims=" %%i in (
+    'git rev-parse HEAD'
+) do set "CommitHash=%%i"
+for /f "delims=" %%i in (
+    'call util\get-timestamp.bat %CommitHash%'
+) do set "CommitTimestamp=%%i"
+set ProjectTimestamp=t%CommitTimestamp%
+echo %ProjectTimestamp%
 
 :: Build image
 docker ^
     build ^
     --file docker\Server\Dockerfile ^
     --progress=plain ^
-    --tag %ProjectName%:latest ^
-    --tag %ProjectName%:%ProjectTimestamp% ^
-    --tag %ProjectName%:%ProjectVersion% ^
-    --tag ghcr.io/imesense/%ProjectName%:latest ^
-    --tag ghcr.io/imesense/%ProjectName%:%ProjectTimestamp% ^
-    --tag ghcr.io/imesense/%ProjectName%:%ProjectVersion% ^
+    --tag %ProjectTag%:latest ^
+    --tag %ProjectTag%:%ProjectTimestamp% ^
+    --tag %ProjectTag%:%ProjectVersion% ^
+    --tag ghcr.io/imesense/%ProjectTag%:latest ^
+    --tag ghcr.io/imesense/%ProjectTag%:%ProjectTimestamp% ^
+    --tag ghcr.io/imesense/%ProjectTag%:%ProjectVersion% ^
     .
 
 :: Export image
 docker ^
     save ^
     --output %ProjectOutputImage% ^
-    %ProjectName%:latest ^
-    %ProjectName%:%ProjectTimestamp% ^
-    %ProjectName%:%ProjectVersion% ^
-    ghcr.io/imesense/%ProjectName%:latest ^
-    ghcr.io/imesense/%ProjectName%:%ProjectTimestamp% ^
-    ghcr.io/imesense/%ProjectName%:%ProjectVersion%
+    %ProjectTag%:latest ^
+    %ProjectTag%:%ProjectTimestamp% ^
+    %ProjectTag%:%ProjectVersion% ^
+    ghcr.io/imesense/%ProjectTag%:latest ^
+    ghcr.io/imesense/%ProjectTag%:%ProjectTimestamp% ^
+    ghcr.io/imesense/%ProjectTag%:%ProjectVersion%
 move ^
     %ProjectOutputImage% ^
     out\%ProjectVersion%\%ProjectOutputImage%

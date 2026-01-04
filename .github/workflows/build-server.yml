@@ -64,7 +64,9 @@ jobs:
             - name: Set tag
               id: set-tag
               run: |
-                  $tag = [math]::Round((New-TimeSpan -Start (Get-Date "1970-01-01") -End (Get-Date)).TotalSeconds)
+                  $hash = (git rev-parse HEAD)
+                  $date = (git show -s --pretty=format:'%ad' --date=format:'%Y-%m-%d %H:%M:%S' $hash)
+                  $tag = [math]::Round(([datetime]::ParseExact($date, 'yyyy-MM-dd HH:mm:ss', $null)).ToUniversalTime().Subtract([datetime]'1970-01-01').TotalSeconds)
                   Add-Content -Path $env:GITHUB_OUTPUT -Value "tag=t$tag"
                   Add-Content -Path $env:GITHUB_ENV -Value "tag=t$tag"
 
@@ -74,16 +76,16 @@ jobs:
                       --file docker/Server/Dockerfile `
                       --progress=plain `
                       --target final `
-                      --tag ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}:${{ env.tag }} `
-                      --tag ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}:latest `
+                      --tag ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}-server:${{ env.tag }} `
+                      --tag ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}-server:latest `
                       .
 
             - name: Save image
               run: |
                   docker save `
                       --output ${{ github.event.repository.name }}-image-${{ env.tag }}.tar `
-                      ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}:${{ env.tag }} `
-                      ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}:latest
+                      ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}-server:${{ env.tag }} `
+                      ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}-server:latest
 
             - name: Upload image
               uses: actions/upload-artifact@v4
@@ -135,6 +137,6 @@ jobs:
             - name: Push image
               run: |
                   docker push `
-                      ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}:${{ env.IMAGE_TAG }}
+                      ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}-server:${{ env.IMAGE_TAG }}
                   docker push `
-                      ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}:latest
+                      ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}-server:latest
