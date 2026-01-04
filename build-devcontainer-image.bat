@@ -11,8 +11,8 @@ set ProjectVersion=%~1
 
 :: Set variables
 set ProjectName=mcforge1.12.2-modification-boilerplate
-set ProjectTag=%ProjectName%-server
-set ProjectOutputImage=%ProjectName%-%ProjectVersion%-server-image.tar
+set ProjectTag=%ProjectName%-devcontainer
+set ProjectOutputImage=%ProjectName%-%ProjectVersion%-devcontainer-image.tar
 
 :: Create folders
 if not exist out\%ProjectVersion% (
@@ -29,18 +29,16 @@ for /f "delims=" %%i in (
 set ProjectTimestamp=t%CommitTimestamp%
 echo %ProjectTimestamp%
 
-:: Build image
-docker ^
+:: Build DevContainer
+devcontainer ^
     build ^
-    --file docker\Server\Dockerfile ^
-    --progress=plain ^
-    --tag %ProjectTag%:latest ^
-    --tag %ProjectTag%:%ProjectTimestamp% ^
-    --tag %ProjectTag%:%ProjectVersion% ^
-    --tag ghcr.io/imesense/%ProjectTag%:latest ^
-    --tag ghcr.io/imesense/%ProjectTag%:%ProjectTimestamp% ^
-    --tag ghcr.io/imesense/%ProjectTag%:%ProjectVersion% ^
-    .
+    --workspace-folder . ^
+    --image-name %ProjectTag%:latest ^
+    --image-name %ProjectTag%:%ProjectTimestamp% ^
+    --image-name %ProjectTag%:%ProjectVersion% ^
+    --image-name ghcr.io/imesense/%ProjectTag%:latest ^
+    --image-name ghcr.io/imesense/%ProjectTag%:%ProjectTimestamp% ^
+    --image-name ghcr.io/imesense/%ProjectTag%:%ProjectVersion%
 
 :: Export image
 docker ^

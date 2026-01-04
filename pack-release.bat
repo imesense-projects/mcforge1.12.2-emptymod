@@ -21,3 +21,6 @@ call pack-server-configs.bat %ProjectVersion%
 
 :: Pack cache
 call pack-gradle-cache.bat %ProjectVersion%
+
+:: Build and pack DevContainer
+call build-devcontainer-image.bat %ProjectVersion%
