@@ -15,12 +15,12 @@ Empty mod for Minecraft 1.12.2 with mixins support.
 
 For building:
 
-- __JDK 1.8__
-- __Docker__ and __Docker Compose__
+- __JDK 1.8__,
+- __Docker__ and __Docker Compose__.
 
 For development:
 
-- __IntelliJ IDEA__ or __Visual Studio Code__
+- __IntelliJ IDEA__ or __Visual Studio Code__.
 
 ## Building
 
@@ -62,8 +62,7 @@ For development:
 
 - Configure `.env` and `server.properties` files.
 
-  See [`.env`](./docker/Server/.env.example) and [`server.properties`](./docker/Server/server.properties.example)
-  examples in `docker/Server/` folder.
+  See [`.env`](./docker/Server/.env.example) and [`server.properties`](./docker/Server/server.properties.example) examples in `docker/Server/` folder.
 
 - Run command to run server in container:
 
@@ -88,5 +87,5 @@ List of environment variables used by server container:
 
 ## License
 
-Contents of this repository licensed under terms of the __MIT license__ unless
-otherwise specified. See [this](./LICENSE.txt) file for details.
+Contents of this repository licensed under terms of the __MIT license__ unless otherwise specified.
+See [this](./LICENSE.txt) file for details.

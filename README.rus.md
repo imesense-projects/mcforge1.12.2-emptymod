@@ -15,12 +15,12 @@
 
 Для сборки:
 
-- __JDK 1.8__
-- __Docker__ и __Docker Compose__
+- __JDK 1.8__,
+- __Docker__ и __Docker Compose__.
 
 Для разработки:
 
-- __IntelliJ IDEA__ или __Visual Studio Code__
+- __IntelliJ IDEA__ или __Visual Studio Code__.
 
 ## Сборка
 
@@ -62,8 +62,7 @@
 
 - Настроить `.env` и `server.properties` файлы.
 
-  Смотрите примеры [`.env`](./docker/Server/.env.example) и [`server.properties`](./docker/Server/server.properties.example)
-  в папке `docker/Server/`.
+  Смотрите примеры [`.env`](./docker/Server/.env.example) и [`server.properties`](./docker/Server/server.properties.example) в папке `docker/Server/`.
 
 - Запустить команду для запуска сервера в контейнере:
 
@@ -88,5 +87,5 @@
 
 ## Лицензия
 
-Содержимое данного репозитория лицензировано согласно условиям __лицензии MIT__,
-пока не указано иное. Смотрите [этот](./LICENSE.txt) файл для деталей.
+Содержимое данного репозитория лицензировано согласно условиям __лицензии MIT__, пока не указано иное.
+Смотрите [этот](./LICENSE.txt) файл для деталей.
