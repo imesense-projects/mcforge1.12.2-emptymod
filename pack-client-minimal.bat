@@ -13,7 +13,7 @@ set ProjectVersion=%~1
 set SevenZip="%ProgramFiles%"\7-Zip\7z.exe
 
 :: Set variables
-set ProjectName=mcforge1.12.2-emptymod
+set ProjectName=mcforge1.12.2-empty-mod
 set ProjectOutputBuild=%ProjectName%-%ProjectVersion%-client.zip
 
 :: Create folders

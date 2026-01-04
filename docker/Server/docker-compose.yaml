@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
 
 services:
-    emptymod:
-        container_name: emptymod
-        image: ${REGISTRY:-ghcr.io/imesense}/mcforge1.12.2-emptymod:${IMAGE_TAG:-latest}
+    empty-mod:
+        container_name: empty-mod
+        image: ${REGISTRY:-ghcr.io/imesense}/mcforge1.12.2-empty-mod:${IMAGE_TAG:-latest}
         platform: linux/amd64
         environment:
             - EULA=${EULA:-false}
@@ -15,10 +15,10 @@ services:
             - ${VOLUME_REPORTS:-../../crash-reports}:/app/crash-reports
             - ${VOLUME_PROPERTIES:-../../server.properties}:/app/server.properties
         networks:
-            - emptymod
+            - empty-mod
         restart: unless-stopped
 
 networks:
-    emptymod:
-        name: emptymod
+    empty-mod:
+        name: empty-mod
         driver: bridge
