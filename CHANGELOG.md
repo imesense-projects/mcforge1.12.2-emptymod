@@ -2,8 +2,9 @@
 
 English | [Русский](./CHANGELOG.rus.md)
 
-## Version 0.2 (December 2025)
+## Version 0.2 (January 2026)
 
+- Updated Java packages.
 - Updated common documents.
 - Updated Visual Studio Code configs.
 - Updated DevContainers manifests.
