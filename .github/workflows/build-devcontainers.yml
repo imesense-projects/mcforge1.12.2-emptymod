@@ -1,0 +1,147 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: "Build devcontainers"
+
+on:
+    push:
+        branches:
+            - "**"
+        paths:
+            - ".github/workflows/**"
+            - "docker/**"
+            - "gradle/**"
+            - "src/**"
+            - "*.gradle"
+            - "gradle*"
+            - "Dockerfile*"
+            - "docker-compose*.yml"
+            - "docker-compose*.yaml"
+
+    pull_request:
+        branches:
+            - "**"
+        paths:
+            - ".github/workflows/**"
+            - "docker/**"
+            - "gradle/**"
+            - "src/**"
+            - "*.gradle"
+            - "gradle*"
+            - "Dockerfile*"
+            - "docker-compose*.yml"
+            - "docker-compose*.yaml"
+
+defaults:
+    run:
+        shell: pwsh
+
+env:
+    DOCKER_REGISTRY: ghcr.io
+
+jobs:
+    build-image:
+        name: "Build image"
+
+        outputs:
+            image-tag: ${{ steps.set-tag.outputs.tag }}
+
+        strategy:
+            matrix:
+                system:
+                    - ubuntu-24.04
+
+        runs-on: ${{ matrix.system }}
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0
+
+            - name: Setup Docker Buildx
+              uses: docker/setup-buildx-action@v3
+
+            - name: Set tag
+              id: set-tag
+              run: |
+                  $hash = (git rev-parse HEAD)
+                  $date = (git show -s --pretty=format:'%ad' --date=format:'%Y-%m-%d %H:%M:%S' $hash)
+                  $tag = [math]::Round(([datetime]::ParseExact($date, 'yyyy-MM-dd HH:mm:ss', $null)).ToUniversalTime().Subtract([datetime]'1970-01-01').TotalSeconds)
+                  Add-Content -Path $env:GITHUB_OUTPUT -Value "tag=t$tag"
+                  Add-Content -Path $env:GITHUB_ENV -Value "tag=t$tag"
+
+            - name: Build image
+              run: |
+                  docker compose `
+                      --file ${{ github.workspace }}/.devcontainer/docker-compose.yaml `
+                      --file ${{ github.workspace }}/.devcontainer/docker-compose.build.yaml `
+                      build
+                  docker `
+                      tag `
+                      ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}-devcontainer:latest `
+                      ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}-devcontainer:${{ env.tag }}
+
+            - name: Save image
+              run: |
+                  docker `
+                      save `
+                      --output ${{ github.event.repository.name }}-devcontainer-${{ env.tag }}.tar `
+                      ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}-devcontainer:${{ env.tag }} `
+                      ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}-devcontainer:latest
+
+            - name: Upload image
+              uses: actions/upload-artifact@v6
+              with:
+                  name: ${{ github.event.repository.name }}-devcontainer-${{ github.sha }}
+                  path: |
+                      ${{ github.workspace }}/${{ github.event.repository.name }}-devcontainer-${{ env.tag }}.tar
+
+    publish-image:
+        name: "Publish image"
+
+        needs:
+            - build-image
+
+        strategy:
+            matrix:
+                system:
+                    - ubuntu-24.04
+
+        runs-on: ${{ matrix.system }}
+
+        permissions:
+            contents: read
+            packages: write
+            attestations: write
+            id-token: write
+
+        env:
+            IMAGE_TAG: ${{ needs.build-image.outputs.image-tag }}
+
+        steps:
+            - name: Download image
+              uses: actions/download-artifact@v7
+              with:
+                  name: ${{ github.event.repository.name }}-devcontainer-${{ github.sha }}
+
+            - name: Load image
+              run: |
+                  docker `
+                      load `
+                      --input ${{ github.workspace }}/${{ github.event.repository.name }}-devcontainer-${{ env.IMAGE_TAG }}.tar
+
+            - name: Login to registry
+              uses: docker/login-action@v3
+              with:
+                  registry: ${{ env.DOCKER_REGISTRY }}
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Push image
+              run: |
+                  docker `
+                      push `
+                      ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}-devcontainer:${{ env.IMAGE_TAG }}
+                  docker `
+                      push `
+                      ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}-devcontainer:latest
