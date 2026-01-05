@@ -37,11 +37,9 @@ For development:
 
 - Build server image:
 
-  <!-- markdownlint-disable MD013 -->
   ```sh
   docker build --file docker/Server/Dockerfile --progress=plain --target final --tag mcforge1.12.2-modification-boilerplate:latest .
   ```
-  <!-- markdownlint-enable MD013 -->
 
   Or run build script from `docker/Server/` folder in root of the repository.
 

@@ -37,11 +37,9 @@
 
 - Собрать образ сервера:
 
-  <!-- markdownlint-disable MD013 -->
   ```sh
   docker build --file docker/Server/Dockerfile --progress=plain --target final --tag mcforge1.12.2-modification-boilerplate:latest .
   ```
-  <!-- markdownlint-enable MD013 -->
 
   Или запустить скрипт сборки из папки `docker/Server/` в корне репозитория.
 
