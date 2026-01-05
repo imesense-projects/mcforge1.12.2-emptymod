@@ -3,7 +3,7 @@
 
     "name": "Empty Mod",
     "dockerComposeFile": "docker-compose.yaml",
-    "service": "emptymod-devcontainer",
+    "service": "empty-mod-devcontainer",
     "remoteUser": "minecraft",
     "workspaceFolder": "/src",
     "shutdownAction": "stopCompose",
