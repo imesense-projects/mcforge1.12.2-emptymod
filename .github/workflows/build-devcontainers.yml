@@ -8,6 +8,7 @@ on:
             - "**"
         paths:
             - ".github/workflows/**"
+            - ".devcontainer/**"
             - "docker/**"
             - "gradle/**"
             - "src/**"
@@ -22,6 +23,7 @@ on:
             - "**"
         paths:
             - ".github/workflows/**"
+            - ".devcontainer/**"
             - "docker/**"
             - "gradle/**"
             - "src/**"
