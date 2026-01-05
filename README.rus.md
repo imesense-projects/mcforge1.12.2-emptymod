@@ -8,6 +8,7 @@
 [![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/imesense/mcforge1.12.2-modification-boilerplate)
 [![Build client](https://github.com/imesense/mcforge1.12.2-modification-boilerplate/actions/workflows/build-client.yml/badge.svg)](https://github.com/imesense/mcforge1.12.2-modification-boilerplate/actions/workflows/build-client.yml)
 [![Build server](https://github.com/imesense/mcforge1.12.2-modification-boilerplate/actions/workflows/build-server.yml/badge.svg)](https://github.com/imesense/mcforge1.12.2-modification-boilerplate/actions/workflows/build-server.yml)
+[![Build devcontainers](https://github.com/imesense/mcforge1.12.2-modification-boilerplate/actions/workflows/build-devcontainers.yml/badge.svg)](https://github.com/imesense/mcforge1.12.2-modification-boilerplate/actions/workflows/build-devcontainers.yml)
 
 Пустой мод для Minecraft 1.12.2 с поддержкой миксин.
 
