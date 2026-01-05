@@ -10,17 +10,17 @@ if "%~1"=="" (
 set ProjectVersion=%~1
 
 :: Build and pack client
-call build-client-minimal.bat
-call pack-client-minimal.bat %ProjectVersion%
-call build-client-full.bat
-call pack-client-full.bat %ProjectVersion%
+call util\build-client-minimal.bat
+call util\pack-client-minimal.bat %ProjectVersion%
+call util\build-client-full.bat
+call util\pack-client-full.bat %ProjectVersion%
 
 :: Build and pack server
-call build-server-image.bat %ProjectVersion%
-call pack-server-configs.bat %ProjectVersion%
+call util\build-server-image.bat %ProjectVersion%
+call util\pack-server-configs.bat %ProjectVersion%
 
 :: Pack cache
-call pack-gradle-cache.bat %ProjectVersion%
+call util\pack-gradle-cache.bat %ProjectVersion%
 
 :: Build and pack DevContainer
-call build-devcontainer-image.bat %ProjectVersion%
+call util\build-devcontainer-image.bat %ProjectVersion%
