@@ -12,10 +12,10 @@ on:
             - "gradle/**"
             - "src/**"
             - "*.gradle"
-            - "*.yml"
-            - "*.yaml"
             - "gradle*"
             - "Dockerfile*"
+            - "docker-compose*.yml"
+            - "docker-compose*.yaml"
 
     pull_request:
         branches:
@@ -26,10 +26,10 @@ on:
             - "gradle/**"
             - "src/**"
             - "*.gradle"
-            - "*.yml"
-            - "*.yaml"
             - "gradle*"
             - "Dockerfile*"
+            - "docker-compose*.yml"
+            - "docker-compose*.yaml"
 
 defaults:
     run:
