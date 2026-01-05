@@ -158,7 +158,7 @@ public class BoilerplateMcforgeTest
     {
         assertEquals("boilerplatemcforge", BoilerplateMcforge.MOD_ID);
         assertEquals("Minecraft Forge Modification Boilerplate", BoilerplateMcforge.NAME);
-        assertEquals("1.12.2-14.23.5.2860", BoilerplateMcforge.VERSION);
+        assertEquals("1.12.2-14.23.5.2864", BoilerplateMcforge.VERSION);
     }
 
     /**
