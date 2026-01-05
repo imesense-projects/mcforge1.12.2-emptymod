@@ -29,16 +29,32 @@ for /f "delims=" %%i in (
 set ProjectTimestamp=t%CommitTimestamp%
 echo %ProjectTimestamp%
 
-:: Build DevContainer
-devcontainer ^
-    build ^
-    --workspace-folder . ^
-    --image-name %ProjectTag%:latest ^
-    --image-name %ProjectTag%:%ProjectTimestamp% ^
-    --image-name %ProjectTag%:%ProjectVersion% ^
-    --image-name ghcr.io/imesense/%ProjectTag%:latest ^
-    --image-name ghcr.io/imesense/%ProjectTag%:%ProjectTimestamp% ^
-    --image-name ghcr.io/imesense/%ProjectTag%:%ProjectVersion%
+:: Build devcontainer
+docker compose ^
+    --file .devcontainer\docker-compose.yaml ^
+    --file .devcontainer\docker-compose.build.yaml ^
+    --progress=plain ^
+    build
+docker ^
+    tag ^
+    ghcr.io/imesense/%ProjectTag%:latest ^
+    ghcr.io/imesense/%ProjectTag%:%ProjectTimestamp%
+docker ^
+    tag ^
+    ghcr.io/imesense/%ProjectTag%:latest ^
+    ghcr.io/imesense/%ProjectTag%:%ProjectVersion%
+docker ^
+    tag ^
+    ghcr.io/imesense/%ProjectTag%:latest ^
+    %ProjectTag%:latest
+docker ^
+    tag ^
+    ghcr.io/imesense/%ProjectTag%:latest ^
+    %ProjectTag%:%ProjectTimestamp%
+docker ^
+    tag ^
+    ghcr.io/imesense/%ProjectTag%:latest ^
+    %ProjectTag%:%ProjectVersion%
 
 :: Export image
 docker ^
