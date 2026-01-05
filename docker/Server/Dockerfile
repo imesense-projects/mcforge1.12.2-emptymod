@@ -29,7 +29,7 @@ LABEL \
     org.opencontainers.image.vendor="ImeSense" \
     org.opencontainers.image.authors="ImeSense, acidicMercury8, OldSerpskiStalker" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.version="0.1" \
+    org.opencontainers.image.version="0.2" \
     org.opencontainers.image.description="Empty Mod (Minecraft Forge 1.12.2)"
 
 # Set working directory
@@ -37,7 +37,7 @@ WORKDIR /app
 
 # Set environment variables
 ENV MINECRAFT_VERSION=1.12.2
-ENV MCFORGE_VERSION=14.23.5.2860
+ENV MCFORGE_VERSION=14.23.5.2864
 ENV EULA=false
 ENV SERVER_PORT=25565
 ENV MAX_MEMORY=2G

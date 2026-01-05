@@ -158,7 +158,7 @@ public class EmptyModTest
     {
         assertEquals("emptymod", EmptyMod.MOD_ID);
         assertEquals("Empty Mod", EmptyMod.NAME);
-        assertEquals("1.12.2-14.23.5.2860", EmptyMod.VERSION);
+        assertEquals("1.12.2-14.23.5.2864", EmptyMod.VERSION);
     }
 
     /**
