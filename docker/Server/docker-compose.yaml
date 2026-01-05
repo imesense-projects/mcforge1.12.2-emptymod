@@ -4,7 +4,7 @@ services:
     # Empty mod server
     boilerplatemcforge-server:
         container_name: boilerplatemcforge-server
-        image: ${REGISTRY:-ghcr.io/imesense}/mcforge1.12.2-modification-boilerplate-server:${IMAGE_TAG:-latest}
+        image: ${IMAGE_REGISTRY:-ghcr.io/imesense}/mcforge1.12.2-modification-boilerplate-server:${IMAGE_TAG:-latest}
         platform: linux/amd64
         environment:
             - EULA=${EULA:-false}

@@ -3,25 +3,21 @@
 services:
     boilerplatemcforge-devcontainer:
         container_name: boilerplatemcforge-devcontainer
-
-        build:
-            dockerfile: .devcontainer/Dockerfile
-            context: ..
-            args:
-                DEBIAN_VARIANT: "bullseye"
-                JAVA_VERSION: "1-8"
-
+        image: ${IMAGE_REGISTRY:-ghcr.io/imesense}/mcforge1.12.2-modification-boilerplate-devcontainer:${IMAGE_TAG:-latest}
+        platform: linux/amd64
         user: minecraft
         working_dir: /src
         volumes:
-            - ..:/src:delegated
-            - ../.gradle:/gradle:delegated
-
+            - ${VOLUME_SOURCES:-..}:/src:delegated
+            - ${VOLUME_GRADLE:-../.gradle}:/gradle:delegated
         networks:
             - boilerplatemcforge-devcontainer
-
-        command: ["tail", "-f", "/dev/null"]
+        command:
+            - "tail"
+            - "-f"
+            - "/dev/null"
 
 networks:
     boilerplatemcforge-devcontainer:
+        name: boilerplatemcforge-devcontainer
         driver: bridge
