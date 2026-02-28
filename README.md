@@ -69,6 +69,19 @@ For development:
   docker compose up -d
   ```
 
+## Debugging
+
+### IntelliJ IDEA
+
+- Run command to generate project:
+
+  ```sh
+  ./gradlew genIntellijRuns
+  ```
+
+- Open folder as __IntelliJ IDEA__ project.
+- Select and run `runClient` or `runServer` configuration.
+
 ## Environment Variables
 
 List of environment variables used by server container:
