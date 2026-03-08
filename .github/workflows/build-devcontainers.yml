@@ -92,7 +92,7 @@ jobs:
                       ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}-devcontainer:latest
 
             - name: Upload image
-              uses: actions/upload-artifact@v6
+              uses: actions/upload-artifact@v7
               with:
                   name: ${{ github.event.repository.name }}-devcontainer-${{ github.sha }}
                   path: |

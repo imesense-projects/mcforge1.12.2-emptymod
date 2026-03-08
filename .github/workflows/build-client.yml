@@ -77,7 +77,7 @@ jobs:
                   ${{ github.workspace }}/gradlew build
 
             - name: Upload modification
-              uses: actions/upload-artifact@v6
+              uses: actions/upload-artifact@v7
               with:
                   name: ${{ github.event.repository.name }}-build-${{ github.sha }}
                   path: |
@@ -85,7 +85,7 @@ jobs:
                   overwrite: true
 
             - name: Upload cache
-              uses: actions/upload-artifact@v6
+              uses: actions/upload-artifact@v7
               with:
                   name: ${{ github.event.repository.name }}-cache-${{ matrix.system }}-${{ github.sha }}
                   path: |
@@ -140,7 +140,7 @@ jobs:
                   ${{ github.workspace }}/gradlew publish
 
             - name: Upload modification
-              uses: actions/upload-artifact@v6
+              uses: actions/upload-artifact@v7
               with:
                   name: ${{ github.event.repository.name }}-publish-${{ github.sha }}
                   path: |
@@ -148,7 +148,7 @@ jobs:
                   overwrite: true
 
             - name: Upload repository
-              uses: actions/upload-artifact@v6
+              uses: actions/upload-artifact@v7
               with:
                   name: ${{ github.event.repository.name }}-repository-${{ github.sha }}
                   path: |
