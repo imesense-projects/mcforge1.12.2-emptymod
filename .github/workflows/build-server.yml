@@ -90,7 +90,7 @@ jobs:
                       ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}-server:latest
 
             - name: Upload image
-              uses: actions/upload-artifact@v6
+              uses: actions/upload-artifact@v7
               with:
                   name: ${{ github.event.repository.name }}-server-${{ github.sha }}
                   path: |
