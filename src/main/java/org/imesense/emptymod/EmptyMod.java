@@ -185,8 +185,7 @@ public final class EmptyMod
         }
         catch (Exception exception)
         {
-            logger.error("Common error: {}", exception.getMessage());
-            exception.printStackTrace();
+            logger.error("Fatal error: {}", exception.getMessage(), exception);
         }
     }
 
