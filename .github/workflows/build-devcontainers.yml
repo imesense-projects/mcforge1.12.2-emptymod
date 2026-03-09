@@ -61,7 +61,7 @@ jobs:
                   fetch-depth: 0
 
             - name: Setup Docker Buildx
-              uses: docker/setup-buildx-action@v3
+              uses: docker/setup-buildx-action@v4
 
             - name: Set tag
               id: set-tag
