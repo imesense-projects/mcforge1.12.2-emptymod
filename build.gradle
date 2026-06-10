@@ -109,7 +109,7 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     implementation "io.github.llamalad7:mixinextras-common:0.3.6"
     annotationProcessor "io.github.llamalad7:mixinextras-common:0.3.6"
-    implementation fg.deobf("curse.maven:fermiumbooter-968474:6386622")
+    implementation fg.deobf("curse.maven:fermiumbooter-968474:7279112")
 
     // Lombok
     //compileOnly 'org.projectlombok:lombok:1.18.30'
