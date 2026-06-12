@@ -6,7 +6,8 @@
     "target": "@env(DEFAULT)",
     "minVersion": "0.8",
     "mixins": [
-        "MixinEntityPlayer"
+        "MixinEntityPlayer",
+        "NetworkRegistryMixin"
     ],
     "injectors": {
         "maxShiftBy": 10
