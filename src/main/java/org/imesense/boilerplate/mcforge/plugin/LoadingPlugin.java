@@ -72,20 +72,8 @@ public final class LoadingPlugin implements IFMLLoadingPlugin
             return;
         }
 
-        try
-        {
-            logger.debug("Initializing Mixin");
-
-            MixinBootstrap.init();
-            FermiumRegistryAPI.enqueueMixin(false, "mixins.boilerplatemcforge.json");
-
-            logger.info("Mixin initialization complete");
-        }
-        catch (Exception exception)
-        {
-            logger.error("Failed to initialize Mixin", exception);
-            throw exception;
-        }
+        MixinBootstrap.init();
+        FermiumRegistryAPI.enqueueMixin(false, "mixins.boilerplatemcforge.json");
     }
 
     /**
