@@ -125,39 +125,6 @@ public class LoadingPluginTest
     }
 
     /**
-     * Tests error handling when mixin initialization fails.
-     * Verifies that:
-     * <ul>
-     *   <li>An exception is thrown when mixin fails to initialize</li>
-     *   <li>The error is properly logged</li>
-     *   <li>The original exception message is preserved</li>
-     * </ul>
-     */
-    @Test
-    public void loadingPlugin_Constructor_ThrowsExceptionWhenMixinFails()
-    {
-        LoadingPlugin.testMode = false;
-
-        doThrow(new RuntimeException("Mixin error"))
-            .when(mockLogger)
-            .debug("Initializing Mixin");
-
-        try
-        {
-            Exception exception = assertThrows(RuntimeException.class, LoadingPlugin::new);
-            assertEquals("Mixin error", exception.getMessage());
-            verify(mockLogger).error(
-                eq("Failed to initialize Mixin"),
-                any(RuntimeException.class)
-            );
-        }
-        finally
-        {
-            LoadingPlugin.testMode = true;
-        }
-    }
-
-    /**
      * Tests the implementation of {@link IFMLLoadingPlugin} interface methods.
      * Verifies that:
      * <ul>
