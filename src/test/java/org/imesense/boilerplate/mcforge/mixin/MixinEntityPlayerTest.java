@@ -70,7 +70,7 @@ public class MixinEntityPlayerTest
     {
         ClassReader reader = new ClassReader(MIXIN_CLASS);
         ClassWriter writer = new ClassWriter(0);
-        reader.accept(new ClassVisitor(Opcodes.ASM9, writer)
+        reader.accept(new ClassVisitor(Opcodes.ASM5, writer)
         {
             @Override
             public MethodVisitor visitMethod(
@@ -81,7 +81,7 @@ public class MixinEntityPlayerTest
                 if (name.equals(METHOD_NAME))
                 {
                     return new MethodVisitor(
-                        Opcodes.ASM9,
+                        Opcodes.ASM5,
                         super.visitMethod(access, name, descriptor, signature, exceptions)
                     )
                     {
@@ -126,7 +126,7 @@ public class MixinEntityPlayerTest
 
         ClassReader reader = new ClassReader(MIXIN_CLASS);
         ClassWriter writer = new ClassWriter(0);
-        reader.accept(new ClassVisitor(Opcodes.ASM9, writer)
+        reader.accept(new ClassVisitor(Opcodes.ASM5, writer)
         {
             @Override
             public MethodVisitor visitMethod(
@@ -137,7 +137,7 @@ public class MixinEntityPlayerTest
                 if (METHOD_NAME.equals(name) &&
                     METHOD_DESCRIPTOR.equals(descriptor))
                 {
-                    return new MethodVisitor(Opcodes.ASM9)
+                    return new MethodVisitor(Opcodes.ASM5)
                     {
                         @Override
                         public void visitMethodInsn(
