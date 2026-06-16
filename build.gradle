@@ -1,18 +1,12 @@
-buildscript {
-    repositories {
-        maven {
-            url = 'https://maven.minecraftforge.net/'
-        }
-        maven {
-            url = 'https://repo.spongepowered.org/repository/maven-public/'
-        }
-        mavenCentral()
-    }
+plugins {
+    id 'java'
 
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
-        classpath 'org.spongepowered:mixingradle:0.7.+'
-    }
+    id 'eclipse'
+    id 'idea'
+
+    id 'net.minecraftforge.gradle' version "6.0.+"
+    id 'org.spongepowered.mixin' version "0.7.+"
+    id 'wtf.gofancy.fancygradle' version "1.1.+"
 }
 
 repositories {
@@ -32,29 +26,23 @@ apply plugin: 'org.spongepowered.mixin'
 // File metadata
 version = '1.12.2-0.2'
 group = 'org.imesense'
-archivesBaseName = 'EmptyMod'
+base.archivesName = 'EmptyMod'
 
 // Java version
-sourceCompatibility =
-targetCompatibility =
-    '1.8'
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
 
 // Compile options
-compileJava {
-    sourceCompatibility =
-    targetCompatibility =
-        '1.8'
+tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+    options.compilerArgs += ['-Xlint:-options']
 }
 
 minecraft {
     // Mappings settings of Minecraft
     mappings channel: 'stable', version: '39-1.12'
-
-    // Uncomment this to disable `Srg` named sources JAR by default
-    //makeObfSourceJar = false
-
-    //accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     // Default run configurations
     runs {
@@ -98,32 +86,24 @@ dependencies {
     // Specify the version of Minecraft to use
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2864'
 
-    // Optional dependencies that exist at compile-time but might not at runtime
-    //provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-
-    // Dependencies to get remapped to current MCP mappings
-    //deobf 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-
     // Mixins
-    implementation 'org.spongepowered:mixin:0.8.5'
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-    implementation "io.github.llamalad7:mixinextras-common:0.3.6"
-    annotationProcessor "io.github.llamalad7:mixinextras-common:0.3.6"
+    compileOnly "org.spongepowered:mixin:0.8.7"
+    annotationProcessor "org.spongepowered:mixin:0.8.7:processor"
+    compileOnly "io.github.llamalad7:mixinextras-common:0.5.0"
+    annotationProcessor "io.github.llamalad7:mixinextras-common:0.5.0"
     implementation fg.deobf("curse.maven:fermiumbooter-968474:7279112")
+
+    // Just Enough Item
+    implementation fg.deobf("curse.maven:jei-238222:5846804")
 
     // Lombok
     //compileOnly 'org.projectlombok:lombok:1.18.30'
     //annotationProcessor 'org.projectlombok:lombok:1.18.30'
 
     // Byte Buddy
-    //implementation 'net.bytebuddy:byte-buddy:1.12.9'
-
-    // DivineRPG
-    //implementation fg.deobf("curse.maven:official-divinerpg-363543:2937175")
-
-    // Asm
-    testImplementation 'org.ow2.asm:asm:9.4'
-    testImplementation 'org.ow2.asm:asm-tree:9.4'
+    testImplementation('net.bytebuddy:byte-buddy:1.12.9') {
+        transitive = false
+    }
 
     // JUnit
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
@@ -146,22 +126,37 @@ test {
     }
 }
 
+fancyGradle {
+    patches {
+        resources
+        coremods
+        asm
+        mergetool
+    }
+}
+
 // Get properties into the manifest for reading by the runtime
 jar {
     manifest {
-        attributes([
-            "Specification-Title": "emptymod",
-            "Specification-Vendor": "imesense",
-            "Specification-Version": "1",
-            "Implementation-Title": project.name,
-            "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"imesense",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-            "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
-            "FMLCorePlugin": "org.imesense.emptymod.plugin.LoadingPlugin",
-            "FMLCorePluginContainsFMLMod": "true",
-            "ForceLoadAsMod": "true"
-        ])
+        def attribute = [:]
+        attribute['Specification-Title'] = 'emptymod'
+        attribute['Specification-Vendor'] = 'imesense'
+        attribute['Specification-Version'] = '1'
+        attribute['Implementation-Title'] = project.name
+        attribute['Implementation-Vendor'] = 'imesense'
+        attribute['Implementation-Version'] = '${version}'
+        attribute['Implementation-Timestamp'] = new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        attribute['FMLCorePlugin'] = 'org.imesense.emptymod.plugin.LoadingPlugin'
+        attribute['FMLCorePluginContainsFMLMod'] = 'true'
+        attribute['TweakClass'] = 'org.spongepowered.asm.launch.MixinTweaker'
+        attribute['ForceLoadAsMod'] = "true"
+
+        def currentTasks = gradle.startParameter.taskNames
+        if (currentTasks[0] == 'build' || currentTasks[0] == 'assemble') {
+            attribute['ForceLoadAsMod'] = "true"
+        }
+
+        attributes(attribute)
     }
 }
 
@@ -170,16 +165,16 @@ jar.finalizedBy('reobfJar')
 
 // Build sources task
 tasks.register('sourcesJar', Jar) {
-    from sourceSets.main.allJava
-    from sourceSets.main.resources
-    classifier = 'sources'
+    dependsOn processResources
+    from sourceSets.main.allSource
+    archiveClassifier = 'sources'
 }
 
 // Build documentation task
 tasks.register('javadocJar', Jar) {
     dependsOn javadoc
     from "$buildDir/docs/javadoc"
-    classifier = 'javadoc'
+    archiveClassifier = 'javadoc'
 }
 
 // Delay the obfuscation
@@ -218,27 +213,12 @@ publishing {
     }
 }
 
-// Enable packaging of metadata and resources
-sourceSets {
-    main {
-        output.resourcesDir = output.classesDir
-    }
-}
-
-// Enable annotations for mixins
-compileJava {
-    options.annotationProcessorPath = configurations.annotationProcessor
-    options.compilerArgs += [
-        "-AdefaultObfuscationEnv=searge"
-    ]
-}
-
 tasks.register('copyDependencies', Copy) {
     from configurations.runtimeClasspath.filter {
         file ->
             file.name.contains('fermiumbooter')
     }
-    into 'build/libs'
+    into 'run/mods'
 }
 
 jar.dependsOn copyDependencies
