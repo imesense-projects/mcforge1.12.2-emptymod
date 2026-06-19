@@ -4,9 +4,9 @@ plugins {
     id 'eclipse'
     id 'idea'
 
-    id 'net.minecraftforge.gradle' version "6.0.+"
-    id 'org.spongepowered.mixin' version "0.7.+"
-    id 'wtf.gofancy.fancygradle' version "1.1.+"
+    alias libs.plugins.minecraftforge.gradle
+    alias libs.plugins.spongepowered.mixin
+    alias libs.plugins.gofancy.fancygradle
 }
 
 repositories {
@@ -42,7 +42,7 @@ tasks.withType(JavaCompile).configureEach {
 
 minecraft {
     // Mappings settings of Minecraft
-    mappings channel: 'stable', version: '39-1.12'
+    mappings channel: 'stable', version: libs.versions.minecraft.mappings
 
     // Default run configurations
     runs {
@@ -84,38 +84,40 @@ mixin {
 
 dependencies {
     // Specify the version of Minecraft to use
-    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2864'
+    minecraft libs.minecraftforge
 
     // Mixins
-    compileOnly "org.spongepowered:mixin:0.8.7"
-    annotationProcessor "org.spongepowered:mixin:0.8.7:processor"
-    compileOnly "io.github.llamalad7:mixinextras-common:0.5.0"
-    annotationProcessor "io.github.llamalad7:mixinextras-common:0.5.0"
-    implementation fg.deobf("curse.maven:fermiumbooter-968474:7279112")
+    compileOnly libs.mixin
+    annotationProcessor variantOf(libs.mixin) {
+        classifier('processor')
+    }
+    compileOnly libs.mixinextras
+    annotationProcessor libs.mixinextras
+    implementation fg.deobf(libs.fermiumbooter)
 
     // Just Enough Item
-    implementation fg.deobf("curse.maven:jei-238222:5846804")
+    implementation fg.deobf(libs.jei)
 
     // Lombok
     //compileOnly 'org.projectlombok:lombok:1.18.30'
     //annotationProcessor 'org.projectlombok:lombok:1.18.30'
 
     // Byte Buddy
-    testImplementation('net.bytebuddy:byte-buddy:1.12.9') {
+    testImplementation(libs.bytebuddy) {
         transitive = false
     }
 
     // JUnit
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+    testImplementation libs.junit.jupiter.api
+    testRuntimeOnly libs.junit.jupiter.engine
 
     // Mockito
-    testImplementation 'org.mockito:mockito-core:4.11.0'
-    testImplementation 'org.mockito:mockito-junit-jupiter:4.11.0'
-    testImplementation 'org.mockito:mockito-inline:4.11.0'
+    testImplementation libs.mockito.core
+    testImplementation libs.mockito.junit.jupiter
+    testImplementation libs.mockito.inline
 
     // Mixins
-    testImplementation 'org.spongepowered:mixin:0.8.5'
+    testImplementation libs.mixin
 }
 
 test {
