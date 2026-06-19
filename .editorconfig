@@ -123,6 +123,12 @@ indent_style = space
 insert_final_newline = true
 
 # Gradle scripts
+[gradle/**/*.toml]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+insert_final_newline = true
 [*.gradle]
 charset = utf-8
 end_of_line = lf
