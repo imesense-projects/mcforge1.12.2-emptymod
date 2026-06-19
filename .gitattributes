@@ -51,6 +51,7 @@ docker-compose*.y*ml text eol=lf encoding=utf-8
 .github/**/*.y*ml text eol=lf encoding=utf-8
 
 # Gradle scripts
+gradle/**/*.toml text eol=lf encoding=utf-8
 *.gradle text eol=lf encoding=utf-8
 gradlew text eol=lf encoding=utf-8
 gradlew.bat text eol=crlf encoding=utf-8

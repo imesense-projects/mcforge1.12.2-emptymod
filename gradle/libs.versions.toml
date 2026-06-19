@@ -1,0 +1,43 @@
+# List of used versions
+[versions]
+
+# Plugins
+minecraftforge-gradle = "6.0.+"
+mixin-gradle = "0.7.+"
+gofancy-gradle = "1.1.+"
+
+# Mappings
+minecraft-mappings = "39-1.12"
+
+# Libraries
+minecraftforge = "1.12.2-14.23.5.2864"
+mixin = "0.8.7"
+mixinextras = "0.5.0"
+fermiumbooter = "7279112"
+jei = "5846804"
+bytebuddy = "1.12.9"
+junit-jupiter-api = "5.8.2"
+junit-jupiter-engine = "5.8.2"
+mockito-core = "4.11.0"
+mockito-junit-jupiter = "4.11.0"
+mockito-inline = "4.11.0"
+
+# List of used libraries
+[libraries]
+minecraftforge = { group = "net.minecraftforge", name = "forge", version.ref = "minecraftforge" }
+mixin = { group = "org.spongepowered", name = "mixin", version.ref = "mixin" }
+mixinextras = { group = "io.github.llamalad7", name = "mixinextras-common", version.ref = "mixinextras" }
+fermiumbooter = { group = "curse.maven", name = "fermiumbooter-968474", version.ref = "fermiumbooter" }
+jei = { group = "curse.maven", name = "jei-238222", version.ref = "jei" }
+bytebuddy = { group = "net.bytebuddy", name = "byte-buddy", version.ref = "bytebuddy" }
+junit-jupiter-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junit-jupiter-api" }
+junit-jupiter-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junit-jupiter-engine" }
+mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito-core" }
+mockito-junit-jupiter = { group = "org.mockito", name = "mockito-junit-jupiter", version.ref = "mockito-junit-jupiter" }
+mockito-inline = { group = "org.mockito", name = "mockito-inline", version.ref = "mockito-inline" }
+
+# List of used plugins
+[plugins]
+minecraftforge-gradle = { id = "net.minecraftforge.gradle", version.ref = "minecraftforge-gradle" }
+spongepowered-mixin = { id = "org.spongepowered.mixin", version.ref = "mixin-gradle" }
+gofancy-fancygradle = { id = "wtf.gofancy.fancygradle", version.ref = "gofancy-gradle" }
