@@ -223,5 +223,25 @@ tasks.register('copyDependencies', Copy) {
     into 'run/mods'
 }
 
+tasks.named('processResources') {
+    doLast {
+        println "mcmod.info exists = " +
+            file("$buildDir/resources/main/mcmod.info").exists()
+    }
+}
+
+tasks.register('prepareAssets', Copy) {
+    from sourceSets.main.resources
+    into layout.buildDirectory.dir('classes/java/main')
+}
+
+tasks.named('classes') {
+    dependsOn 'prepareAssets'
+}
+
+tasks.named('jar', Jar) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
 jar.dependsOn copyDependencies
 build.dependsOn copyDependencies
