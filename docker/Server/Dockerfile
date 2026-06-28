@@ -3,6 +3,13 @@
 # Build stage
 FROM openjdk:8u342-jdk-slim-bullseye AS build
 
+# Install CA certificates
+RUN \
+    apt update && \
+    apt install -y \
+        ca-certificates-java && \
+    rm -rf /var/lib/apt/lists/*
+
 # Set working directory
 WORKDIR /app
 

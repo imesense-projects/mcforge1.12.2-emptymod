@@ -61,6 +61,12 @@ jobs:
             - name: Setup Docker Buildx
               uses: docker/setup-buildx-action@v4
 
+            - name: Setup packages
+              run: |
+                  sudo apt update && `
+                  sudo apt install -y `
+                      ca-certificates-java
+
             - name: Set tag
               id: set-tag
               run: |
