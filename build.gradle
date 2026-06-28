@@ -16,6 +16,9 @@ repositories {
     maven {
         url "https://cursemaven.com"
     }
+    maven {
+        url 'https://maven.gofancy.wtf/releases'
+    }
 }
 
 apply plugin: 'maven-publish'
