@@ -11,13 +11,19 @@ plugins {
 
 repositories {
     flatDir {
+        dirs 'lib'
+    }
+    flatDir {
         dirs 'libs'
     }
     maven {
-        url "https://cursemaven.com"
+        url "file://${rootDir}/dep/maven-packages-store/src/www.cursemaven.com"
     }
     maven {
-        url 'https://maven.gofancy.wtf/releases'
+        url "file://${rootDir}/dep/maven-packages-store/src/maven.su5ed.dev/releases"
+    }
+    maven {
+        url 'https://maven.minecraftforge.net'
     }
 }
 

@@ -4,12 +4,16 @@
 .DS_Store
 Thumbs.db
 
+# Dependencies
+dep/
+
 # Gradle cache and settings
 .gradle/
 build/
 run/
 
-# Java cache
+# Java libraries
+lib/
 libs/
 
 # IntelliJ Idea cache and settings
