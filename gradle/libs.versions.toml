@@ -4,7 +4,7 @@
 # Plugins
 minecraftforge-gradle = "6.0.+"
 mixin-gradle = "0.7.+"
-gofancy-gradle = "1.1.3-0"
+gofancy-gradle = "1.1.+"
 
 # Mappings
 minecraft-mappings = "39-1.12"

@@ -2,13 +2,13 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         maven {
-            url = 'https://maven.minecraftforge.net'
+            url "file://${rootDir}/dep/maven-packages-store/src/maven.gofancy.wtf/releases"
         }
         maven {
-            url = 'https://repo.spongepowered.org/maven'
+            url 'https://maven.minecraftforge.net'
         }
         maven {
-            url 'https://maven.gofancy.wtf/releases'
+            url 'https://repo.spongepowered.org/maven'
         }
     }
 
