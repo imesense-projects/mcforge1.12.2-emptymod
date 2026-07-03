@@ -16,7 +16,23 @@ WORKDIR /app
 # Copy project
 COPY . .
 
-# Set cache
+# Get Maven repository
+RUN \
+    apt update && \
+    apt install -y \
+        git \
+        git-lfs && \
+    git clone \
+        --depth=1 \
+        https://github.com/imesense/maven-packages-store \
+        /app/dep/maven-packages-store && \
+    apt remove -y \
+        git \
+        git-lfs && \
+    apt autoremove -y && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set Gradle cache
 ENV GRADLE_USER_HOME=/gradle
 RUN \
     mkdir -p ${GRADLE_USER_HOME} && \
