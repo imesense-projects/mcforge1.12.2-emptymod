@@ -13,10 +13,14 @@ docker/
 # Environment configs
 *.env*
 
+# Dependencies
+dep/
+
 # GitHub files and folders
 .github/
 
-# Java cache
+# Java libraries
+lib/
 libs/
 
 # IntelliJ Idea cache and settings
