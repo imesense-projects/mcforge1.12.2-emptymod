@@ -22,6 +22,11 @@ if not exist out\%ProjectVersion% (
     mkdir out\%ProjectVersion%
 )
 
+:: Move dependencies
+move ^
+    run\mods\*.jar ^
+    build\libs\
+
 :: Pack publish
 pushd ^
     build\libs

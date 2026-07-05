@@ -9,6 +9,9 @@ if "%~1"=="" (
 )
 set ProjectVersion=%~1
 
+:: Get Maven repositories
+call get-repositories.bat
+
 :: Build and pack client
 call util\build-client-minimal.bat
 call util\pack-client-minimal.bat %ProjectVersion%
