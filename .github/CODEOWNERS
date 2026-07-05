@@ -1,2 +1,7 @@
 # Default assignment
-* @acidicMercury8 @OldSerpskiStalker
+* @acidicMercury8
+
+# Java sources and Gradle configs
+gradle/ @acidicMercury8 @the-055
+src/ @acidicMercury8 @the-055
+*.gradle @acidicMercury8 @the-055

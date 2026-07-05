@@ -50,7 +50,7 @@ FROM openjdk:8u342-jre-slim-bullseye AS final
 # Set metadata
 LABEL \
     org.opencontainers.image.vendor="ImeSense" \
-    org.opencontainers.image.authors="ImeSense, acidicMercury8, OldSerpskiStalker" \
+    org.opencontainers.image.authors="ImeSense, acidicMercury8, 055" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.version="0.2" \
     org.opencontainers.image.description="Empty Mod (Minecraft Forge 1.12.2)"

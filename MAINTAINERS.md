@@ -6,4 +6,4 @@ English | [Русский](./MAINTAINERS.rus.md)
 
 - `*`
   - `acidicMercury8`
-  - `OldSerpskiStalker`
+  - `055`
