@@ -52,7 +52,7 @@ LABEL \
     org.opencontainers.image.vendor="ImeSense" \
     org.opencontainers.image.authors="ImeSense, acidicMercury8, 055" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.version="0.2" \
+    org.opencontainers.image.version="1.0" \
     org.opencontainers.image.description="Empty Mod (Minecraft Forge 1.12.2)"
 
 # Set working directory
