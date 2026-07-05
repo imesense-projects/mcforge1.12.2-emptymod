@@ -1,33 +1,30 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-issue-forms.json
 
-name: Feature request
-description: Suggest feature for integration
-title: "Feature: "
+name: Task request
+description: Suggest task for complete.
 labels:
-    - "enhancement"
+    - "task"
 
 body:
-    # Feature information
+    # Task information
     - type: textarea
       id: formulation
       attributes:
           label: Formulation
           description: >
-              Description of why a feature is need to integrate
-      validations:
-          required: true
+              Description of task to complete.
     - type: textarea
       id: solution
       attributes:
           label: Solution
           description: >
-              Description of what want to happen
+              Description of what want to happen.
     - type: textarea
       id: alternatives
       attributes:
           label: Alternatives
           description: >
-              Description of any alternative solutions or features
+              Description of any alternative solutions or features.
 
     # Options
     - type: textarea
@@ -35,4 +32,4 @@ body:
       attributes:
           label: Additional context
           description: >
-              Add any other context or screenshots about the feature request here
+              Add any other context or screenshots about the task request.
