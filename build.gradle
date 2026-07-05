@@ -224,18 +224,22 @@ publishing {
     }
 }
 
+// Map of dependency file name patterns to target renamed JAR names.
+def dependencies = [:]
+dependencies['fermiumbooter'] = '`FermiumBooter-1.4.1.jar'
+//dependencies['jei'] = 'jei_1.12.2-4.16.1.1013.jar'
+
 tasks.register('copyDependencies', Copy) {
-    from configurations.runtimeClasspath.filter {
-        file ->
-            file.name.contains('fermiumbooter')
+    from configurations.runtimeClasspath.filter { file ->
+        dependencies.keySet().any { pattern ->
+            file.name.toLowerCase().contains(pattern)
+        }
     }
     into 'run/mods'
-}
-
-tasks.named('processResources') {
-    doLast {
-        println "mcmod.info exists = " +
-            file("$buildDir/resources/main/mcmod.info").exists()
+    dependencies.each { pattern, targetName ->
+        filesMatching("**/*${pattern}*.jar") {
+            it.name = targetName
+        }
     }
 }
 
