@@ -63,6 +63,7 @@ jobs:
               run: |
                   git clone `
                       --depth=1 `
+                      --branch d2026.7.5 `
                       https://github.com/imesense/maven-packages-store `
                       ${{ github.workspace }}/dep/maven-packages-store
 
@@ -138,6 +139,7 @@ jobs:
               run: |
                   git clone `
                       --depth=1 `
+                      --branch d2026.7.5 `
                       https://github.com/imesense/maven-packages-store `
                       ${{ github.workspace }}/dep/maven-packages-store
 

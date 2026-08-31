@@ -24,6 +24,7 @@ RUN \
         git-lfs && \
     git clone \
         --depth=1 \
+        --branch d2026.7.5 \
         https://github.com/imesense/maven-packages-store \
         /app/dep/maven-packages-store && \
     apt remove -y \
